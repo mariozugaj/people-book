@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails people_book: test" uuid="3b86cee0-adff-4e49-9af1-697602365784">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Rails people_book: development" uuid="72a1b778-a807-4cbc-bb87-1878e624c75d">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Rails people_book: production" uuid="915e2fd9-d314-4b20-841d-c5b4a87a7c98">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+      <user-name>people_book</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddffadfefdfe5dffadfe6dfefdff5dfe8dfe5dfe5dfe1dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+    </data-source>
+  </component>
+</project>
