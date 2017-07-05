@@ -1,0 +1,34 @@
+.ui.blue.inverted.borderless.menu
+
+  /* Logo
+  .item
+    = link_to 'PeopleBook', root_path, class: 'ui inverted header'
+
+  /* Search
+  .item
+    .ui.icon.input
+      %input{ type: 'text', placeholder: 'Search' }
+      %i.search.link.icon
+
+  /* Right header menu
+  .right.menu
+
+    /* Notifications
+    -#.ui.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications', 'data-link': 'notifications-link', 'data-notifications': (render template: 'notifications/index', formats: [:json]) }
+
+        /* Notifications bell icon and label
+        .right.pointing.ui.red.label{ 'data-behavior': 'unread-count' }
+        %i.bell.icon
+
+        /* Notifications dropdown
+        .menu.ui.divided.items{ 'data-behavior': 'notification-items' }
+
+    /* Current user profile links
+    .ui.floating.pointing.top.right.dropdown.item#user-dropdown
+      -#= image_tag current_user.profile.avatar_url, class: 'ui avatar image'
+      = link_to current_user.name, user_path(current_user)
+      .menu
+        = link_to 'Edit account', edit_user_registration_path, class: 'item'
+        = link_to 'Edit profile', edit_user_profile_path(current_user), class: 'item'
+        -#= link_to 'Friends', user_friends_path(current_user), class: 'item'
+        = link_to 'Logout', destroy_user_session_path, class: 'item', method: 'delete'

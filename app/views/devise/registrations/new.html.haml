@@ -1,0 +1,41 @@
+= provide :title, 'Sign up'
+
+.ui.centered.grid
+  .fixed-width.column
+    .ui.secondary.raised.segment
+      %h2.ui.center.aligned.header= yield :title
+      = form_with model: resource, as: resource_name, url: registration_path(resource_name),
+                 html: { class: 'ui form' } do |f|
+        = devise_error_messages!
+
+        .required.field
+          = f.label :name
+          = f.text_field :name, required: true, placeholder: 'e.g. John Smith'
+
+        .required.field
+          = f.label :email
+          = f.email_field :email, required: true, placeholder: 'e.g. johnsmith@example.com'
+
+        .required.field
+          = f.label :password
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} characters minimum)
+          = f.password_field :password, autocomplete: 'off', required: true
+
+        .required.field
+          .ui.checkbox
+            %input{ type: 'checkbox', name: 'checkbox'}
+            %label I agree to the Terms and Conditions
+
+        .actions
+          = f.submit 'Sign up for PeopleBook', class: 'ui fluid positive button'
+
+        .ui.horizontal.divider
+          OR
+        %p.center-text
+          %i.facebook.square.icon
+          = link_to "Sign up with Facebook", user_facebook_omniauth_authorize_path
+
+    .ui.secondary.raised.segment
+      %p.center-text Already have an account? #{link_to 'Log in', new_user_session_path}

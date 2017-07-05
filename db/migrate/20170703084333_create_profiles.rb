@@ -1,0 +1,17 @@
+class CreateProfiles < ActiveRecord::Migration[5.1]
+  def change
+    create_table :profiles do |t|
+      t.references :user, foreign_key: true, null: false
+      t.datetime :birthday
+      t.string :education
+      t.string :hometown
+      t.string :profession
+      t.string :company
+      t.string :relationship_status
+      t.string :about
+      t.string :phone_number
+
+      t.timestamps
+    end
+  end
+end

@@ -1,0 +1,46 @@
+= provide :title, 'Edit account'
+
+.row
+
+  // User info
+  .four.wide.column
+    = render 'users/aside', user: @user
+
+  .ten.wide.column
+
+    .ui.dividing.header= yield :title
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name),
+               html: { method: :put, class: 'ui form' }) do |f|
+      = devise_error_messages!
+
+      .ui.field
+        = f.label :name
+        = f.text_field :name
+
+      .ui.field
+        = f.label :email
+        = f.email_field :email, autofocus: true
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        %div
+          Currently waiting confirmation for: #{resource.unconfirmed_email}
+
+      .ui.field
+        = f.label :password
+        %i (leave blank if you don't want to change it)
+        = f.password_field :password, autocomplete: "off"
+        - if @minimum_password_length
+          %em
+            = @minimum_password_length
+            characters minimum
+
+      .ui.required.field
+        = f.label :current_password
+        %i (we need your current password to confirm your changes)
+        = f.password_field :current_password, autocomplete: "off"
+
+      .actions
+        = f.submit "Update your account", class: 'ui fluid positive button'
+
+    %h3.ui.center.aligned.header Unhappy?
+    = button_to "Cancel my account", registration_path(resource_name), class: 'ui fluid negative button', data: { confirm: "Are you sure?" }, method: :delete

@@ -1,0 +1,12 @@
+= form_with model: [current_user, status_update], multipart: true, class: 'ui form' do |form|
+
+  .field
+    = form.text_area :text, rows: 4, placeholder: 'What\'s on your mind?'
+
+  .field
+    .ui.basic.blue.left.floated.button#upload_fake
+      %i.image.icon
+      \ Add pictures
+    = form.file_field :images, id: 'picture_upload', style: 'display: none;'
+
+    = form.submit 'Post', class: 'ui blue right floated button'
