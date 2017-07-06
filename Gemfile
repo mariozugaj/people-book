@@ -29,7 +29,6 @@ gem 'pundit'
 gem 'rails', '~> 5.1.1'
 gem 'redis', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
-gem "shrine"
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'therubyracer'
 gem 'turbolinks', '~> 5'
