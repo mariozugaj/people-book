@@ -10,6 +10,8 @@ class CreateProfiles < ActiveRecord::Migration[5.1]
       t.string :relationship_status
       t.string :about
       t.string :phone_number
+      t.string :avatar
+      t.string :cover_photo
 
       t.timestamps
     end

@@ -1,0 +1,9 @@
+= provide :title, @user.name
+
+.row
+  // User info
+  .four.wide.column
+    = render 'users/aside', user: @user
+
+  .ten.wide.column
+    = render partial: 'profiles/form', locals: { user: @user, profile: @profile, relationship_options: @relationship_options }

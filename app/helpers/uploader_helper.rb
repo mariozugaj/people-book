@@ -5,10 +5,6 @@ module UploaderHelper
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def default_url(*args)
-    '/missing/' + [version_name, 'missing.png'].compact.join('_')
-  end
-
   def extension_whitelist
     %w[jpg jpeg gif png]
   end

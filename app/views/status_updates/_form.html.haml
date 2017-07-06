@@ -1,8 +1,10 @@
-= form_with model: (status_update.persisted? ? status_update : [current_user, status_update]), multipart: true, class: 'ui form' do |form|
+.ui.clearing.segment
+  .content
+    = form_with model: (status_update.persisted? ? status_update : [current_user, status_update]), multipart: true, class: 'ui form' do |form|
 
-  .field
-    = form.text_area :text, rows: 4, placeholder: 'What\'s on your mind?'
-  .field
-    = form.file_field :image
+      .field
+        = form.text_area :text, rows: 4, placeholder: 'What\'s on your mind?'
+      .field
+        = form.file_field :image
 
-  = form.submit class: 'ui blue right floated button'
+      = form.submit class: 'ui blue right floated button'

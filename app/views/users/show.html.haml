@@ -1,0 +1,15 @@
+= provide :title, @user.name
+
+.row
+  .image
+    = image_tag @user.profile.cover_photo
+  // User aside info
+  .four.wide.column
+    = render 'users/aside', user: @user
+
+  .ten.wide.column
+    -# Render status update form if current_user
+    - if @user == current_user
+      = render 'status_updates/form', status_update: @new_status_update
+
+    = render @feed

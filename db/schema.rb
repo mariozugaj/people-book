@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20170704100221) do
     t.string "relationship_status"
     t.string "about"
     t.string "phone_number"
+    t.string "avatar"
+    t.string "cover_photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"

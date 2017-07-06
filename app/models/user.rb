@@ -23,8 +23,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   has_one :profile, dependent: :destroy, inverse_of: :user
-  has_one :avatar, through: :profile
-  has_one :cover_photo, through: :profile
   has_many :photo_albums, dependent: :destroy
   has_many :status_updates, foreign_key: 'author_id', dependent: :destroy
 

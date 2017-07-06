@@ -1,5 +1,7 @@
 .ten.wide.centered.column
   = render 'status_updates/form', status_update: @status_update
+
+-# Show status update image if it's present
 -if @status_update.image.url
   .ten.wide.centered.column
     = image_tag @status_update.image.url(:normal), class: 'ui image'
