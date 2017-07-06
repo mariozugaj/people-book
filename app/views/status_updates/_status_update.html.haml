@@ -1,32 +1,37 @@
 %div.ui.fluid.card.status_update{ id: ['status_update', status_update.id] }
 
-  // status_update user's avatar, full name and date
+  -# Status update's author's avatar, full name and date
   .content
+    -# Edit and delete buttons
     - if policy(status_update).edit?
       .ui.right.floated.meta
+
         %a.ui.blue.label{ href: edit_status_update_path(status_update) } Edit
         = link_to 'Delete', status_update_path(status_update), method: :delete, data: { confirm: 'Are you sure' }, class: 'ui red label'
 
     -# User's avatar
-    %a{ href: user_path(status_update.user) }
-      = image_tag status_update.user.avatar.url, class: 'left floated mini ui image'
+    %a{ href: user_path(status_update.author) }
+    -# = image_tag status_update.author.avatar.url, class: 'left floated mini ui image'
 
-    -# User's name
+    -# Author's name
     .header
-      = link_to status_update.user.name, user_path(status_update.user)
+      = link_to status_update.author.name, user_path(status_update.author)
 
     -# Time at status_update creation
     .meta
       = time_ago_in_words(status_update.created_at)
       ago
 
-  // status_update text
+  -# Status update text
   - unless status_update.text.empty?
     .content
       .description
         = simple_format(status_update.text)
 
-  // status_update picture
+  -# Status update picture
+  - if status_update.image.url
+    .image
+      = image_tag status_update.image.url :normal
 
   // Like button
 

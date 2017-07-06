@@ -5,6 +5,7 @@ class CreateStatusUpdates < ActiveRecord::Migration[5.1]
       t.text :text
       t.integer :likes_count
       t.integer :comments_count
+      t.string :image
 
       t.timestamps
     end

@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration[5.1]
       t.belongs_to :commentable, polymorphic: true
       t.belongs_to :author
       t.text :text
+      t.integer :likes_count
 
       t.timestamps
     end

@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20170704100221) do
     t.bigint "commentable_id"
     t.bigint "author_id"
     t.text "text"
+    t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "likes_count"
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["commentable_id", "commentable_type", "text", "author_id"], name: "index_on_commentable"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170704100221) do
     t.text "text"
     t.integer "likes_count"
     t.integer "comments_count"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_status_updates_on_author_id"

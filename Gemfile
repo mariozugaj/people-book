@@ -7,8 +7,12 @@ end
 
 ruby '2.4.0'
 
+gem 'annotate'
 gem 'autoprefixer-rails'
 gem 'aws-sdk'
+gem 'bullet'
+gem 'carrierwave'
+gem 'carrierwave-aws'
 gem 'coffee-rails', '~> 4.2'
 gem 'css-class-string'
 gem 'devise'
@@ -20,7 +24,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'jquery-turbolinks'
 gem 'kaminari'
-gem "mini_magick"
+gem 'mini_magick'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'pg', '~> 0.18'

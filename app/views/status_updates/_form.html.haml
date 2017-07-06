@@ -1,13 +1,8 @@
-= form_with model: [current_user, status_update], multipart: true, class: 'ui form' do |form|
+= form_with model: (status_update.persisted? ? status_update : [current_user, status_update]), multipart: true, class: 'ui form' do |form|
 
   .field
     = form.text_area :text, rows: 4, placeholder: 'What\'s on your mind?'
-
   .field
-    .ui.basic.blue.left.floated.button#upload_fake
-      %i.image.icon
-      \ Upload picture
-    = form.fields_for :image_attachment do |image_form|
-      = image_form.file_field :data, id: 'image_upload', style: 'display: none;'
+    = form.file_field :image
 
-  = form.submit 'Post', class: 'ui blue right floated button'
+  = form.submit class: 'ui blue right floated button'

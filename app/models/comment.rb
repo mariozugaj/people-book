@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id               :integer          not null, primary key
+#  commentable_type :string
+#  commentable_id   :integer
+#  author_id        :integer
+#  text             :text
+#  likes_count      :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true, counter_cache: true
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
