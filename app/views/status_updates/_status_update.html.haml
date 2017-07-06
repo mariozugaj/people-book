@@ -2,13 +2,14 @@
 
   // status_update user's avatar, full name and date
   .content
-    .ui.right.floated.meta
-      %a.ui.blue.label{ href: status_update_path(status_update) } Edit
-      = link_to 'Delete', status_update_path(status_update), method: :delete, data: { confirm: 'Are you sure' }, class: 'ui red label'
+    - if policy(status_update).edit?
+      .ui.right.floated.meta
+        %a.ui.blue.label{ href: edit_status_update_path(status_update) } Edit
+        = link_to 'Delete', status_update_path(status_update), method: :delete, data: { confirm: 'Are you sure' }, class: 'ui red label'
 
     -# User's avatar
     %a{ href: user_path(status_update.user) }
-      = image_tag status_update.user.profile.avatar_url, class: 'left floated mini ui image'
+      = image_tag status_update.user.avatar.url, class: 'left floated mini ui image'
 
     -# User's name
     .header
@@ -26,41 +27,11 @@
         = simple_format(status_update.text)
 
   // status_update picture
-  - if status_update.images.any?
-    .image
-      = image_tag status_update.picture_url(:status_update)
 
   // Like button
-  .content
-    .like.actions
-      - if current_user.likes? status_update
-        = render 'likes/unlike',
-                  path: post_like_path(status_update, find_like(status_update, current_user))
-      - else
-        = render 'likes/like', path: post_likes_path(status_update)
-
 
   // Likes and comments count
-  .extra.content
-    %i.heart.icon
-    = pluralize status_update.likes_count, 'like'
-    |
-    %i.comment.icon
-    %span.comments_count
-      = pluralize status_update.comments_count, 'comment'
 
   // status_update comments
-  - if status_update.comments.any?
-    .content
-      .ui.comments
-        %h4.ui.diving.header Comments
-        = render status_update.comments.includes(:user, :likes).order(:created_at).limit(5), status_update: status_update
-
-        - if status_update.comments.size > 5 && @seemore
-          .ui.centered.tiny.header
-            = link_to 'See more', post_path(status_update)
 
   /* New comment form
-  - if policy(status_update).comment?
-    .extra.content
-      = render 'comments/form', status_update: status_update

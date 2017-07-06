@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/doabit/semantic-ui-sass.git
+  revision: 48f03deab9131ad1583eda53c16b3eb83e11c178
+  specs:
+    semantic-ui-sass (2.2.10.1)
+      sass (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -77,9 +84,6 @@ GEM
       xpath (~> 2.0)
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
-    climate_control (0.2.0)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     codeclimate-engine-rb (0.4.0)
       virtus (~> 1.0)
     coercible (1.0.0)
@@ -91,7 +95,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    commonjs (0.2.7)
     concurrent-ruby (1.0.5)
     css-class-string (0.1.1)
     database_cleaner (1.6.1)
@@ -104,6 +107,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
+    down (4.0.0)
     draper (3.0.0)
       actionpack (~> 5.0)
       activemodel (~> 5.0)
@@ -180,15 +184,6 @@ GEM
     kaminari-core (1.0.1)
     launchy (2.4.3)
       addressable (~> 2.3)
-    less (2.6.0)
-      commonjs (~> 0.2.7)
-    less-rails (2.7.1)
-      actionpack (>= 4.0)
-      less (~> 2.6.0)
-      sprockets (> 2, < 4)
-      tilt
-    less-rails-semantic_ui (2.2.10.0)
-      less-rails (>= 2.6.0, < 2.8.0)
     libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -202,7 +197,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
+    mini_magick (4.7.2)
     mini_portile2 (2.2.0)
     minitest (5.10.2)
     multi_json (1.12.1)
@@ -226,12 +221,6 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paperclip (5.1.0)
-      activemodel (>= 4.2.0)
-      activesupport (>= 4.2.0)
-      cocaine (~> 0.5.5)
-      mime-types
-      mimemagic (~> 0.3.0)
     parser (2.4.0.0)
       ast (~> 2.2)
     path_expander (1.0.2)
@@ -323,6 +312,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
     sexp_processor (4.9.0)
+    shrine (2.6.1)
+      down (>= 2.3.6)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -391,11 +382,10 @@ DEPENDENCIES
   jquery-rails (~> 4.3, >= 4.3.1)
   jquery-turbolinks
   kaminari
-  less-rails-semantic_ui
   listen (>= 3.0.5, < 3.2)
+  mini_magick
   omniauth
   omniauth-facebook
-  paperclip
   pg (~> 0.18)
   puma (~> 3.7)
   pundit
@@ -405,6 +395,8 @@ DEPENDENCIES
   rubycritic
   sass-rails (~> 5.0)
   selenium-webdriver
+  semantic-ui-sass!
+  shrine
   spring
   spring-watcher-listen (~> 2.0.0)
   therubyracer

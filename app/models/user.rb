@@ -24,8 +24,16 @@ class User < ApplicationRecord
     Friendship.where('accepted = ? AND (user_id = ? OR friend_id = ?)', true, id, id)
   end
 
+  def friend_ids
+    friendships.map { |f| f.user_id == id ? f.friend_id : f.user_id }
+  end
+
   def friends
-    User.where('id in (?)', (friendships.map { |f| f.user_id == id ? f.friend_id : f.user_id }))
+    User.where('id in (?)', friend_ids)
+  end
+
+  def friend_with?(user)
+    friends.include? user
   end
 
   def self.from_omniauth(auth)

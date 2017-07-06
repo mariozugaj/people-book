@@ -6,7 +6,8 @@
   .field
     .ui.basic.blue.left.floated.button#upload_fake
       %i.image.icon
-      \ Add pictures
-    = form.file_field :images, id: 'picture_upload', style: 'display: none;'
+      \ Upload picture
+    = form.fields_for :image_attachment do |image_form|
+      = image_form.file_field :data, id: 'image_upload', style: 'display: none;'
 
-    = form.submit 'Post', class: 'ui blue right floated button'
+  = form.submit 'Post', class: 'ui blue right floated button'

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
                                     registrations: 'users/registrations'}
 
   resources :users, only: :show do
-    resources :status_updates
+    resources :status_updates, shallow: true
     resource :profile, only: %i[show edit update]
   end
 end
