@@ -19,4 +19,5 @@ class Comment < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   validates_presence_of :author, :commentable_id, :commentable_type
+  validates :text, length: { maximum: 4000, minimum: 1}
 end

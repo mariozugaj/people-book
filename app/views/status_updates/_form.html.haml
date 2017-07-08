@@ -7,4 +7,16 @@
       .field
         = form.file_field :image
 
-      = form.submit class: 'ui blue right floated button'
+      = form.submit 'Post',
+        class: 'ui blue right floated button',
+        data: { 'disable-with': 'Posting...' }
+
+      - if status_update.persisted?
+        = link_to 'Cancel', request.referrer,
+          class: 'ui basic grey right floated button'
+
+        = link_to 'Delete',
+          status_update_path(status_update),
+          method: 'delete',
+          class: 'ui red basic right floated button',
+          data: { 'confirm': 'Are you sure you want to delete it?' }

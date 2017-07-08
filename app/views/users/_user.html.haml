@@ -1,7 +1,7 @@
 .ui.card
 
   .image
-    = image_tag user.profile.avatar.url
+    = image_tag user.profile.avatar.url :normal, alt: user.name
 
   .content
     = link_to user.name, user_path(user), class: 'header'

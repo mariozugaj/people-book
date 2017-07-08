@@ -1,9 +1,11 @@
 class CoverPhotoUploader < CarrierWave::Uploader::Base
 
+  Rails.env.production? ? (storage :aws) : (storage :file)
+
   include UploaderHelper
 
   version :normal do
-    process resize_to_fill: [1200, 300]
+    process resize_to_fill: [840, 313]
   end
 
   def default_url(*args)

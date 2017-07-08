@@ -1,0 +1,28 @@
+.comment{ 'data-id': comment.id, 'data-type': comment.class }
+
+  // User avatar
+  .avatar.image
+    = image_tag comment.author.profile.avatar.url :thumb
+
+  .content
+
+    // Comment author
+    .author
+      = link_to comment.author.name, user_path(comment.author)
+
+    .meta
+      // Comment created at
+      %span.date
+        = l(comment.created_at, format: '%B, %d %Y %H:%M')
+
+      - if policy(comment).destroy?
+        // Delete comment button
+        .right.floated
+          = link_to 'Delete', comment_path(comment, format: :js),
+                    method: :delete,
+                    remote: true,
+                    data: { confirm: 'Are you sure you want to delete it?' },
+                    class: 'ui red label'
+    // Comment text
+    .text
+      = simple_format comment.text

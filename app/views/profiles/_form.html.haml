@@ -1,6 +1,6 @@
 .ui.dividing.header Your profile info
 
-= form_with model: [user, profile], local: true, multipart: true, class: 'ui form' do |form|
+= form_with model: [user, user.profile], multipart: true, class: 'ui form' do |form|
 
   .field
     = form.label :birthday
@@ -31,6 +31,10 @@
     = form.text_field :about
 
   .field
+    = form.label :phone_number
+    = form.text_field :phone_number
+
+  .field
     = form.label :avatar
     = form.file_field :avatar
 
@@ -39,4 +43,4 @@
     = form.file_field :cover_photo
 
   .actions
-    = form.submit class: 'ui positive button'
+    = form.submit class: 'ui positive button', data: { 'disable-with': 'Updating...' }

@@ -24,6 +24,7 @@ class StatusUpdate < ApplicationRecord
 
   # Validations
   validates_presence_of :author_id
+  validates :text, length: { maximum: 4000, minimum: 1 }
   validate :text_or_image
 
   private

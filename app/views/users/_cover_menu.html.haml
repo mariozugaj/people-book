@@ -1,0 +1,6 @@
+// Cover photo
+.ui.fluid.image
+  = image_tag user.profile.cover_photo.url :normal, alt: user.name
+
+// Actions
+= render 'users/menu', user: user

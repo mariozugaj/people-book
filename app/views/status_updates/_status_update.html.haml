@@ -1,42 +1,59 @@
-%div.ui.fluid.card.status_update{ id: ['status_update', status_update.id] }
+.ui.fluid.card.status_update{ 'data-id': status_update.id, 'data-type': status_update.class }
 
-  -# Status update's author's avatar, full name and date
+  // Status update's author's avatar, full name and date
   .content
-    -# Edit and delete buttons
     - if policy(status_update).edit?
+
+      // Edit and delete buttons
       .ui.right.floated.meta
 
-        %a.ui.blue.label{ href: edit_status_update_path(status_update) } Edit
-        = link_to 'Delete', status_update_path(status_update), method: :delete, data: { confirm: 'Are you sure' }, class: 'ui red label'
+        = link_to 'Edit', edit_status_update_path(status_update),
+                  class: 'ui blue label'
 
-    -# User's avatar
-    %a{ href: user_path(status_update.author) }
-    -# = image_tag status_update.author.avatar.url, class: 'left floated mini ui image'
+        = link_to 'Delete', status_update_path(status_update),
+                  method: :delete,
+                  data: { confirm: 'Are you sure' },
+                  class: 'ui red label'
 
-    -# Author's name
+    // Author's avatar
+    = link_to user_path(status_update.author) do
+      = image_tag status_update.author.profile.avatar.url(:thumb),
+        class: 'ui left floated avatar image'
+
+    // Author's name
     .header
       = link_to status_update.author.name, user_path(status_update.author)
 
-    -# Time at status_update creation
+    // Time at status_update creation
     .meta
       = time_ago_in_words(status_update.created_at)
       ago
 
-  -# Status update text
   - unless status_update.text.empty?
-    .content
-      .description
-        = simple_format(status_update.text)
 
-  -# Status update picture
+    // Status update text
+    .content
+      .description.status_update__text
+        = sanitize status_update.text,
+          tags: %w[strong em a h3 h4 h5 h6 p hr ul ol li],
+          attributes: %w[href]
+
   - if status_update.image.url
-    .image
+
+    // Status update image
+    .ui.centered.image
       = image_tag status_update.image.url :normal
 
-  // Like button
+  // Status update comments
+  .content
+    .ui.comments{ style: 'max-width: 100%' }
+      %h5.meta.comments_count= pluralize status_update.comments_count, 'comment'
+      = render status_update.comments
 
-  // Likes and comments count
+  -# If current_user can comment, show comment form
+  - if policy(status_update).comment?
+    // Comment form
+    .extra.content
+      = link_to 'Leave a comment', nil, data: { 'behavior': 'comment-link' }
 
-  // status_update comments
-
-  /* New comment form
+    = render partial: 'comments/form', locals: { commentable: status_update }

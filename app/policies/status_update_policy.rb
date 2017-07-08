@@ -1,8 +1,8 @@
 class StatusUpdatePolicy
-  attr_reader :author, :status_update
+  attr_reader :user, :status_update
 
-  def initialize(author, status_update)
-    @author = author
+  def initialize(user, status_update)
+    @user = user
     @status_update = status_update
   end
 
@@ -18,13 +18,17 @@ class StatusUpdatePolicy
     owner?
   end
 
+  def destroy?
+    owner?
+  end
+
   def comment?
-    current_author.friend_with? author
+    user.friend_with? status_update.author
   end
 
   private
 
   def owner?
-    author == status_update.author
+    user == status_update.author
   end
 end

@@ -1,0 +1,28 @@
+.ui.bottom.attached.fluid.teal.borderless.menu
+
+  // User posts link
+  = link_to 'Timeline',
+    user_path(user),
+    class: class_string('item', 'active' => current_page?(user_path(user)))
+
+  // User friends link
+  %a{ class: class_string('item') }
+    Friends
+    .ui.left.pointing.friend_count.label
+      = user.friends.count
+
+  - unless current_user == user
+    // Friendship links
+    .right.floated.item.friendship
+      = render_friendship user
+
+  -# If user == current_user, show edit links
+  - if policy(user.profile).edit?
+
+    // User edit account link
+    = link_to 'Edit account', edit_user_registration_path(user),
+      class: class_string('item', 'active' => current_page?(edit_user_registration_path(user)))
+
+    // User edit profile link
+    = link_to 'Edit profile', edit_user_profile_path(user),
+      class: class_string('item', 'active' => current_page?(edit_user_profile_path(user)))

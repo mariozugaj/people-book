@@ -1,9 +1,13 @@
-= provide :title, @user.name
+= provide :title, 'Edit profile'
 
-.row
-  // User info
-  .four.wide.column
-    = render 'users/aside', user: @user
+// User aside info
+.four.wide.column
+  = render 'users/aside', user: @user
 
-  .ten.wide.column
-    = render partial: 'profiles/form', locals: { user: @user, profile: @profile, relationship_options: @relationship_options }
+.twelve.wide.column
+
+  // Cover photo and links
+  = render 'users/cover_menu', user: @user
+
+  // Profile edit form
+  = render partial: 'form', locals: { user: @user, relationship_options: @relationship_options }

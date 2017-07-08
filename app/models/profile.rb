@@ -29,4 +29,21 @@ class Profile < ApplicationRecord
 
   # Validations
   validates_presence_of :user
+
+  RELATIONSHIP_OPTIONS = ['Single',
+                          'In a relationship',
+                          'Engaged',
+                          'Married',
+                          'In a civil partnership',
+                          'In a domestic partnership',
+                          'In an open relationship',
+                          'It\'s complicated',
+                          'Separated',
+                          'Divorced',
+                          'Widowed'].freeze
+
+  # Calculate user's age
+  def age
+    ((Time.zone.now - birthday) / (365.2422 * 60 * 60 * 24)).to_i
+  end
 end

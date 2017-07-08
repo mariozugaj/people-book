@@ -1,0 +1,7 @@
+<%= render partial: "shared/flash_js" %>
+
+var comments_count = "<%= pluralize @comment.commentable.reload.comments_count, 'comment' %>"
+PeopleBook.CommentsModule.removeComment('<%= @comment.id %>',
+                                        comments_count,
+                                        '<%= @comment.commentable_id %>',
+                                        '<%= @comment.commentable_type %>');

@@ -6,6 +6,7 @@
 #  name                   :string           not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  friends_count          :string           default("0")
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime

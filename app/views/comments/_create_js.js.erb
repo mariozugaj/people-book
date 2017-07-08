@@ -1,0 +1,8 @@
+<%= render partial: 'shared/flash_js' %>
+
+var comment = '<%= j render @comment %>';
+var comments_count = "<%= pluralize @commentable.reload.comments_count, 'comment' %>"
+PeopleBook.CommentsModule.addComment('<%= @comment.commentable_id %>',
+                                     '<%= @comment.commentable_type %>',
+                                     comment,
+                                     comments_count);

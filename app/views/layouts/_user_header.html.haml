@@ -24,11 +24,11 @@
         .menu.ui.divided.items{ 'data-behavior': 'notification-items' }
 
     /* Current user profile links
-    .ui.floating.pointing.top.right.dropdown.item#user-dropdown
-      -#= image_tag current_user.profile.avatar_url, class: 'ui avatar image'
+    .ui.floating.pointing.top.right.dropdown.item#user_menu__dropdown
+      = image_tag current_user.profile.avatar.url(:thumb), class: 'ui avatar image'
       = link_to current_user.name, user_path(current_user)
       .menu
-        = link_to 'Edit account', edit_user_registration_path, class: 'item'
+        = link_to 'Edit account', edit_user_registration_path(current_user), class: 'item'
         = link_to 'Edit profile', edit_user_profile_path(current_user), class: 'item'
         -#= link_to 'Friends', user_friends_path(current_user), class: 'item'
         = link_to 'Logout', destroy_user_session_path, class: 'item', method: 'delete'

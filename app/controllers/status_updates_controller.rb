@@ -12,14 +12,16 @@ class StatusUpdatesController < ApplicationController
     else
       flash[:alert] = 'We were unable to save your post.'
     end
-    redirect_back(fallback_location: current_user)
+    redirect_to request.referrer || current_user
   end
 
-  def edit; end
+  def edit
+    authorize @status_update
+  end
 
   def update
     authorize @status_update
-    if @status_update.update_attributes(status_update_params)
+    if @status_update.update(status_update_params)
       flash[:success] = 'Status successfuly updated'
       redirect_back(fallback_location: current_user)
     else
