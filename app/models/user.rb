@@ -1,4 +1,4 @@
-# == Schema Information
+  # == Schema Information
 #
 # Table name: users
 #
@@ -44,9 +44,6 @@ class User < ApplicationRecord
   # Validations
   validates_presence_of :name, :email, :password
 
-  # Callbacks
-  after_create :create_profile
-
   def friendships
     Friendship.where('accepted = ? AND (user_id = ? OR friend_id = ?)', true, id, id)
   end
@@ -68,7 +65,10 @@ class User < ApplicationRecord
       user.email = auth.info.email if auth.info.email
       user.password = Devise.friendly_token(40)
       user.name = auth.info.name
-      Profile.create! user: user, remote_avatar_url: auth[:info][:image]
+      if user.email
+        Profile.create! user: user,
+                        remote_avatar_url: auth.info.image
+      end
     end
   end
 
