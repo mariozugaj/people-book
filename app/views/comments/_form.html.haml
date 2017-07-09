@@ -1,17 +1,16 @@
-.content.comment__form{ style: 'display: none;' }
-  = form_with model: [commentable, commentable.comments.build],
-    class: 'ui form' do |form|
+= form_with model: [commentable, Comment.new],
+  class: 'ui form' do |form|
 
-    = hidden_field_tag 'comment[author_id]', current_user.id
+  = hidden_field_tag 'comment[author_id]', current_user.id
 
-    .field
-      = form.text_area :text, placeholder: 'Add comment', rows: 2
+  .field
+    = form.text_area :text, placeholder: 'Add comment', rows: 2
 
-    .actions
-      = form.submit 'Comment',
-        class: 'ui blue right floated comment-submit button',
-        data: { 'disable-with': 'Posting comment...' }
+  .actions
+    = form.submit 'Comment',
+      class: 'ui blue right floated comment-submit button',
+      data: { 'disable-with': 'Posting comment...' }
 
-    = link_to 'Cancel', nil,
-      data: { 'behavior': 'cancel-link' },
-      class: 'ui right floated basic grey button'
+  = link_to 'Cancel', nil,
+    data: { 'behavior': 'cancel-link' },
+    class: 'ui right floated basic grey button'

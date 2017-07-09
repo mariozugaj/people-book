@@ -5,14 +5,15 @@ PeopleBook.CommentsModule = (function () {
   var init = function () {
     _commentLinkListener();
     _cancelCommentLinkListener();
+    _showCommentsLinkListener();
   };
 
   var _commentLinkListener = function () {
     $(document).on('click', "[data-behavior='comment-link']", function (e) {
       e.preventDefault();
-      var $linkContainer = $(e.target).parent();
-      var $form = $linkContainer.next();
-      $linkContainer.slideUp('fast', function () {
+      var $form = $(e.target).parent().next();
+      var $commentsContainer = $form.next();
+      $commentsContainer.slideDown('fast', function () {
         $form.slideDown('fast');
       });
     });
@@ -21,10 +22,17 @@ PeopleBook.CommentsModule = (function () {
   var _cancelCommentLinkListener = function () {
     $(document).on('click', "[data-behavior='cancel-link']", function (e) {
       e.preventDefault();
-      var $form = $(e.target).parent().parent();
-      var $linkContainer = $form.prev();
-      $linkContainer.slideDown('fast');
+      var $form = $(e.target).parents('.comment__form');
       $form.slideUp('fast');
+    });
+  };
+
+  var _showCommentsLinkListener = function () {
+    $(document).on('click', "[data-behavior='show-comments']", function (e) {
+      e.preventDefault();
+      var $linkContainer = $(e.target).parent();
+      var $commentsContainer = $linkContainer.siblings('.comments.content');
+      $commentsContainer.slideToggle('fast');
     });
   };
 
@@ -35,8 +43,6 @@ PeopleBook.CommentsModule = (function () {
 
   var _hideCommentForm = function (container) {
     var $formContainer = container.parent().siblings('.comment__form');
-    var $linkContainer = $formContainer.prev();
-    $linkContainer.slideDown('fast');
     $formContainer.slideUp('fast');
   };
 
@@ -44,20 +50,25 @@ PeopleBook.CommentsModule = (function () {
     return $('[data-id="' + id + '"][data-type="Comment"]');
   };
 
-  var _clearForm = function ($container) {
-    var form = $container.parent().siblings('.comment__form').children('form')[0];
+  var _clearForm = function (container) {
+    var form = container.parent().siblings('.comment__form').find('form')[0];
     form.reset();
   };
 
   var _updateCommentsCount = function (container, commentsCount) {
-    var $container = container.children('.comments_count');
+    var $container = $('.comments_count');
     $container.html(commentsCount);
   };
 
   var addComment = function (parentId, parentType, comment, commentsCount) {
     var $container = _getCommentsContainer(parentId, parentType);
     var $comment = $(comment);
-    $comment.appendTo($container).hide().slideDown('fast');;
+    $comment.appendTo($container).hide().slideDown('fast', function () {
+      $('html, body').animate({
+        scrollTop: $comment.offset().top,
+      }, 1000);
+    });
+
     _updateCommentsCount($container, commentsCount);
     _clearForm($container);
     _hideCommentForm($container);

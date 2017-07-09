@@ -1,12 +1,12 @@
 .comment{ 'data-id': comment.id, 'data-type': comment.class }
 
-  // User avatar
+  // Comment author's avatar
   .avatar.image
     = image_tag comment.author.profile.avatar.url :thumb
 
   .content
 
-    // Comment author
+    // Comment author's name
     .author
       = link_to comment.author.name, user_path(comment.author)
 

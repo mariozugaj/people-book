@@ -44,16 +44,32 @@
     .ui.centered.image
       = image_tag status_update.image.url :normal
 
-  // Status update comments
-  .content
-    .ui.comments{ style: 'max-width: 100%' }
-      %h5.meta.comments_count= pluralize status_update.comments_count, 'comment'
-      = render status_update.comments
+  // Status update statistics
+  .extra.content
+    %span.su_whitespace 0 Likes
+    %a.comments_count.su_whitespace{ 'data-behavior': 'show-comments' }
+      = pluralize status_update.reload.comments_count, 'comment'
 
-  -# If current_user can comment, show comment form
+  // Status update actions
+  .extra.content
+    // Like link
+    %span.su_whitespace
+      %i.like.icon
+      Like
+
+    - if policy(status_update).comment?
+      // Comment link
+      %a{ 'data-behavior': 'comment-link' }
+        %i.comment.icon
+        Add comment
+
   - if policy(status_update).comment?
     // Comment form
-    .extra.content
-      = link_to 'Leave a comment', nil, data: { 'behavior': 'comment-link' }
+    .extra.content.comment__form{ style: 'display: none;' }
+      = render partial: 'comments/form', locals: { commentable: status_update }
 
-    = render partial: 'comments/form', locals: { commentable: status_update }
+  // Status update comments
+  .comments.content{ style: 'display: none;' }
+    %h4 Comments
+    .ui.comments{ style: 'max-width: 100%' }
+      = render status_update.comments
