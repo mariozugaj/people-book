@@ -1,8 +1,8 @@
 var flashTimeout;
 clearTimeout(flashTimeout);
-$('#flash').html('<%= j(render partial: "shared/flash") %>').show();
+$('#flash').html('<%= j render partial: "shared/flash" %>').show();
 flashTimeout = setTimeout( function() {
   $('#flash').slideUp(250);
-}, 6000);
+}, 4000);
 
 <% flash.clear %>

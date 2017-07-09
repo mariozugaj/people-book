@@ -1,4 +1,4 @@
 - if flash.any?
-  - flash.each do |key, value|
-    %div{ class: "ui row message #{key}" }
-      = value
+  - flash.each do |type, message|
+    %div{ class: "ui row message #{type}"}
+      .header= message

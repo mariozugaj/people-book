@@ -45,7 +45,7 @@
       = image_tag status_update.image.url :normal
 
   // Status update statistics
-  .extra.content
+  .extra.statistics.content
     %span.su_whitespace 0 Likes
     %a.comments_count.su_whitespace{ 'data-behavior': 'show-comments' }
       = pluralize status_update.reload.comments_count, 'comment'

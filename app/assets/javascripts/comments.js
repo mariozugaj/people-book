@@ -56,8 +56,8 @@ PeopleBook.CommentsModule = (function () {
   };
 
   var _updateCommentsCount = function (container, commentsCount) {
-    var $container = $('.comments_count');
-    $container.html(commentsCount);
+    var $countContainer = container.parent().siblings('.statistics').children('.comments_count');
+    $countContainer.html(commentsCount);
   };
 
   var addComment = function (parentId, parentType, comment, commentsCount) {
