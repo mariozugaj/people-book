@@ -1,0 +1,32 @@
+.ui.top.right.pointing.dropdown.item
+
+  // Notifications bell icon and label
+  .right.pointing.ui.red.label= current_user.received_friend_requests.count
+  %i.users.icon
+
+  // Notifications dropdown
+  .menu
+    - unless current_user.received_friend_requests.any?
+      .item
+        %span No new friend requests. Make some new friends?
+    - else
+      - friend_requests.each do |request|
+        .item
+          .request.content
+            .description
+              .ui.avatar.image
+                = image_tag request.user.profile.avatar.url :thumb
+              %span.ui.small.header
+                = link_to request.user.name, user_path(request.user)
+              %span.text requested to be your friend
+            %span.request.buttons
+              // Approve button
+              = link_to 'Approve',
+                friendship_path(request.id),
+                method: 'patch',
+                class: 'ui mini positive request button'
+              // Decline button
+              = link_to 'Decline',
+                friendship_path(request.id, user_id: request.user.id),
+                method: 'delete',
+                class: 'ui mini negative request button'

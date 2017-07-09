@@ -20,23 +20,31 @@
 #
 
 class User < ApplicationRecord
+  # Devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  # Associations
   has_one :profile, dependent: :destroy, inverse_of: :user
   has_many :photo_albums, dependent: :destroy
   has_many :status_updates, foreign_key: 'author_id', dependent: :destroy
 
-  has_many :received_friend_requests, class_name: 'Friendship',
-                                      foreign_key: 'friend_id',
-                                      dependent: :destroy
+  has_many :received_friend_requests,
+           -> { where friendships: { accepted: false } },
+           class_name: 'Friendship',
+           foreign_key: 'friend_id',
+           dependent: :destroy
 
-  has_many :sent_friend_requests, class_name: 'Friendship',
-                                  foreign_key: 'user_id',
-                                  dependent: :destroy
+  has_many :sent_friend_requests,
+           -> { where friendships: { accepted: false } },
+           class_name: 'Friendship',
+           foreign_key: 'user_id',
+           dependent: :destroy
 
+  # Validations
   validates_presence_of :name, :email, :password
 
+  # Callbacks
   after_create :create_profile
 
   def friendships

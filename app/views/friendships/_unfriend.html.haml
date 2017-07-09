@@ -1,4 +1,5 @@
-= button_to friendship_path(user),
+= button_to friendship_path(find_friendship(user), user_id: user),
+  form_class: 'friendship_button',
   method: :delete,
   remote: true,
   class: 'ui small blue unfriend button' do

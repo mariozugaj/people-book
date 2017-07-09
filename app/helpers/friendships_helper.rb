@@ -8,4 +8,10 @@ module FriendshipsHelper
       render 'friendships/add_friend', user: user
     end
   end
+
+  def find_friendship(user)
+    Friendship.where('user_id = :user_id OR friend_id = :user_id',
+                     user_id: user.id)
+              .first
+  end
 end

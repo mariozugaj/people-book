@@ -1,7 +1,7 @@
-= form_with url: friendships_path(id: user.id) do |form|
+= form_with url: friendships_path(id: user.id), class: 'friendship_button' do |form|
 
   = hidden_field_tag 'friendship[friend_id]', user.id
 
-  = button_tag type: :submit, class: 'ui blue small button' do
+  = button_tag type: :submit, class: 'ui teal small button' do
     %i.add.user.icon
     %span Add friend

@@ -15,4 +15,9 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
+
+  # Friends requests helper
+  def friend_requests
+    current_user.received_friend_requests.includes(user: :profile)
+  end
 end

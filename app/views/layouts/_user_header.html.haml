@@ -13,6 +13,10 @@
   /* Right header menu
   .right.menu
 
+    // Friend requests notifications
+    = render 'layouts/request_notifications'
+
+
     /* Notifications
     -#.ui.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications', 'data-link': 'notifications-link', 'data-notifications': (render template: 'notifications/index', formats: [:json]) }
 
@@ -24,7 +28,7 @@
         .menu.ui.divided.items{ 'data-behavior': 'notification-items' }
 
     /* Current user profile links
-    .ui.floating.pointing.top.right.dropdown.item#user_menu__dropdown
+    .ui.floating.pointing.top.right.hover.dropdown.item
       = image_tag current_user.profile.avatar.url(:thumb), class: 'ui avatar image'
       = link_to current_user.name, user_path(current_user)
       .menu

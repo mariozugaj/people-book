@@ -19,17 +19,22 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-
+    @friendship = Friendship.find(params[:id])
+    if @friendship.update(accepted: true)
+      flash[:success] = "You and #{@friendship.user.name} are now friends"
+    else
+      flash[:alert] = "We couldn\'t accept friend request from #{@friendship.user.name}"
+    end
+    redirect_to request.referrer || root_path
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @friendship = Friendship.where('user_id = :user OR friend_id = :user', user: @user.id).first
+    @user = User.find(params[:user_id])
+    @friendship = Friendship.find(params[:id])
     if @friendship.destroy
-      flash[:success] = "You are no longer friends with #{@user.name}"
-      p flash
+      flash[:success] = "You are no longer friends with #{@user.name}" if @friendship.accepted
       respond_to do |format|
-        format.html { redirect_to @user }
+        format.html { redirect_to request.referrer || @user }
         format.js
       end
     else
@@ -44,6 +49,6 @@ class FriendshipsController < ApplicationController
   private
 
   def friendship_params
-    params.require(:friendship).permit(:id, :friend_id)
+    params.require(:friendship).permit(:user_id, :friend_id)
   end
 end
