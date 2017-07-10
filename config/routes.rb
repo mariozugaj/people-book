@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Root
   authenticated :user do
     root to: 'home#index', as: :authenticated_root
@@ -8,19 +7,19 @@ Rails.application.routes.draw do
 
   # Devise routes
   devise_for :users,
-    controllers:
-    {
-      omniauth_callbacks: 'users/omniauth_callbacks',
-      registrations: 'users/registrations'
-    }
+             controllers:
+             {
+               omniauth_callbacks: 'users/omniauth_callbacks',
+               registrations: 'users/registrations'
+             }
 
   # Concerns
-  concern :likeable do
-    resources :likes, only: %i[create destroy]
+  concern :commentable do
+    resources :comments, only: %i[create destroy], concerns: :likeable
   end
 
-  concern :commentable do
-    resources :comments, only: %i[create destroy]
+  concern :likeable do
+    resources :likes, only: %i[create destroy]
   end
 
   # Users and nested resources

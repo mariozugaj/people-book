@@ -46,20 +46,26 @@
 
   // Status update statistics
   .extra.statistics.content
-    %span.su_whitespace 0 Likes
-    %a.comments_count.su_whitespace{ 'data-behavior': 'show-comments' }
+
+    // Likes count
+    %span.likes.count{ 'data-tooltip': '44'}
+      = pluralize status_update.reload.likes_count, 'like'
+
+    // Comments count
+    %a.comments_count.whitespace--left{ 'data-behavior': 'show-comments' }
       = pluralize status_update.reload.comments_count, 'comment'
 
   // Status update actions
   .extra.content
+
     // Like link
-    %span.su_whitespace
-      %i.like.icon
-      Like
+    - if policy(status_update).like?
+      %span.likes.actions
+        = render_likes status_update
 
     - if policy(status_update).comment?
       // Comment link
-      %a{ 'data-behavior': 'comment-link' }
+      %a.whitespace--left{ 'data-behavior': 'comment-link' }
         %i.comment.icon
         Add comment
 

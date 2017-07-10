@@ -28,24 +28,24 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy, inverse_of: :user
   has_many :photo_albums, dependent: :destroy
   has_many :status_updates, foreign_key: 'author_id', dependent: :destroy
-
   has_many :received_friend_requests,
            -> { where friendships: { accepted: false } },
            class_name: 'Friendship',
            foreign_key: 'friend_id',
            dependent: :destroy
-
   has_many :sent_friend_requests,
            -> { where friendships: { accepted: false } },
            class_name: 'Friendship',
            foreign_key: 'user_id',
            dependent: :destroy
+  has_many :likes
 
   # Validations
   validates_presence_of :name, :email, :password
 
   def friendships
-    Friendship.where('accepted = ? AND (user_id = ? OR friend_id = ?)', true, id, id)
+    Friendship.where('accepted = ?', true)
+              .where('user_id = ? OR friend_id = ?', id, id)
   end
 
   def friend_ids

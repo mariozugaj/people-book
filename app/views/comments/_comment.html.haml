@@ -26,3 +26,11 @@
     // Comment text
     .text
       = simple_format comment.text
+
+    // Comment actions
+    %span.likes.actions
+      - if policy(comment).like?
+        = render_likes comment
+
+    %span.likes.count.whitespace--left
+      = pluralize comment.reload.likes_count, 'like'

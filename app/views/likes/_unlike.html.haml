@@ -1,0 +1,5 @@
+= link_to like_path(likeable.likes.find_by_user_id(current_user.id), format: :js),
+  method: :delete,
+  remote: true do
+  %i.red.like.icon
+  %span.unlike Liked

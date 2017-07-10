@@ -7,14 +7,23 @@ class CommentPolicy
   end
 
   def create?
-    (user.friend_with? comment.commentable.author) || user == comment.commentable.author
+    friend_or_self?
   end
 
   def destroy?
     owner?
   end
 
+  def like?
+    friend_or_self?
+  end
+
   private
+
+  def friend_or_self?
+    (user.friend_with? comment.commentable.author) ||
+      user == comment.commentable.author
+  end
 
   def owner?
     user == comment.author

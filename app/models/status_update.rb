@@ -20,7 +20,9 @@ class StatusUpdate < ApplicationRecord
   # Associations
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :commenters, through: :comments, source: :author
   has_many :likes, as: :likeable, dependent: :destroy
+  has_many :users_who_like_it, through: :likes, source: :user
 
   # Validations
   validates_presence_of :author_id

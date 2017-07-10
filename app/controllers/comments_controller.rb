@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       flash[:success] = 'Comment successfuly posted'
       respond_to do |format|
         format.html { redirect_to request.referrer || root_path }
-        format.js { render partial: 'create_js' }
+        format.js
       end
     else
       flash[:alert] = 'There was a problem posting your comment. Try again?'
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
       flash[:success] = 'Your comment was destroyed'
       respond_to do |format|
         format.html { redirect_to request.referrer || root_path }
-        format.js { render partial: 'destroy_js' }
+        format.js
       end
     else
       flash[:alert] = 'There was a problem destroying your comment. Try again?'
