@@ -40,4 +40,5 @@ PeopleBook.LikesModule = (function () {
 
 $(document).on('turbolinks:load', function () {
   PeopleBook.LikesModule.init();
+  $('.likes.count').popup();
 });

@@ -48,31 +48,30 @@
   .extra.statistics.content
 
     // Likes count
-    %span.likes.count{ 'data-tooltip': '44'}
+    %span.likes.count{ 'data-html': "#{render 'likes/tooltip', likeable: status_update}" }
       = pluralize status_update.reload.likes_count, 'like'
 
     // Comments count
     %a.comments_count.whitespace--left{ 'data-behavior': 'show-comments' }
       = pluralize status_update.reload.comments_count, 'comment'
 
-  // Status update actions
-  .extra.content
+  - if policy(status_update).comment?
+    // Status update actions
+    .extra.content
 
-    // Like link
-    - if policy(status_update).like?
+      // Like link
       %span.likes.actions
         = render_likes status_update
 
-    - if policy(status_update).comment?
       // Comment link
       %a.whitespace--left{ 'data-behavior': 'comment-link' }
         %i.comment.icon
         Add comment
 
-  - if policy(status_update).comment?
-    // Comment form
-    .extra.content.comment__form{ style: 'display: none;' }
-      = render partial: 'comments/form', locals: { commentable: status_update }
+    - if policy(status_update).comment?
+      // Comment form
+      .extra.content.comment__form{ style: 'display: none;' }
+        = render partial: 'comments/form', locals: { commentable: status_update }
 
   // Status update comments
   .comments.content{ style: 'display: none;' }

@@ -26,10 +26,6 @@ class StatusUpdatePolicy
     friend_or_self?
   end
 
-  def like?
-    friend_or_self?
-  end
-
   private
 
   def owner?

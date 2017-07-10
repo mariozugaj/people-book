@@ -29,8 +29,7 @@
 
     // Comment actions
     %span.likes.actions
-      - if policy(comment).like?
-        = render_likes comment
+      = render_likes comment
 
-    %span.likes.count.whitespace--left
+    %span.likes.count.whitespace--left{ 'data-html': "#{render 'likes/tooltip', likeable: comment}" }
       = pluralize comment.reload.likes_count, 'like'

@@ -15,4 +15,7 @@ class Like < ApplicationRecord
   belongs_to :user
 
   validates_presence_of :user, :likeable_id, :likeable_type
+  validates_uniqueness_of :user_id,
+                          scope: %i[likeable_id likeable_type],
+                          message: 'can\'t like more than once'
 end

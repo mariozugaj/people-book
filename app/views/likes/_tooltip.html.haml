@@ -1,0 +1,13 @@
+.ui.divided.items
+  - likeable.users_who_like_it.limit(5).each do |user|
+    .item
+      .content
+        .ui.avatar.image
+          = image_tag user.profile.avatar.url :thumb
+        %span.description= user.name
+
+  - if likeable.users_who_like_it.count > 5
+    .item
+      %span.description
+        +
+        = pluralize (likeable.users_who_like_it.count - 5), 'other'

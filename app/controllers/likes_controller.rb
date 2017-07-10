@@ -4,7 +4,6 @@ class LikesController < ApplicationController
   def create
     @likeable = find_polymorphic(params)
     @like = @likeable.likes.build(like_params)
-    authorize @like
     @like.save
     flash[:success] = 'You liked it!'
     respond_to do |format|
@@ -15,7 +14,6 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find(params[:id])
-    authorize @like
     @like.destroy
     flash[:success] = 'You dont\' like it anymore'
     respond_to do |format|
