@@ -1,7 +1,5 @@
-= button_to friendship_path(find_friendship(user), user_id: user),
-  form_class: 'friendship_button',
-  method: :delete,
-  remote: true,
-  class: 'ui small blue unfriend button' do
-  %i.checkmark.icon
-  %span Friends
+= form_with model: [current_user, find_friendship(user)],
+  class: 'friendship_button', method: :delete do |form|
+  = button_tag type: :submit, class: 'ui small blue unfriend button' do
+    %i.checkmark.icon
+    %span Friends

@@ -1,0 +1,15 @@
+= provide :title, "#{@user.name} | Friends"
+
+// User aside info
+.four.wide.column
+  = render 'users/aside', user: @user
+
+.twelve.wide.column
+
+  // Cover photo and links
+  = render 'users/cover_menu', user: @user
+
+  - if @user.friends.any?
+    // Friends index
+    .ui.three.column.grid
+      = render partial: 'users/user', collection: @friends, as: :user

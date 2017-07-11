@@ -26,8 +26,6 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     resources :status_updates, shallow: true, concerns: %i[commentable likeable]
     resource :profile, only: %i[edit update]
+    resources :friendships, only: %i[index create update destroy]
   end
-
-  # Friendship resources
-  resources :friendships, only: %i[create update destroy]
 end

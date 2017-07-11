@@ -6,8 +6,9 @@
     class: class_string('item', 'active' => current_page?(user_path(user)))
 
   // User friends link
-  %a{ class: class_string('item') }
-    Friends
+  = link_to user_friendships_path(user),
+    class: class_string('item', 'active' => current_page?(user_friendships_path(user))) do
+    %span Friends
     .ui.left.pointing.friend_count.label
       = user.friends.count
 

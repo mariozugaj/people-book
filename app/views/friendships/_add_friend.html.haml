@@ -1,4 +1,5 @@
-= form_with url: friendships_path(id: user.id), class: 'friendship_button' do |form|
+= form_with model: [current_user, current_user.sent_friend_requests.build],
+  class: 'friendship_button' do |form|
 
   = hidden_field_tag 'friendship[friend_id]', user.id
 

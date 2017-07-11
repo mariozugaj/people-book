@@ -1,27 +1,32 @@
-.ui.card
+.column
+  .ui.raised.card
+    .blurring.dimmable.image
 
-  .image
-    = image_tag user.profile.avatar.url :normal, alt: user.name
+      // Dimmer containing friendship button
+      .ui.dimmer
+        .content
+          .center
+            - if current_user == user
+              .ui.teal.button It's you, yeey!!
+            - else
+              = render_friendship user
 
-  .content
-    = link_to user.name, user_path(user), class: 'header'
+      // User's image
+      = image_tag user.profile.avatar.url :normal
+    .content
 
-    .meta
-      %span.date
-        Joined
-        = time_ago_in_words user.created_at
-        ago
-  -#
-    .description
-      = "I am a #{user.profile.profession.downcase} from #{user.profile.hometown}, #{user.profile.age} years old, currently #{user.profile.relationship_status.downcase}"
--#
-  .extra.content
+      // Link to user's name
+      = link_to user.name, user, class: 'header'
 
-    %a
-      %i.user.icon
-      %span.friends_count
-        = pluralize user.friends_count, 'friend'
+      // When did the user join PeopleBook?
+      .meta
+        %span.date
+          Joined
+          = time_ago_in_words user.created_at
+          ago
 
-    - if current_user != user
-      %span.right.floated.friendship
-        = render 'friend_requests/form', user: user
+    // Link to and count of user's friends
+    .extra.content
+      = link_to user_friendships_path(user) do
+        %i.users.icon
+        = pluralize user.reload.friends.count, 'friend'

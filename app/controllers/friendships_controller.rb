@@ -1,25 +1,23 @@
 class FriendshipsController < ApplicationController
+  before_action :set_friendship, only: %i[update destroy]
+
+  def index
+    @user = User.find(params[:user_id])
+    @friends = @user.friends
+  end
 
   def create
     @friendship = current_user.sent_friend_requests.build(friendship_params)
     @friend = @friendship.friend
     if @friendship.save
       flash[:success] = "You sent a friend request to #{@friend.name}"
-      respond_to do |format|
-        format.html { redirect_to @friend }
-        format.js
-      end
     else
       flash[:alert] = "We couldn\'t send friend request to #{@friend.name}"
-      respond_to do |format|
-        format.html { redirect_to @friend }
-        format.js { render 'shared/flash_js' }
-      end
     end
+    redirect_to request.referrer || @friend
   end
 
   def update
-    @friendship = Friendship.find(params[:id])
     if @friendship.update(accepted: true)
       flash[:success] = "You and #{@friendship.user.name} are now friends"
     else
@@ -29,24 +27,20 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
-    @friendship = Friendship.find(params[:id])
+    @friend = @friendship.friend
     if @friendship.destroy
-      flash[:success] = "You are no longer friends with #{@user.name}" if @friendship.accepted
-      respond_to do |format|
-        format.html { redirect_to request.referrer || @user }
-        format.js
-      end
+      flash[:success] = "You are no longer friends with #{@friend.name}" if @friendship.accepted
     else
-      flash[:alert] = "We couldn\'t remove #{@user.name} as your friend"
-      respond_to do |format|
-        format.html { redirect_to @user }
-        format.js { render 'shared/flash_js' }
-      end
+      flash[:alert] = "We couldn\'t remove #{@friend.name} as your friend"
     end
+    redirect_to request.referrer || @friend
   end
 
   private
+
+  def set_friendship
+    @friendship = Friendship.find(params[:id])
+  end
 
   def friendship_params
     params.require(:friendship).permit(:user_id, :friend_id)

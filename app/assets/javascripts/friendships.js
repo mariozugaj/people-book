@@ -5,4 +5,8 @@ $(document).on('turbolinks:load', function () {
     var unfriend = "<i class='remove icon'></i><span>Unfriend</span>";
     container.html(e.type == 'mouseenter' ? unfriend : friends);
   });
+
+  $('.raised.card .image').dimmer({
+    on: 'hover',
+  });
 });
