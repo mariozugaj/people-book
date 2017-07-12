@@ -1,0 +1,113 @@
+.row
+  .column
+    .ui.top.attached.secondary.clearing.segment
+      %h2.ui.left.floated.header
+        %i.camera.retro.icon
+        .content
+          = link_to @photo_album.name, user_photo_album_path(@author, @photo_album)
+
+      // Link to the photo album
+      = link_to user_photo_album_path(@author, @photo_album),
+        class: 'ui basic grey right floated button' do
+        %i.arrow.circle.outline.left.icon
+        Back to photo album
+
+    // Small navigational images
+    .ui.attached.segment
+      .ui.images.thumb.container
+        - @photo_album.images.each do |image|
+          = link_to image_path(image) do
+            = image_tag image.image.url :thumb, class: 'ui rounded image'
+.row
+
+  // Large image
+  .ui.eleven.wide.column
+    .ui.segment
+
+      .ui.centered.rounded.image
+
+        - if policy(@image).edit?
+          // Set as avatar and cover photo links
+          = link_to 'Set as avatar', user_set_avatar_path(@author, image_id: @image),
+            method: :post,
+            class: 'ui blue ribbon label'
+
+          = link_to 'Set as cover photo', user_set_cover_path(@author, image_id: @image),
+            method: :post,
+            class: 'ui teal right ribbon label'
+
+        // Actual image
+        = image_tag @image.image.url(:normal)
+
+  // Image aside
+  .ui.five.wide.column{ 'data-id': @image.id, 'data-type': @image.class }
+    .ui.fluid.card
+
+      // Header info
+      .content
+        - if policy(@image).edit?
+
+          // Edit and delete buttons
+          .ui.right.floated.meta
+
+            = link_to 'Edit', edit_image_path(@image),
+                      class: 'ui blue label'
+
+            = link_to 'Delete', image_path(@image),
+                      method: :delete,
+                      data: { confirm: 'Are you sure' },
+                      class: 'ui red label'
+
+        // Author's avatar
+        = link_to user_path(@image.author) do
+          = image_tag @image.author.profile.avatar.url(:thumb),
+            class: 'ui left floated avatar image'
+
+        // Author's name
+        .header
+          = link_to @image.author.name, user_path(@image.author)
+
+        // Time at @image creation
+        .meta
+          = time_ago_in_words(@image.created_at)
+          ago
+
+      - if @image.description
+        .content
+          .description
+            = simple_format @image.description
+
+      // Image statistics
+      .extra.statistics.content
+
+        // Likes count
+        %span.likes.count{ 'data-html': "#{render 'likes/tooltip', likeable: @image}" }
+          = pluralize @image.reload.likes_count, 'like'
+
+        // Comments count
+        %a.comments_count.whitespace--left{ 'data-behavior': 'show-comments' }
+          = pluralize @image.reload.comments_count, 'comment'
+
+      // Image actions
+      .extra.content
+
+        // Like link
+        %span.likes.actions
+          = render_likes @image
+
+        - if policy(@image).comment?
+          // Comment link
+          %a.whitespace--left{ 'data-behavior': 'comment-link' }
+            %i.comment.icon
+            Add comment
+
+      - if policy(@image).comment?
+        // Comment form
+        .extra.content.comment__form{ style: 'display: none;' }
+          = render partial: 'comments/form', locals: { commentable: @image }
+
+      // Image comments
+      .comments.content{ style: 'display: none;' }
+        %h4 Comments
+        .ui.comments{ style: 'max-width: 100%' }
+          = render @image.comments

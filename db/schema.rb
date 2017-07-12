@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704100221) do
+ActiveRecord::Schema.define(version: 20170711171103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20170704100221) do
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
+  create_table "images", force: :cascade do |t|
+    t.string "description"
+    t.string "image"
+    t.integer "likes_count"
+    t.integer "comments_count"
+    t.bigint "photo_album_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_album_id"], name: "index_images_on_photo_album_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.string "likeable_type"
     t.bigint "likeable_id"
@@ -51,11 +62,12 @@ ActiveRecord::Schema.define(version: 20170704100221) do
   end
 
   create_table "photo_albums", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "author_id"
     t.string "name"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_photo_albums_on_user_id"
+    t.index ["author_id"], name: "index_photo_albums_on_author_id"
   end
 
   create_table "profiles", force: :cascade do |t|

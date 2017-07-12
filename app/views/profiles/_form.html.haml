@@ -1,46 +1,47 @@
-.ui.dividing.header Your profile info
+%h2.ui.top.attached.block.header
+  %i.configure.icon
+  .content
+    = yield :title
+    .sub.header Manage your profile
 
-= form_with model: [user, user.profile], multipart: true, class: 'ui form' do |form|
+.ui.attached.segment
+  = form_with model: [user, user.profile], multipart: true, class: 'ui form' do |form|
 
-  .field
-    = form.label :birthday
-    = form.date_field :birthday
+    .equal.width.fields
+      .field
+        = form.label :birthday
+        = form.date_field :birthday
 
-  .field
-    = form.label :education
-    = form.text_field :education
+      .field
+        = form.label :education
+        = form.text_field :education
 
-  .field
-    = form.label :hometown
-    = form.text_field :hometown
+    .equal.width.fields
+      .field
+        = form.label :hometown
+        = form.text_field :hometown
 
-  .field
-    = form.label :profession
-    = form.text_field :profession
+      .field
+        = form.label :profession
+        = form.text_field :profession
 
-  .field
-    = form.label :company
-    = form.text_field :company
+    .equal.width.fields
+      .field
+        = form.label :company
+        = form.text_field :company
 
-  .field
-    = form.label :relationship_status
-    = form.select :relationship_status, relationship_options, { include_blank: true}, { class: 'ui fluid dropdown' }
+      .field
+        = form.label :relationship_status
+        = form.select :relationship_status, relationship_options, { include_blank: true}, { class: 'ui fluid dropdown' }
 
-  .field
-    = form.label :about
-    = form.text_field :about
+    .equal.width.fields
+      .field
+        = form.label :about
+        = form.text_field :about
 
-  .field
-    = form.label :phone_number
-    = form.text_field :phone_number
+      .field
+        = form.label :phone_number
+        = form.text_field :phone_number
 
-  .field
-    = form.label :avatar
-    = form.file_field :avatar
-
-  .field
-    = form.label :cover_photo
-    = form.file_field :cover_photo
-
-  .actions
-    = form.submit class: 'ui positive button', data: { 'disable-with': 'Updating...' }
+    .actions
+      = form.submit class: 'ui positive button', data: { 'disable-with': 'Updating...' }

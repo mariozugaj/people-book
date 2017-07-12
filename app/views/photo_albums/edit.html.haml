@@ -1,0 +1,47 @@
+= provide :title, "#{current_user.name} | Edit Photo Album"
+
+// User aside info
+.four.wide.column
+  = render 'users/aside', user: current_user
+
+.twelve.wide.column
+
+  // Cover photo and links
+  = render 'users/cover_menu', user: current_user
+
+  // New photo album form
+  .ui.top.attached.secondary.clearing.segment
+    %h2.ui.left.floated.header
+      %i.camera.retro.icon
+      .content
+        Edit photo album
+
+    - unless policy(@photo_album).default?
+      = link_to "Delete #{@photo_album.name}",
+        user_photo_album_path(current_user, @photo_album),
+        method: :delete,
+        data: { confirm: 'Are you sure you want to delete it?' },
+        class: 'ui negative basic right floated button'
+
+    = link_to user_photo_album_path(current_user, @photo_album),
+      class: 'ui basic grey right floated button' do
+      %i.arrow.circle.outline.left.icon
+      Back to photo album
+
+  .ui.attached.segment
+    = render 'photo_albums/form', author: current_user
+
+  - if @photo_album.persisted? && @photo_album.images.any?
+    .ui.attached.segment
+      .ui.small.images
+        - @photo_album.images.each do |image|
+          .ui.blurring.dimmable.image
+            .ui.dimmer
+              .content
+                .center
+                  = link_to 'Delete',
+                    image_path(image.id, photo_album_id: image.photo_album.id),
+                    method: :delete,
+                    class: 'ui negative button',
+                    data: { confirm: 'Are you sure you want to destroy it?'}
+            = image_tag image.image.url :mini

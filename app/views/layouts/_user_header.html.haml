@@ -29,8 +29,9 @@
 
     /* Current user profile links
     .ui.floating.pointing.top.right.hover.dropdown.item
-      = image_tag current_user.profile.avatar.url(:thumb), class: 'ui avatar image'
-      = link_to current_user.name, user_path(current_user)
+      = link_to user_path(current_user) do
+        = image_tag current_user.profile.avatar.url(:thumb), class: 'ui avatar image'
+        = current_user.name
       .menu
         = link_to 'Edit account', edit_user_registration_path(current_user), class: 'item'
         = link_to 'Edit profile', edit_user_profile_path(current_user), class: 'item'

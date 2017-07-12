@@ -7,7 +7,7 @@ PeopleBook.LikesModule = (function () {
   };
 
   var _unlikeLinkListener = function () {
-    $('.likes.actions').on('mouseenter mouseleave', function (e) {
+    $(document).on('mouseenter mouseleave', '.likes.actions', function (e) {
       var link = $(this).find('.unlike');
       link.text(e.type == 'mouseenter' ? 'Unlike' : 'Liked');
     });

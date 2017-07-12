@@ -26,6 +26,13 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     resources :status_updates, shallow: true, concerns: %i[commentable likeable]
     resource :profile, only: %i[edit update]
+    post :set_avatar, to: 'profiles#set_avatar'
+    post :set_cover, to: 'profiles#set_cover'
     resources :friendships, only: %i[index create update destroy]
+    resources :photo_albums do
+      resources :images, only: %i[show edit create update destroy],
+                         shallow: true,
+                         concerns: %i[commentable likeable]
+    end
   end
 end

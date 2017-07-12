@@ -1,0 +1,22 @@
+= form_with model: [author, @photo_album],
+  class: 'ui form',
+  multipart: true do |form|
+
+  .field
+    = form.label :name
+    - unless policy(@photo_album).default?
+      = form.text_field :name
+    - else
+      = form.text_field :name, readonly: true
+
+  .field
+    = form.label :description
+    = form.text_area :description, rows: 4
+
+  = fields_for :images, @photo_album.images do |images_form|
+    .field
+      = images_form.label :images
+      = images_form.file_field :image, multiple: true, name: 'images[image][]'
+
+  .actions
+    = form.submit class: 'ui positive button'

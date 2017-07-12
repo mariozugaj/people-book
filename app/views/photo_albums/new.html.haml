@@ -1,0 +1,20 @@
+= provide :title, "#{current_user.name} | New Photo Album"
+
+// User aside info
+.four.wide.column
+  = render 'users/aside', user: current_user
+
+.twelve.wide.column
+
+  // Cover photo and links
+  = render 'users/cover_menu', user: current_user
+
+  // New photo album form
+  .ui.top.attached.secondary.clearing.segment
+    %h2.ui.left.floated.header
+      %i.camera.retro.icon
+      .content
+        Create new photo album
+
+  .ui.attached.segment
+    = render 'photo_albums/form', author: current_user

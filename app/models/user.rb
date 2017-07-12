@@ -1,4 +1,4 @@
-  # == Schema Information
+# == Schema Information
 #
 # Table name: users
 #
@@ -6,7 +6,8 @@
 #  name                   :string           not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  friends_count          :string           default("0")
+#  provider               :string
+#  uid                    :string
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -26,7 +27,7 @@ class User < ApplicationRecord
 
   # Associations
   has_one :profile, dependent: :destroy, inverse_of: :user
-  has_many :photo_albums, dependent: :destroy
+  has_many :photo_albums, foreign_key: 'author_id', dependent: :destroy
   has_many :status_updates, foreign_key: 'author_id', dependent: :destroy
   has_many :received_friend_requests,
            -> { where friendships: { accepted: false } },
@@ -39,6 +40,8 @@ class User < ApplicationRecord
            foreign_key: 'user_id',
            dependent: :destroy
   has_many :likes
+  has_many :comments
+  has_many :images, through: :photo_albums
 
   # Validations
   validates_presence_of :name, :email, :password

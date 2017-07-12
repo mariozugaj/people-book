@@ -1,0 +1,72 @@
+.row
+  .column
+    .ui.top.attached.secondary.clearing.segment
+      %h2.ui.left.floated.header
+        %i.camera.retro.icon
+        .content
+          = link_to @photo_album.name, user_photo_album_path(@author, @photo_album)
+
+      // Link to the photo album
+      = link_to user_photo_album_path(@author, @photo_album),
+        class: 'ui basic grey right floated button' do
+        %i.arrow.circle.outline.left.icon
+        Back to photo album
+
+    // Small navigational images
+    .ui.attached.segment
+      .ui.images.thumb.container
+        - @photo_album.images.each do |image|
+          = link_to image_path(image) do
+            = image_tag image.image.url :thumb, class: 'ui rounded image'
+.row
+
+  // Large image
+  .ui.eleven.wide.column
+    .ui.segment
+
+      .ui.centered.rounded.image
+        // Set as avatar and cover photo links
+        = link_to 'Set as avatar', user_set_avatar_path(@author, image_id: @image),
+          method: :post,
+          class: 'ui blue ribbon label'
+
+        = link_to 'Set as cover photo', user_set_cover_path(@author, image_id: @image),
+          method: :post,
+          class: 'ui teal right ribbon label'
+
+        // Actual image
+        = image_tag @image.image.url(:normal)
+
+  // Image aside
+  .ui.five.wide.column{ 'data-id': @image.id, 'data-type': @image.class }
+    .ui.fluid.card
+
+      // Header info
+      .content
+
+        // Author's avatar
+        = link_to user_path(@image.author) do
+          = image_tag @image.author.profile.avatar.url(:thumb),
+            class: 'ui left floated avatar image'
+
+        // Author's name
+        .header
+          = link_to @image.author.name, user_path(@image.author)
+
+        // Time at @image creation
+        .meta
+          = time_ago_in_words(@image.created_at)
+          ago
+
+      .content
+        = form_with model: @image, class: 'ui form' do |form|
+
+          .field
+            = form.text_area :description,
+              name: 'description',
+              placeholder: 'Image description',
+              rows: 3
+
+          .actions
+            = link_to 'Cancel', @image, class: 'ui grey basic button'
+            = form.submit 'Update', class: 'ui blue button'

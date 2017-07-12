@@ -1,0 +1,44 @@
+= provide :title, "#{@author.name} | #{@photo_album.name}"
+
+// author aside info
+.four.wide.column
+  = render 'users/aside', user: @author
+
+.twelve.wide.column
+
+  // Cover photo and links
+  = render 'users/cover_menu', user: @author
+
+  // New photo album form
+  .ui.top.attached.secondary.clearing.segment
+    %h2.ui.left.floated.header
+      %i.camera.retro.icon
+      .content
+        = @photo_album.name
+
+    = link_to user_photo_albums_path,
+      class: 'ui right floated grey basic button' do
+      %i.arrow.circle.outline.left.icon
+      Back to photo albums
+
+    - if policy(@author.photo_albums.build).create?
+      = link_to edit_user_photo_album_path(@author, @photo_album),
+        class: 'ui right floated blue button' do
+        %i.add.square.icon
+        EDIT or ADD new images
+
+  - unless @photo_album.description.blank?
+    .ui.attached.segment
+      .description
+        = simple_format @photo_album.description
+
+  // Photo albums index
+  .ui.attached.segment
+    - if @photo_album.images.any?
+      .ui.three.column.grid
+        - @photo_album.images.each do |image|
+          .column
+            = link_to image_path(image), class: 'ui medium image' do
+              = image_tag image.image.url :mini
+    - else
+      %h3 No images yet
