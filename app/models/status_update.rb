@@ -25,15 +25,13 @@ class StatusUpdate < ApplicationRecord
   has_many :users_who_like_it, through: :likes, source: :user
 
   # Validations
-  validates_presence_of :author_id
+  validates_presence_of :author
   validates :text, length: { maximum: 4000, minimum: 1 }
   validate :text_or_image
 
   private
 
   def text_or_image
-    if text.nil? && image.nil?
-      errors.add 'Please enter either some text or image or both.'
-    end
+    errors.add 'Please enter either some text or image or both.' if text.nil? && image.nil?
   end
 end

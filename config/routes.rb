@@ -35,4 +35,8 @@ Rails.application.routes.draw do
                          concerns: %i[commentable likeable]
     end
   end
+
+  resources :notifications, only: :index do
+    post 'mark_as_read', on: :collection
+  end
 end

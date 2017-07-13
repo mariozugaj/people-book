@@ -1,11 +1,10 @@
 class StatusUpdatesController < ApplicationController
-
   before_action :set_status_update, only: %i[show edit update destroy]
 
   def show; end
 
   def create
-    @status_update = current_user.status_updates.build(status_update_params)
+    @status_update = StatusUpdate.new(status_update_params)
     authorize @status_update
     if @status_update.save
       flash[:success] = 'You\'ve posted an update.'
@@ -47,6 +46,6 @@ class StatusUpdatesController < ApplicationController
   end
 
   def status_update_params
-    params.require(:status_update).permit(:text, :image, :remote_image_url)
+    params.require(:status_update).permit(:author_id, :text, :image, :remote_image_url)
   end
 end
