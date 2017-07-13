@@ -4,29 +4,32 @@
       multipart: true,
       class: 'ui form' do |form|
 
+      = hidden_field_tag 'status_update[author_id]', current_user.id
+
       .field
         = form.text_area :text,
-          rows: 1,
+          rows: 3,
           placeholder: 'What\'s on your mind today?',
-          id: 'status_update__textarea'
+          data: { 'behavior': 'su-form-link' }
 
       .actions{ style: 'display: none;'}
         .equal.width.fields
           .field
-            = form.label :image
+            = form.label :upload_image
             = form.file_field :image
 
           .field
-            = form.label :cloud_image
+            = form.label :image_from_url
             = form.text_field :remote_image_url, placeholder: 'Paste image url here...'
 
         = form.submit 'Post',
-          class: 'ui blue right floated button',
-          data: { 'disable-with': 'Posting...' }
+          class: 'ui blue right floated button'
+
+        = link_to 'Cancel', nil,
+          class: 'ui blue basic right floated button',
+          data: { 'behavior': 'su-form-cancel-link' }
 
         - if status_update.persisted?
-          = link_to 'Cancel', request.referrer,
-            class: 'ui basic grey right floated button'
 
           = link_to 'Delete',
             status_update_path(status_update),

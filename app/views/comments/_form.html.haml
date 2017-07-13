@@ -8,9 +8,8 @@
 
   .actions
     = form.submit 'Comment',
-      class: 'ui blue right floated comment-submit button',
-      data: { 'disable-with': 'Posting comment...' }
+      class: 'ui blue right floated comment-submit button'
 
   = link_to 'Cancel', nil,
     data: { 'behavior': 'cancel-link' },
-    class: 'ui right floated basic grey button'
+    class: 'ui right floated basic blue button'

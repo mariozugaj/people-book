@@ -8,7 +8,7 @@
 
       // Link to the photo album
       = link_to user_photo_album_path(@author, @photo_album),
-        class: 'ui basic grey right floated button' do
+        class: 'ui basic blue right floated button' do
         %i.arrow.circle.outline.left.icon
         Back to photo album
 
@@ -68,5 +68,5 @@
               rows: 3
 
           .actions
-            = link_to 'Cancel', @image, class: 'ui grey basic button'
+            = link_to 'Cancel', @image, class: 'ui blue basic button'
             = form.submit 'Update', class: 'ui blue button'

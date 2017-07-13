@@ -17,7 +17,7 @@
         = @photo_album.name
 
     = link_to user_photo_albums_path,
-      class: 'ui right floated grey basic button' do
+      class: 'ui right floated blue basic button' do
       %i.arrow.circle.outline.left.icon
       Back to photo albums
 
@@ -38,7 +38,7 @@
       .ui.three.column.grid
         - @photo_album.images.each do |image|
           .column
-            = link_to image_path(image), class: 'ui medium image' do
+            = link_to image_path(image), class: 'ui medium rounded image' do
               = image_tag image.image.url :mini
     - else
       %h3 No images yet
