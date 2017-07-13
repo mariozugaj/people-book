@@ -17,15 +17,18 @@
     = render 'layouts/request_notifications'
 
 
-    /* Notifications
-    -#.ui.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications', 'data-link': 'notifications-link', 'data-notifications': (render template: 'notifications/index', formats: [:json]) }
+    //Notifications
+    .ui.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications',
+      'data-link': 'notifications-link',
+      'data-notifications': (render template: 'notifications/index',
+      formats: [:json]) }
 
-        /* Notifications bell icon and label
-        .right.pointing.ui.red.label{ 'data-behavior': 'unread-count' }
-        %i.bell.icon
+      /* Notifications bell icon and label
+      .right.pointing.ui.red.label{ 'data-behavior': 'unread-count' }
+      %i.bell.icon
 
-        /* Notifications dropdown
-        .menu.ui.divided.items{ 'data-behavior': 'notification-items' }
+      /* Notifications dropdown
+      .menu.ui.divided.items{ 'data-behavior': 'notification-items' }
 
     /* Current user profile links
     .ui.floating.pointing.top.right.hover.dropdown.item

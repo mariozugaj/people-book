@@ -1,0 +1,18 @@
+.item{ id: ['notification', notification.id] }
+  .card
+    .content
+      .ui.avatar.image
+        = image_tag notification.actor.profile.avatar_url
+      %span.ui.small.header
+        = link_to notification.actor.name, user_path(notification.actor)
+      %span.description
+        requested to be your friend
+    .extra.content
+      - unless notification.recipient.friend_with? notification.actor
+        .ui.two.buttons
+          = link_to 'Approve', friendships_path('friendship[friend_id]': notification.actor), method: 'post', class: 'ui basic green button'
+          = link_to 'Decline', friend_request_path(notification.notifiable_id), method: 'delete', class: 'ui basic red button'
+      - else
+        .ui.basic.blue.icon.button
+          %i.checkmark.icon
+          Friends

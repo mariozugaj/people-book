@@ -1,0 +1,15 @@
+.item
+  %a.content{ href: user_status_update_path(notification.actor, notification.notifiable_type.underscore.downcase, anchor: dom_id(notification.notifiable)) }
+
+    .ui.avatar.image
+      = image_tag notification.actor.profile.avatar.url :thumb
+    %span.ui.small.header= notification.actor.name
+    %span.description
+      = notification.action
+      a
+      = notification.notifiable_type.underscore.humanize.downcase
+    %span.meta
+      = time_ago_in_words notification.created_at
+      ago
+    - if notification.read_at.nil?
+      %span.ui.red.empty.circular.label

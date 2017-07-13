@@ -1,0 +1,15 @@
+.item
+  %a.content{ href: post_path(notification.notifiable) }
+
+    .ui.avatar.image
+      = image_tag notification.actor.profile.avatar_url
+    %span.ui.small.header= notification.actor.name
+    %span.description
+      = notification.action
+      your
+      = notification.notifiable_type.underscore.humanize.downcase
+    %span.meta
+      = time_ago_in_words notification.created_at
+      ago
+    - if notification.read_at.nil?
+      %span.ui.red.empty.circular.label
