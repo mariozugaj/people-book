@@ -5,6 +5,5 @@ class UsersController < ApplicationController
     @new_status_update = StatusUpdate.new
     @feed = @user.status_updates.includes(:author,
                                           comments: [:author, author: :profile])
-    @friends = @user.friends
   end
 end

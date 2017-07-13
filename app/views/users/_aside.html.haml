@@ -16,4 +16,4 @@
       .three.column.row
         .column
           .ui.header Friends
-      = render partial: 'users/user_thumb', collection: @friends, as: :user
+      = render partial: 'users/user_thumb', collection: user.friends.limit(10), as: :user
