@@ -1,0 +1,15 @@
+.ui.comments
+  .blue.comment
+    .avatar
+      = image_tag notification.actor.profile.avatar.url :thumb
+    .content
+      %span.author= notification.actor.name
+      .metadata
+        .date
+          = time_ago_in_words notification.created_at
+          ago
+        - if !notification.read_at
+          %span.ui.red.empty.circular.label
+      .text
+        = notification.action
+        = message

@@ -24,4 +24,5 @@ $(document).on('turbolinks:load', function () {
   PeopleBook.FlashModule.init();
   PeopleBook.FriendshipsModule.init();
   PeopleBook.LikesModule.init();
+  new Notifications;
 });

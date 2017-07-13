@@ -5,6 +5,14 @@ class LikesController < ApplicationController
     @likeable = find_polymorphic(params)
     @like = @likeable.likes.build(like_params)
     @like.save
+
+    # Send notifications
+    recipient = @likeable.author unless @likeable.author == current_user
+    Notification.create(recipient: recipient,
+                        actor: current_user,
+                        action: 'liked',
+                        notifiable: @likeable)
+
     flash[:success] = 'You liked it!'
     respond_to do |format|
       format.html { redirect_to request.referrer || root_path }

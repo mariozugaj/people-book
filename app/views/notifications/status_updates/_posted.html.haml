@@ -1,7 +1,7 @@
 .item
-  = link_to user_path(notification.actor),
+  = link_to status_update_path(notification.notifiable),
     class: 'content' do
 
     = render partial: 'notifications/shared/notification_body',
       locals: { notification: notification,
-      message: 'your friend request' }
+      message: 'a status update' }

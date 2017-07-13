@@ -1,5 +1,5 @@
 class PhotoAlbumsController < ApplicationController
-  before_action :set_author, only: %i[index show create update]
+  before_action :set_author, only: %i[index show create update ]
   before_action :set_photo_album, only: %i[show edit update destroy]
 
   def index
@@ -21,6 +21,7 @@ class PhotoAlbumsController < ApplicationController
     authorize @photo_album
     if @photo_album.save
       if params[:images]
+        send_notification(@author, @photo_album)
         params[:images][:image].each do |image|
           @photo_album.images.create(image: image)
         end
@@ -35,6 +36,7 @@ class PhotoAlbumsController < ApplicationController
     authorize @photo_album
     if @photo_album.update(photo_album_params)
       if params[:images]
+        send_notification(@author, @photo_album)
         params[:images][:image].each do |image|
           @photo_album.images.create(image: image)
         end
@@ -56,6 +58,16 @@ class PhotoAlbumsController < ApplicationController
   end
 
   private
+
+  def send_notification(author, photo_album)
+    recipients = author.friends
+    recipients.each do |user|
+      Notification.create!(recipient: user,
+                           actor: current_user,
+                           action: 'shared',
+                           notifiable: photo_album)
+    end
+  end
 
   def set_photo_album
     @photo_album = PhotoAlbum.find(params[:id])

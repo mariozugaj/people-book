@@ -10,6 +10,16 @@ class ProfilesController < ApplicationController
   def update
     authorize @profile
     if @profile.update(profile_params)
+
+      # Send notifications
+      recipients = @profile.user.friends
+      recipients.each do |user|
+        Notification.create(recipient: user,
+                            actor: current_user,
+                            action: 'updated',
+                            notifiable: @profile)
+      end
+
       flash[:success] = 'You\'ve successfuly updated your profile'
       redirect_to current_user
     else

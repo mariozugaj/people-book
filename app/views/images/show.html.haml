@@ -1,24 +1,4 @@
 .row
-  .column
-    .ui.top.attached.teal.clearing.segment
-      %h2.ui.left.floated.header
-        %i.camera.retro.icon
-        .content
-          = link_to @photo_album.name, user_photo_album_path(@author, @photo_album)
-
-      // Link to the photo album
-      = link_to user_photo_album_path(@author, @photo_album),
-        class: 'ui basic blue right floated button' do
-        %i.arrow.circle.outline.left.icon
-        Back to photo album
-
-    // Small navigational images
-    .ui.attached.segment
-      .ui.images.thumb.container
-        - @photo_album.images.each do |image|
-          = link_to image_path(image) do
-            = image_tag image.image.url :thumb, class: 'ui rounded image'
-.row
 
   // Large image
   .ui.eleven.wide.column
@@ -41,7 +21,7 @@
 
   // Image aside
   .ui.five.wide.column{ 'data-id': @image.id, 'data-type': @image.class }
-    .ui.fluid.card
+    .ui.fluid.card.image_show_card
 
       // Header info
       .content
@@ -109,5 +89,26 @@
       // Image comments
       .comments.content{ style: 'display: none;' }
         %h4 Comments
-        .ui.comments{ style: 'max-width: 100%' }
+        .ui.comments.container{ style: 'max-width: 100%' }
           = render @image.comments
+
+.row
+  .column
+    // Small navigational images
+    .ui.top.attached.teal.segment
+      .ui.images.thumb.container
+        - @photo_album.images.each do |image|
+          = link_to image_path(image) do
+            = image_tag image.image.url :thumb, class: 'ui rounded image'
+
+    .ui.attached.clearing.segment
+      %h2.ui.left.floated.header
+        %i.camera.retro.icon
+        .content
+          = link_to @photo_album.name, user_photo_album_path(@author, @photo_album)
+
+      // Link to the photo album
+      = link_to user_photo_album_path(@author, @photo_album),
+        class: 'ui basic blue right floated button' do
+        %i.arrow.circle.outline.left.icon
+        Back to photo album

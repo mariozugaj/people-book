@@ -19,6 +19,14 @@ class FriendshipsController < ApplicationController
 
   def update
     if @friendship.update(accepted: true)
+
+      # Send notifications
+      recipient = @friendship.user
+      Notification.create(recipient: recipient,
+                          actor: current_user,
+                          action: 'accepted',
+                          notifiable: @friendship)
+
       flash[:success] = "You and #{@friendship.user.name} are now friends"
     else
       flash[:alert] = "We couldn\'t accept friend request from #{@friendship.user.name}"
@@ -27,7 +35,11 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    @friend = @friendship.friend
+    @friend = if @friendship.friend == current_user
+                @friendship.user
+              else
+                @friendship.friend
+              end
     if @friendship.destroy
       flash[:success] = "You are no longer friends with #{@friend.name}" if @friendship.accepted
     else

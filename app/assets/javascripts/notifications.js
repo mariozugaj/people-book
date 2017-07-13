@@ -1,7 +1,7 @@
 var Notifications,
-  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
 
-Notifications = (function() {
+Notifications = (function () {
   function Notifications() {
     this.handleSucess = bind(this.handleSucess, this);
     this.handleClick = bind(this.handleClick, this);
@@ -9,40 +9,47 @@ Notifications = (function() {
     if (this.notifications.length > 0) {
       this.handleSucess(this.notifications.data('notifications'));
       $("[data-link='notifications-link']").on('click', this.handleClick);
+      setInterval(((function (_this) {
+        return function () {
+          return _this.getNewNotifications();
+        };
+      })(this)), 5000);
     }
   }
 
-  Notifications.prototype.getNewNotifications = function() {
+  Notifications.prototype.getNewNotifications = function () {
     return $.ajax({
-      url: 'notifications.json',
+      url: '/notifications.json',
       dataType: 'JSON',
       method: 'GET',
-      success: this.handleSucess
+      success: this.handleSucess,
     });
   };
 
-  Notifications.prototype.handleClick = function(e) {
+  Notifications.prototype.handleClick = function (e) {
     return $.ajax({
-      url: "/notifications/mark_as_read",
+      url: '/notifications/mark_as_read',
       dataType: 'JSON',
       method: 'POST',
-      success: function() {
+      success: function () {
         return $("[data-behavior='unread-count']").text(0);
-      }
+      },
     });
   };
 
-  Notifications.prototype.handleSucess = function(data) {
+  Notifications.prototype.handleSucess = function (data) {
     var items, unreadCount;
-    items = $.map(data, function(notification) {
+    items = $.map(data, function (notification) {
       return notification.template;
     });
+
     unreadCount = 0;
-    $.each(data, function(i, notification) {
+    $.each(data, function (i, notification) {
       if (notification.unread) {
         return unreadCount += 1;
       }
     });
+
     $("[data-behavior='unread-count']").text(unreadCount);
     return $("[data-behavior='notification-items']").html(items);
   };

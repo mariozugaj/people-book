@@ -42,6 +42,7 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
   has_many :images, through: :photo_albums
+  has_many :notifications, foreign_key: :recipient_id
 
   # Validations
   validates_presence_of :name, :email, :password

@@ -1,7 +1,7 @@
 .item
-  = link_to user_path(notification.actor),
+  = link_to user_photo_album_path(notification.actor, notification.notifiable),
     class: 'content' do
 
     = render partial: 'notifications/shared/notification_body',
       locals: { notification: notification,
-      message: 'your friend request' }
+      message: 'new image(s)' }

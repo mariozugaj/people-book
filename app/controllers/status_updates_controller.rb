@@ -7,6 +7,16 @@ class StatusUpdatesController < ApplicationController
     @status_update = StatusUpdate.new(status_update_params)
     authorize @status_update
     if @status_update.save
+
+      # Send notifications
+      recipients = @status_update.author.friends
+      recipients.each do |user|
+        Notification.create(recipient: user,
+                            actor: current_user,
+                            action: 'posted',
+                            notifiable: @status_update)
+      end
+
       flash[:success] = 'You\'ve posted an update.'
     else
       flash[:alert] = 'We were unable to save your post.'

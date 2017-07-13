@@ -5,6 +5,7 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
       t.belongs_to :actor, class_name: 'User', index: true
       t.belongs_to :notifiable, polymorphic: true, index: true
       t.integer :read_at
+      t.string :action
 
       t.timestamps
     end

@@ -7,12 +7,11 @@ class CommentsController < ApplicationController
     authorize @comment
     if @comment.save
       # Send notifications
-      recipients = (@commentable.commenters
-                    + [@commentable.author]).uniq - [current_user]
+      recipients = (@commentable.commenters + [@commentable.author]).uniq - [current_user]
       recipients.each do |user|
         Notification.create(recipient: user,
                             actor: current_user,
-                            action: 'commented',
+                            action: 'posted',
                             notifiable: @comment)
       end
       flash[:success] = 'Comment successfuly posted'

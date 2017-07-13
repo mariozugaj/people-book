@@ -20,4 +20,14 @@ module ApplicationHelper
   def friend_requests
     current_user.received_friend_requests.includes(user: :profile)
   end
+
+  # Semantic UI flash
+  def flash_class(level)
+    case level
+    when 'success' then 'ui positive message'
+    when 'error' then 'ui red message'
+    when 'notice' then 'ui info message'
+    when 'alert' then 'ui warning message'
+    end
+  end
 end
