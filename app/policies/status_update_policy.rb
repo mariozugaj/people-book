@@ -23,7 +23,7 @@ class StatusUpdatePolicy
   end
 
   def comment?
-    friend_or_self?
+    friend? || owner?
   end
 
   private
@@ -32,7 +32,7 @@ class StatusUpdatePolicy
     user == status_update.author
   end
 
-  def friend_or_self?
-    (user.friend_with? status_update.author) || user == status_update.author
+  def friend?
+    user.friend_with? status_update.author
   end
 end

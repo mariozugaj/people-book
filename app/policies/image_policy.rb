@@ -23,7 +23,7 @@ class ImagePolicy
   end
 
   def comment?
-    friend_or_self?
+    friend? || owner?
   end
 
   private
@@ -32,7 +32,7 @@ class ImagePolicy
     user == image.author
   end
 
-  def friend_or_self?
-    (user.friend_with? image.author) || user == image.author
+  def friend?
+    user.friend_with? image.author
   end
 end
