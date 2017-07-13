@@ -16,3 +16,12 @@
 //= require jquery_ujs
 //= require semantic-ui
 //= require_tree .
+
+$(document).on('turbolinks:load', function () {
+  PeopleBook.StatusUpdatesModule.init();
+  PeopleBook.CommentsModule.init();
+  PeopleBook.DropdownsModule.init();
+  PeopleBook.FlashModule.init();
+  PeopleBook.FriendshipsModule.init();
+  PeopleBook.LikesModule.init();
+});

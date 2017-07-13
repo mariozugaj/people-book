@@ -3,14 +3,11 @@ var PeopleBook = PeopleBook || {};
 PeopleBook.LikesModule = (function () {
 
   var init = function () {
-    _unlikeLinkListener();
+    _likeTooltip();
   };
 
-  var _unlikeLinkListener = function () {
-    $(document).on('mouseenter mouseleave', '.likes.actions', function (e) {
-      var link = $(this).find('.unlike');
-      link.text(e.type == 'mouseenter' ? 'Unlike' : 'Liked');
-    });
+  var _likeTooltip = function () {
+    $('.likes.count').popup();
   };
 
   var _getCountContainer = function (parentId, parentType) {
@@ -37,8 +34,3 @@ PeopleBook.LikesModule = (function () {
   };
 
 })();
-
-$(document).on('turbolinks:load', function () {
-  PeopleBook.LikesModule.init();
-  $('.likes.count').popup();
-});

@@ -9,7 +9,7 @@ PeopleBook.CommentsModule = (function () {
   };
 
   var _commentLinkListener = function () {
-    $(document).on('click', "[data-behavior='comment-link']", function (e) {
+    $("[data-behavior='comment-link']").on('click', function (e) {
       e.preventDefault();
       var $form = $(e.target).parent().next();
       var $commentsContainer = $form.next();
@@ -20,7 +20,7 @@ PeopleBook.CommentsModule = (function () {
   };
 
   var _cancelCommentLinkListener = function () {
-    $(document).on('click', "[data-behavior='cancel-link']", function (e) {
+    $("[data-behavior='cancel-link']").on('click', function (e) {
       e.preventDefault();
       var $form = $(e.target).parents('.comment__form');
       $form.slideUp('fast');
@@ -28,7 +28,7 @@ PeopleBook.CommentsModule = (function () {
   };
 
   var _showCommentsLinkListener = function () {
-    $(document).on('click', "[data-behavior='show-comments']", function (e) {
+    $("[data-behavior='show-comments']").on('click', function (e) {
       e.preventDefault();
       var $linkContainer = $(e.target).parent();
       var $commentsContainer = $linkContainer.siblings('.comments.content');
@@ -90,7 +90,3 @@ PeopleBook.CommentsModule = (function () {
   };
 
 })();
-
-$(document).on('turbolinks:load', function () {
-  PeopleBook.CommentsModule.init();
-});

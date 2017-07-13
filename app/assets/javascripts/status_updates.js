@@ -1,20 +1,29 @@
-$(document).on('turbolinks:load', function () {
-  var textarea = document.getElementById('status_update__textarea');
+var PeopleBook = PeopleBook || {};
 
-  function showFormActions() {
-    textarea.rows = '4';
-    $(actions).slideDown('fast');
+PeopleBook.StatusUpdatesModule = (function () {
+
+  var init = function () {
+    _statusUpdatetFocusListener();
+    _cancelStatusUpdateLinkListener();
   };
 
-  function hideFormActions() {
-    $(actions).slideUp('fast', function () {
-      textarea.rows = '1';
+  var _statusUpdatetFocusListener = function () {
+    $("[data-behavior='su-form-link']").on('focus', function (e) {
+      var $actions = $(this).parent().next();
+      $actions.slideDown('fast');
     });
   };
 
-  if (textarea != null) {
-    var actions = textarea.parentElement.nextElementSibling;
-    textarea.addEventListener('focus', showFormActions, false);
-    textarea.addEventListener('blur', hideFormActions, false);
-  }
-});
+  var _cancelStatusUpdateLinkListener = function () {
+    $("[data-behavior='su-form-cancel-link']").on('click', function (e) {
+      e.preventDefault();
+      var $actions = $(this).parent();
+      $actions.slideUp('fast');
+    });
+  };
+
+  return {
+    init: init,
+  };
+
+})();
