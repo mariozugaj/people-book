@@ -71,6 +71,8 @@ class User < ApplicationRecord
       if user.email
         Profile.create! user: user,
                         remote_avatar_url: auth.info.image
+        PhotoAlbum.create(author: user, name: 'Avatars')
+        PhotoAlbum.create(author: user, name: 'Cover photos')
       end
     end
   end
