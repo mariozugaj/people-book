@@ -11,9 +11,14 @@
           id: 'status_update__textarea'
 
       .actions{ style: 'display: none;'}
-        .field
-          = form.label :image
-          = form.file_field :image
+        .equal.width.fields
+          .field
+            = form.label :image
+            = form.file_field :image
+
+          .field
+            = form.label :cloud_image
+            = form.text_field :remote_image_url, placeholder: 'Paste image url here...'
 
         = form.submit 'Post',
           class: 'ui blue right floated button',

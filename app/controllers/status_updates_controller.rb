@@ -47,6 +47,6 @@ class StatusUpdatesController < ApplicationController
   end
 
   def status_update_params
-    params.require(:status_update).permit(:text, :image)
+    params.require(:status_update).permit(:text, :image, :remote_image_url)
   end
 end

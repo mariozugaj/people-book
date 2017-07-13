@@ -13,10 +13,16 @@
     = form.label :description
     = form.text_area :description, rows: 4
 
-  = fields_for :images, @photo_album.images do |images_form|
-    .field
-      = images_form.label :images
-      = images_form.file_field :image, multiple: true, name: 'images[image][]'
+  .equal.width.fields
+    = fields_for :images, @photo_album.images do |images_form|
+      .field
+        = images_form.label :images
+        = images_form.file_field :image, multiple: true, name: 'images[image][]'
+
+    = fields_for :cloud_image, @photo_album.cloud_image do |cloud_image_form|
+      .field
+        = cloud_image_form.label :cloud_image
+        = cloud_image_form.text_field :remote_image_url, placeholder: 'Paste image url here...'
 
   .actions
     = form.submit class: 'ui positive button'

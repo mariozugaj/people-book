@@ -15,10 +15,12 @@ class PhotoAlbum < ApplicationRecord
   # Associations
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
   has_many :images, dependent: :destroy
+  has_one :cloud_image, class_name: 'Image', dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
+  accepts_nested_attributes_for :cloud_image, allow_destroy: true
 
   # Validations
   validates_presence_of :name, :author
 
-  DEFAULT_IMAGE = ''
+  DEFAULT_IMAGE = 'https://s3.eu-central-1.amazonaws.com/chanjman-peoplebook/missing/photo_album/missing.jpg'
 end

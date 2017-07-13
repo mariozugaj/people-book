@@ -38,9 +38,13 @@ class PhotoAlbumsController < ApplicationController
         params[:images][:image].each do |image|
           @photo_album.images.create(image: image)
         end
+      elsif params[:cloud_image]
+        Image.create(remote_image_url: params[:cloud_image][:remote_image_url],
+                     photo_album: @photo_album)
       end
       redirect_to user_photo_album_path(@author, @photo_album), success: 'Photo album was successfully updated.'
     else
+      flash[:alert] = 'There was a problem updating your photo album. Try again?'
       render :edit
     end
   end
@@ -61,9 +65,14 @@ class PhotoAlbumsController < ApplicationController
     params.require(:photo_album).permit(:author_id,
                                         :name,
                                         :description,
-                                        images_attributes: %i[id
-                                                              photo_album_id
-                                                              image])
+                                        images_attributes:
+                                          %i[id
+                                             photo_album_id
+                                             image],
+                                        cloud_image_attributes:
+                                          %i[id
+                                             photo_album_id
+                                             remote_image_url])
   end
 
   def set_author
