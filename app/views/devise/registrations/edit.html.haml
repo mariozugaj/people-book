@@ -9,11 +9,12 @@
   // Cover photo and links
   = render 'users/cover_menu', user: @user
 
-  %h2.ui.top.attached.block.header
-    %i.settings.icon
-    .content
-      = yield :title
-      .sub.header Manage your account
+  .ui.top.attached.teal.clearing.segment
+    %h2.ui.header
+      %i.settings.icon
+      .content
+        = yield :title
+        .sub.header Manage your account
 
   .ui.attached.segment
     = form_for(resource, as: resource_name, url: registration_path(resource_name),
@@ -48,11 +49,11 @@
           = f.password_field :current_password, autocomplete: "off"
 
       .actions
-        = f.submit "Update your account", class: 'ui fluid positive button'
+        = f.submit "Update your account", class: 'ui fluid blue button'
 
     %h3.ui.center.aligned.header Unhappy?
     = button_to "Delete my account",
       registration_path(resource_name),
-      class: 'ui fluid negative button',
+      class: 'ui fluid negative basic button',
       data: { confirm: "Are you sure you want to permanently delete your account?" },
       method: :delete

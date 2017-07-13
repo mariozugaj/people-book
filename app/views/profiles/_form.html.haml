@@ -1,8 +1,9 @@
-%h2.ui.top.attached.block.header
-  %i.configure.icon
-  .content
-    = yield :title
-    .sub.header Manage your profile
+.ui.top.attached.teal.clearing.segment
+  %h2.ui.header
+    %i.configure.icon
+    .content
+      = yield :title
+      .sub.header Manage your profile
 
 .ui.attached.segment
   = form_with model: [user, user.profile], multipart: true, class: 'ui form' do |form|
@@ -44,4 +45,4 @@
         = form.text_field :phone_number
 
     .actions
-      = form.submit class: 'ui positive button', data: { 'disable-with': 'Updating...' }
+      = form.submit class: 'ui blue button', data: { 'disable-with': 'Updating...' }
