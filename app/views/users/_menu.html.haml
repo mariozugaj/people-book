@@ -1,35 +1,43 @@
 .ui.bottom.attached.fluid.teal.borderless.menu
 
   // User posts link
-  = link_to 'Timeline',
-    user_path(user),
-    class: class_string('item', 'active' => current_page?(user_path(user)))
+  = link_to user_path(user),
+    class: class_string('item', 'active' => current_page?(user_path(user))) do
+    %i.newspaper.icon
+    Timeline
 
   // User friends link
   = link_to user_friendships_path(user),
     class: class_string('item', 'active' => current_page?(user_friendships_path(user))) do
+    %i.users.icon
     %span Friends
-    .ui.left.pointing.friend_count.label
+    .ui.left.pointing.friend_count.teal.label
       = user.friends.count
 
   // User photo albums link
   = link_to user_photo_albums_path(user),
     class: class_string('item', 'active' => current_page?(user_photo_albums_path(user))) do
+    %i.camera.retro.icon
     %span Photo Albums
-    .ui.left.pointing.label
+    .ui.left.pointing.teal.label
       = user.photo_albums.count
-  - unless current_user == user
-    // Friendship links
-    .right.floated.item.friendship
-      = render_friendship user
 
   -# If user == current_user, show edit links
   - if policy(user.profile).edit?
 
     // User edit account link
-    = link_to 'Update account', edit_user_registration_path(user),
-      class: class_string('item', 'active' => current_page?(edit_user_registration_path(user)))
+    = link_to edit_user_registration_path(user),
+      class: class_string('item', 'active' => current_page?(edit_user_registration_path(user))) do
+      %i.settings.icon
+      Update account
 
     // User edit profile link
-    = link_to 'Update profile', edit_user_profile_path(user),
-      class: class_string('item', 'active' => current_page?(edit_user_profile_path(user)))
+    = link_to edit_user_profile_path(user),
+      class: class_string('item', 'active' => current_page?(edit_user_profile_path(user))) do
+      %i.configure.icon
+      Update profile
+
+  - unless current_user == user
+    // Friendship links
+    .right.floated.item.friendship
+      = render_friendship user
