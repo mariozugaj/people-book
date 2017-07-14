@@ -22,6 +22,7 @@ class Notification < ApplicationRecord
   validates_presence_of :recipient, :actor, :notifiable
 
   # Scopes
-  scope :recent, -> { order(created_at: :desc).limit(5) }
+  scope :recent, -> { order(created_at: :desc).limit(7) }
   scope :unread, -> { where(read_at: nil) }
+  scope :read, -> { where('read_at IS NOT NULL') }
 end

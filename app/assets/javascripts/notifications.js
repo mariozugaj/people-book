@@ -42,6 +42,7 @@ Notifications = (function () {
     items = $.map(data, function (notification) {
       return notification.template;
     });
+    var notificationsIndex = $("[data-behavior='notifications-index']");
 
     unreadCount = 0;
     $.each(data, function (i, notification) {
@@ -51,7 +52,10 @@ Notifications = (function () {
     });
 
     $("[data-behavior='unread-count']").text(unreadCount);
-    return $("[data-behavior='notification-items']").html(items);
+    $("[data-behavior='notification-items']").html(items);
+    if (notificationsIndex.length > 0) {
+      notificationsIndex.html(items);
+    }
   };
 
   return Notifications;

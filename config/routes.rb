@@ -38,5 +38,6 @@ Rails.application.routes.draw do
 
   resources :notifications, only: :index do
     post 'mark_as_read', on: :collection
+    post 'clear', on: :collection
   end
 end

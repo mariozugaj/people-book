@@ -23,6 +23,7 @@ class StatusUpdate < ApplicationRecord
   has_many :commenters, through: :comments, source: :author
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :users_who_like_it, through: :likes, source: :user
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   # Validations
   validates_presence_of :author

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   def set_notifications
     @notifications = Notification.includes(:actor, :notifiable).where(recipient: current_user).recent
+    @all_notifications = current_user.notifications
   end
   private
 

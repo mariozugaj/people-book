@@ -16,6 +16,7 @@ class PhotoAlbum < ApplicationRecord
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
   has_many :images, dependent: :destroy
   has_one :cloud_image, class_name: 'Image', dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :cloud_image, allow_destroy: true
 

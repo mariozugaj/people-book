@@ -43,6 +43,10 @@ class User < ApplicationRecord
   has_many :comments
   has_many :images, through: :photo_albums
   has_many :notifications, foreign_key: :recipient_id
+  has_many :sent_notifications,
+           class_name: 'Notification',
+           foreign_key: :actor_id,
+           dependent: :destroy
 
   # Validations
   validates_presence_of :name, :email, :password

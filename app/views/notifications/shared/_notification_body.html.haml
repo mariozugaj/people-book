@@ -1,9 +1,9 @@
 .ui.comments
-  .blue.comment
+  .comment
     .avatar
       = image_tag notification.actor.profile.avatar.url :thumb
     .content
-      %span.author= notification.actor.name
+      %span.author.link= notification.actor.name
       .metadata
         .date
           = time_ago_in_words notification.created_at
@@ -12,4 +12,4 @@
           %span.ui.red.empty.circular.label
       .text
         = notification.action
-        = message
+        %b= message

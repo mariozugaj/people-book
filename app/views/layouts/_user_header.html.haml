@@ -18,7 +18,7 @@
 
 
     //Notifications
-    .ui.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications',
+    .ui.floating.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications',
       'data-link': 'notifications-link',
       'data-notifications': (render template: 'notifications/index',
       formats: [:json]) }
@@ -28,7 +28,23 @@
       %i.bell.icon
 
       /* Notifications dropdown
-      .menu.ui.divided.items{ 'data-behavior': 'notification-items' }
+      .menu
+        - if @notifications.empty?
+          %span.item No new notifications
+        - if @all_notifications.size > 7
+          // See all notifications link
+          = link_to 'See all', notifications_path, class: 'active item center-text'
+
+        // Notifications
+        .items{ 'data-behavior': 'notification-items' }
+
+        - if @notifications.any?
+          // Clear notifications link
+          = link_to clear_notifications_path,
+            class: 'active item center-text',
+            method: 'POST',
+            data: { confirm: 'Are you sure?'} do
+            Clear all notifications
 
     /* Current user profile links
     .ui.floating.pointing.top.right.hover.dropdown.item

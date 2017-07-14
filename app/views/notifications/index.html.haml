@@ -1,0 +1,29 @@
+.row
+  .column
+    .ui.blue.attached.clearing.segment
+      %h2.ui.left.floated.header
+        %i.bell.teal.icon
+        .content Notifications
+
+      - if @all_notifications.any?
+        // Link to the photo album
+        = link_to clear_notifications_path,
+          class: 'ui basic red right floated button',
+          method: 'POST',
+          data: { confirm: 'Are you sure?'} do
+          Clear all notifications
+
+.ui.two.column.row
+  .column
+    - if @all_notifications.any?
+      .ui.segment
+        .ui.divided.items
+          - @all_notifications.each do |notification|
+            = render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}",
+                                          locals: { notification: notification },
+                                          formats: [:html]
+    - else
+      .ui.message
+        .content
+          .header
+            No new notifications yet

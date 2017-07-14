@@ -4,4 +4,4 @@
 
     = render partial: 'notifications/shared/notification_body',
       locals: { notification: notification,
-      message: 'a comment' }
+      message: "a comment: '#{ truncate notification.notifiable.text, length: 50}'" }

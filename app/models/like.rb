@@ -11,9 +11,11 @@
 #
 
 class Like < ApplicationRecord
+  # Associations
   belongs_to :likeable, polymorphic: true, counter_cache: true
   belongs_to :user
 
+  # Validations
   validates_presence_of :user, :likeable_id, :likeable_type
   validates_uniqueness_of :user_id,
                           scope: %i[likeable_id likeable_type],
