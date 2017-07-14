@@ -54,17 +54,17 @@
 .row
   .column
     // Small navigational images
-    .ui.top.attached.teal.segment
+    .ui.top.attached.blue.segment
       .ui.images.thumb.container
         - @photo_album.images.each do |image|
           = link_to image_path(image) do
             = image_tag image.image.url :thumb, class: 'ui rounded image'
 
-    .ui.attached.clearing.segment
+    .ui.blue.attached.clearing.segment
       %h2.ui.left.floated.header
-        %i.camera.retro.icon
+        %i.camera.retro.teal.icon
         .content
-          = link_to @photo_album.name, user_photo_album_path(@author, @photo_album)
+          = @photo_album.name
 
       // Link to the photo album
       = link_to user_photo_album_path(@author, @photo_album),
