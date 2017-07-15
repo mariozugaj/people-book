@@ -14,14 +14,6 @@
       %span.date
         = l(comment.created_at, format: '%B, %d %Y %H:%M')
 
-      - if policy(comment).destroy?
-        // Delete comment button
-        .right.floated
-          = link_to 'Delete', comment_path(comment, format: :js),
-                    method: :delete,
-                    remote: true,
-                    data: { confirm: 'Are you sure you want to delete it?' },
-                    class: 'ui red label'
     // Comment text
     .text
       = simple_format comment.text
@@ -29,6 +21,13 @@
     // Comment actions
     %span.likes.actions
       = render_likes comment
+
+      - if policy(comment).destroy?
+        // Delete comment button
+        = link_to 'Delete', comment_path(comment, format: :js),
+                  method: :delete,
+                  remote: true,
+                  data: { confirm: 'Are you sure you want to delete it?' }
 
     %span.likes.count.whitespace--left{ 'data-html': "#{render 'likes/tooltip', likeable: comment}" }
       = pluralize comment.reload.likes_count, 'like'
