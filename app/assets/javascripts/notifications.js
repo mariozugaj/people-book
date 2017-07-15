@@ -9,11 +9,11 @@ Notifications = (function () {
     if (this.notifications.length > 0) {
       this.handleSucess(this.notifications.data('notifications'));
       $("[data-link='notifications-link']").on('click', this.handleClick);
-      setInterval(((function (_this) {
+      /*setInterval(((function (_this) {
         return function () {
           return _this.getNewNotifications();
         };
-      })(this)), 5000);
+      })(this)), 5000);*/
     }
   }
 

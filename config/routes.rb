@@ -40,4 +40,6 @@ Rails.application.routes.draw do
     post 'mark_as_read', on: :collection
     post 'clear', on: :collection
   end
+
+  get :search, to: 'search#index'
 end
