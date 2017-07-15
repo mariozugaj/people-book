@@ -39,8 +39,8 @@ class User < ApplicationRecord
            class_name: 'Friendship',
            foreign_key: 'user_id',
            dependent: :destroy
-  has_many :likes
-  has_many :comments
+  has_many :likes, dependent: :destroy
+  has_many :comments, foreign_key: 'author_id', dependent: :destroy
   has_many :images, through: :photo_albums
   has_many :notifications, foreign_key: :recipient_id
   has_many :sent_notifications,
@@ -76,7 +76,8 @@ class User < ApplicationRecord
       if user.email
         Profile.create! user: user,
                         remote_avatar_url: auth.info.image
-        PhotoAlbum.create(author: user, name: 'Avatars')
+        avatars = PhotoAlbum.create(author: user, name: 'Avatars')
+        avatars.images.create(remote_image_url: auth.info.image)
         PhotoAlbum.create(author: user, name: 'Cover photos')
       end
     end
