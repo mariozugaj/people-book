@@ -4,12 +4,16 @@ PeopleBook.SearchModule = (function () {
 
   var init = function () {
     _searchListener();
+    _searchValidator();
   };
 
   var _searchListener = function () {
     $('.ui.category.search')
       .search({
         type: 'category',
+        selector: {
+          prompt: '.search.input',
+        },
         apiSettings: {
           url: '/search/?q={query}',
         },
@@ -26,6 +30,16 @@ PeopleBook.SearchModule = (function () {
           actionUrl: 'url',
         },
         minCharacters: 1,
+      });
+  };
+
+  var _searchValidator = function () {
+    $('.ui.category.search')
+      .form({
+        inline: true,
+        fields: {
+          q: 'empty',
+        },
       });
   };
 

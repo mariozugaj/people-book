@@ -15,10 +15,10 @@ json.results do
     json.name 'Status updates'
     json.results do
       json.array! @status_updates do |s_update|
-        json.name s_update.author.name
+        json.name truncate s_update.text, length: 50
         json.avatar s_update.author.profile.avatar.url :thumb
         json.url status_update_path(s_update)
-        json.description truncate s_update.text, length: 50
+        json.description s_update.author.name
       end
     end
   end
