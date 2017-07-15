@@ -1,0 +1,18 @@
+.ui.floating.pointing.top.right.hover.dropdown.item
+  = link_to user_path(current_user) do
+    = image_tag current_user.profile.avatar.url(:thumb), class: 'ui avatar image'
+    = current_user.name
+  .menu
+    = link_to user_friendships_path(current_user), class: 'item' do
+      %i.users.icon
+      Friends
+    = link_to edit_user_registration_path(current_user), class: 'item' do
+      %i.settings.icon
+      Edit Account
+    = link_to edit_user_profile_path(current_user), class: 'item' do
+      %i.configure.icon
+      Edit profile
+    .divider
+    = link_to destroy_user_session_path, class: 'item', method: 'delete' do
+      %i.sign.out.icon
+      Log out

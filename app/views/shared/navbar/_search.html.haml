@@ -1,0 +1,10 @@
+= form_with url: search_path,
+  class: 'ui category search item',
+  method: :get,
+  local: true do |form|
+  .ui.action.input
+    = form.text_field :q, placeholder: 'Search people, updates...',
+      class: 'search input'
+    = form.button class: 'ui teal icon search button' do
+      %i.ui.search.icon
+  .results

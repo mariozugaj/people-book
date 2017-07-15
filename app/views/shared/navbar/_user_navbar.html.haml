@@ -1,0 +1,20 @@
+.ui.blue.inverted.borderless.menu
+
+  //Logo
+  .item
+    = link_to 'PeopleBook', root_path, class: 'ui inverted header'
+
+  // Search
+  = render 'shared/navbar/search'
+
+  // Right navbar menu
+  .right.menu
+
+    // Friend requests notifications
+    = render 'shared/navbar/request_notifications'
+
+    // Notifications
+    = render 'shared/navbar/notifications'
+
+    // Current user profile links
+    = render 'shared/navbar/user_links'
