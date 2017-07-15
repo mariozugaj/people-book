@@ -47,7 +47,7 @@
         .header
           = link_to @image.author.name, user_path(@image.author)
 
-        // Time at @image creation
+        // Time at image creation
         .meta
           = time_ago_in_words(@image.created_at)
           ago
@@ -57,34 +57,8 @@
           .description
             = simple_format @image.description
 
-      // Image statistics
-      .extra.statistics.content
-
-        // Likes count
-        %span.likes.count{ 'data-html': "#{render 'likes/tooltip', likeable: @image}" }
-          = pluralize @image.reload.likes_count, 'like'
-
-        // Comments count
-        %a.comments_count.whitespace--left{ 'data-behavior': 'show-comments' }
-          = pluralize @image.reload.comments_count, 'comment'
-
-      // Image actions
-      .extra.content
-
-        // Like link
-        %span.likes.actions
-          = render_likes @image
-
-        - if policy(@image).comment?
-          // Comment link
-          %a.whitespace--left{ 'data-behavior': 'comment-link' }
-            %i.comment.icon
-            Add comment
-
-      - if policy(@image).comment?
-        // Comment form
-        .extra.content.comment__form{ style: 'display: none;' }
-          = render partial: 'comments/form', locals: { commentable: @image }
+      // Image feedback actions/statistics
+      = render 'shared/feedback_actions', feedbackable: @image
 
       // Image comments
       .comments.content{ style: 'display: none;' }

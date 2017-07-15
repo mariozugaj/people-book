@@ -1,5 +1,6 @@
 = link_to [likeable, Like.new, user_id: current_user, format: :js],
   method: :post,
-  remote: true do
+  remote: true,
+  class: 'comment__like',
+  data: { 'behavior': 'like-action' } do
   %i.like.icon
-  %span Like

@@ -12,20 +12,20 @@ PeopleBook.LikesModule = (function () {
 
   var _getCountContainer = function (parentId, parentType) {
     var $parent = $('[data-id="' + parentId + '"][data-type="' + parentType + '"]');
-    return $parent.find('.likes.count').first();
+    return $parent.find("[data-behavior='like-count-container']").first();
   };
 
-  var _getActionsContainer = function (parentId, parentType) {
+  var _getAction = function (parentId, parentType) {
     var $parent = $('[data-id="' + parentId + '"][data-type="' + parentType + '"]');
-    return $parent.find('.likes.actions').first();
+    return $parent.find("[data-behavior='like-action']").first();
   };
 
   var renderLikes = function (parentId, parentType, count, action) {
     var $countContainer = _getCountContainer(parentId, parentType);
-    var $actionsContainer = _getActionsContainer(parentId, parentType);
+    var $actionContainer = _getAction(parentId, parentType);
     var $action = $(action);
     $countContainer.html(count);
-    $actionsContainer.empty().append($action);
+    $actionContainer.replaceWith($action);
   };
 
   return {

@@ -19,8 +19,14 @@
       = simple_format comment.text
 
     // Comment actions
-    %span.likes.actions
+    .likes.actions
+
+      // Like
       = render_likes comment
+
+      %a.likes.count{ 'data-html': "#{render 'likes/tooltip', likeable: comment}",
+        'data-behavior': 'like-count-container' }
+        = pluralize comment.reload.likes_count, 'like'
 
       - if policy(comment).destroy?
         // Delete comment button
@@ -28,6 +34,3 @@
                   method: :delete,
                   remote: true,
                   data: { confirm: 'Are you sure you want to delete it?' }
-
-    %span.likes.count.whitespace--left{ 'data-html': "#{render 'likes/tooltip', likeable: comment}" }
-      = pluralize comment.reload.likes_count, 'like'

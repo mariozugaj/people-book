@@ -11,7 +11,7 @@ PeopleBook.CommentsModule = (function () {
   var _commentLinkListener = function () {
     $("[data-behavior='comment-link']").on('click', function (e) {
       e.preventDefault();
-      var $form = $(e.target).parent().next();
+      var $form = $(e.target).parents('.extra.statistics.content').siblings("[data-behavior='comment-form']");
       var $commentsContainer = $form.next();
       $commentsContainer.slideDown('fast', function () {
         $form.slideDown('fast');
