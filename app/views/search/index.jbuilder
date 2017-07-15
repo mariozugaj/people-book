@@ -16,7 +16,7 @@ json.results do
     json.results do
       json.array! @status_updates do |s_update|
         json.name truncate s_update.text, length: 50
-        json.avatar s_update.author.profile.avatar.url :thumb
+        json.avatar s_update.image.url(:thumb) if s_update.image.url
         json.url status_update_path(s_update)
         json.description s_update.author.name
       end

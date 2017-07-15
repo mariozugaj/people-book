@@ -36,7 +36,7 @@
             - @status_updates.each do |s_update|
               = link_to s_update, class: 'result' do
                 .image
-                  = image_tag s_update.author.profile.avatar.url :thumb
+                  = image_tag s_update.image.url :thumb if s_update.image.url
                 .content
                   .text= truncate s_update.text, length: 100
                   .description= s_update.author.name
