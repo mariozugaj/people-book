@@ -7,10 +7,9 @@
   .content
 
     // Comment author's name
-    .author
-      = link_to comment.author.name, user_path(comment.author)
+    = link_to comment.author.name, user_path(comment.author), class: 'author'
 
-    .meta
+    .metadata
       // Comment created at
       %span.date
         = l(comment.created_at, format: '%B, %d %Y %H:%M')
