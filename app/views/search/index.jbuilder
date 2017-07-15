@@ -6,7 +6,7 @@ json.results do
         json.name person.name
         json.avatar person.profile.avatar.url :thumb
         json.url user_path(person)
-        json.description person.profile.hometown
+        json.description person.profile.hometown || ''
       end
     end
   end
@@ -24,9 +24,9 @@ json.results do
   end
 end
 
-if @people.size > 5 || @status_updates.size > 5
+if @results_count > 6
   json.action do
-    json.url search_path
-    json.text "View all #{@people.size + @status_updates.size} results"
+    json.url search_path(q: @query)
+    json.text "View all #{@results_count} results"
   end
 end

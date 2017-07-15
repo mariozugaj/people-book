@@ -12,8 +12,9 @@ class SearchController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        @people = @people.limit(5)
-        @status_updates = @status_updates.limit(5)
+        @results_count = @people.size + @status_updates.size
+        @people = @people.limit(3)
+        @status_updates = @status_updates.limit(3)
       }
     end
   end

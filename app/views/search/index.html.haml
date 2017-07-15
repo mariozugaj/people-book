@@ -13,7 +13,8 @@
       .results.transition.visible.index
         - unless @people.nil? || @people.blank?
           .category
-            .name People
+            .name
+              = pluralize @people.size, 'person'
             - @people.each do |person|
               = link_to person, class: 'result' do
                 .image
@@ -31,7 +32,7 @@
       .results.transition.visible.index
         - unless @status_updates.nil?  || !@status_updates.any?
           .category
-            .name Status updates
+            .name= pluralize @status_updates.size, 'status update'
             - @status_updates.each do |s_update|
               = link_to s_update, class: 'result' do
                 .image
