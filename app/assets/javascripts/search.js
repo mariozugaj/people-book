@@ -7,17 +7,20 @@ PeopleBook.SearchModule = (function () {
   };
 
   var _searchListener = function () {
-    $('.ui.search')
+    $('.ui.category.search')
       .search({
+        type: 'category',
         apiSettings: {
           url: '/search/?q={query}',
         },
         fields: {
-          results: 'people',
+          categories: 'results',
+          categoryName: 'name',
+          categoryResults: 'results',
           title: 'name',
           url: 'url',
           image: 'avatar',
-          description: 'hometown',
+          description: 'description',
           action: 'action',
           actionText: 'text',
           actionUrl: 'url',

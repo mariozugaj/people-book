@@ -5,12 +5,11 @@
     = link_to 'PeopleBook', root_path, class: 'ui inverted header'
 
   /* Search
-
   = form_with url: search_path,
-    class: 'ui search item',
+    class: 'ui category search item',
     method: :get do |form|
     .ui.icon.input
-      = form.text_field :q, placeholder: 'Find people...', class: 'prompt'
+      = form.text_field :q, placeholder: 'Search people, updates...', class: 'prompt'
       %i.inverted.teal.circular.link.search.icon
     .results
 
