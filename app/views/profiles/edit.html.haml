@@ -1,13 +1,13 @@
-= provide :title, 'Update profile'
+= provide :title, "#{current_user.name} | Edit profile"
 
 // User aside info
 .four.wide.column
-  = render 'users/aside', user: @user
+  = render 'users/aside', user: current_user
 
 .twelve.wide.column
 
   // Cover photo and links
-  = render 'users/cover_menu', user: @user
+  = render 'users/cover_menu', user: current_user
 
   // Profile edit form
-  = render partial: 'form', locals: { user: @user, relationship_options: @relationship_options }
+  = render partial: 'form', locals: { user: current_user, relationship_options: @relationship_options }

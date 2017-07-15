@@ -29,13 +29,13 @@
     = link_to edit_user_registration_path(user),
       class: class_string('item', 'active' => current_page?(edit_user_registration_path(user))) do
       %i.settings.icon
-      Update account
+      Edit account
 
     // User edit profile link
     = link_to edit_user_profile_path(user),
       class: class_string('item', 'active' => current_page?(edit_user_profile_path(user))) do
       %i.configure.icon
-      Update profile
+      Edit profile
 
   - unless current_user == user
     // Friendship links
