@@ -1,7 +1,7 @@
 // Cover photo
 .ui.fluid.image
   - if current_user == user
-    = link_to 'Change cover', edit_user_photo_album_path(current_user, user.photo_albums.where(name: 'Cover photos').first),
+    = link_to 'Change cover', user_photo_album_path(current_user, user.photo_albums.where(name: 'Cover photos').first),
       class: 'ui blue right ribbon label'
   = image_tag user.profile.cover_photo.url :normal, alt: user.name
 

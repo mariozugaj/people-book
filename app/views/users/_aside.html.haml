@@ -2,7 +2,7 @@
 .ui.card
   .image
     - if current_user == user
-      = link_to 'Change avatar', edit_user_photo_album_path(current_user, user.photo_albums.where(name: 'Avatars').first),
+      = link_to 'Change avatar', user_photo_album_path(current_user, user.photo_albums.where(name: 'Avatars').first),
         class: 'ui blue ribbon label'
     = image_tag user.profile.avatar.url :normal, alt: user.name
 
