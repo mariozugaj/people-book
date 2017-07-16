@@ -56,12 +56,12 @@ class User < ApplicationRecord
               .where('user_id = ? OR friend_id = ?', id, id)
   end
 
-  def friend_ids
+  def friends_ids
     friendships.map { |f| f.user_id == id ? f.friend_id : f.user_id }
   end
 
   def friends
-    User.where('id in (?)', friend_ids)
+    User.where('id in (?)', friends_ids)
   end
 
   def friend_with?(user)

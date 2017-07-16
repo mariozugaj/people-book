@@ -17,7 +17,7 @@
 //= require semantic-ui
 //= require_tree .
 
-$(document).on('turbolinks:load', function () {
+document.addEventListener('turbolinks:load', function () {
   PeopleBook.StatusUpdatesModule.init();
   PeopleBook.CommentsModule.init();
   PeopleBook.DropdownsModule.init();
