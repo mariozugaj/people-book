@@ -20,12 +20,13 @@ PeopleBook.LikesModule = (function () {
     return $parent.find("[data-behavior='like-action']").first();
   };
 
-  var renderLikes = function (parentId, parentType, count, action) {
+  var renderLikes = function (parentId, parentType, count, action, tooltip) {
     var $countContainer = _getCountContainer(parentId, parentType);
     var $actionContainer = _getAction(parentId, parentType);
     var $action = $(action);
     $countContainer.html(count);
     $actionContainer.replaceWith($action);
+    $countContainer[0].dataset.html = tooltip;
   };
 
   return {

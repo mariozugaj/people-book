@@ -1,8 +1,11 @@
 <%= render partial: 'shared/flash_js' %>
 
 var likeCount = "<%= pluralize @like.likeable.reload.likes_count, 'like' %>"
-var action = "<%= j render partial: 'likes/like', locals: { likeable: @like.likeable } %>'"
+var action = "<%= j render partial: 'likes/like', locals: { likeable: @like.likeable } %>"
+var tooltip = "<%= j render partial: 'likes/tooltip', locals: { likeable: @like.likeable } %>"
 
 PeopleBook.LikesModule.renderLikes('<%= @like.likeable_id %>',
                                    '<%= @like.likeable_type %>',
-                                    likeCount, action);
+                                    likeCount,
+                                    action,
+                                    tooltip);
