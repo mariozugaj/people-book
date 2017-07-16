@@ -1,10 +1,10 @@
 .row
 
   // Large image
-  .ui.eleven.wide.column
+  .ui.eleven.wide.column{ 'data-behavior': 'image-container'}
     .ui.segment
 
-      .ui.centered.rounded.image
+      .ui.fluid.centered.rounded.image
 
         - if policy(@image).edit?
           // Set as avatar and cover photo links
@@ -52,6 +52,7 @@
           = time_ago_in_words(@image.created_at)
           ago
 
+      // Image description
       - if @image.description
         .content
           .description
