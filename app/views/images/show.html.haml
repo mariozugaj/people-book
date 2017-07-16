@@ -61,9 +61,9 @@
       = render 'shared/feedback_actions', feedbackable: @image
 
       // Image comments
-      .comments.content{ style: 'display: none;' }
-        %h4 Comments
-        .ui.comments.container{ style: 'max-width: 100%' }
+      .comments.content
+        %h5 Comments
+        .ui.comments
           = render @image.comments
 
 .row

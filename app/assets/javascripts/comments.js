@@ -11,7 +11,7 @@ PeopleBook.CommentsModule = (function () {
   var _commentLinkListener = function () {
     $("[data-behavior='comment-link']").on('click', function (e) {
       e.preventDefault();
-      var $form = $(e.target).parents('.extra.statistics.content').siblings("[data-behavior='comment-form']");
+      var $form = $(e.target).parents('.content.statistics').siblings("[data-behavior='comment-form']");
       var $commentsContainer = $form.next();
       $commentsContainer.slideDown('fast', function () {
         $form.slideDown('fast');
@@ -30,7 +30,7 @@ PeopleBook.CommentsModule = (function () {
   var _showCommentsLinkListener = function () {
     $("[data-behavior='show-comments']").on('click', function (e) {
       e.preventDefault();
-      var $linkContainer = $(e.target).parent();
+      var $linkContainer = $(e.target).parents('.content.statistics');
       var $commentsContainer = $linkContainer.siblings('.comments.content');
       $commentsContainer.slideToggle('fast');
     });
@@ -56,7 +56,7 @@ PeopleBook.CommentsModule = (function () {
   };
 
   var _updateCommentsCount = function (container, commentsCount) {
-    var $countContainer = container.parent().siblings('.statistics').children('.comments_count');
+    var $countContainer = container.parent().siblings('.content.statistics').find('.comments_count');
     $countContainer.html(commentsCount);
   };
 

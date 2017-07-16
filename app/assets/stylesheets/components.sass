@@ -37,13 +37,14 @@
   overflow-x: auto !important
   white-space: nowrap !important
 
-.comments.container
-  max-height: 271px
-  overflow-y: auto
+.image_show_card .comments.content
+  overflow-y: scroll
 
 .image_show_card
-  max-height: 488px
-  overflow-y: auto
+  max-height: 490px
+
+.image_show_card .content
+  max-height: 100%
 
 /*--------- Search -----------*/
 
@@ -51,6 +52,12 @@
   z-index: 0
 
 /*--------- Comment -----------*/
+
+.comments.content, .comment__form
+  display: none
+
+.ui.comments
+  width: 100%
 
 .comment__like
   margin-right: 0 !important

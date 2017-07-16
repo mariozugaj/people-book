@@ -7,7 +7,7 @@ PeopleBook.LikesModule = (function () {
   };
 
   var _likeTooltip = function () {
-    $('.likes.count').popup();
+    $("[data-behavior='like-count-container']").popup();
   };
 
   var _getCountContainer = function (parentId, parentType) {
