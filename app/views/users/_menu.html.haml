@@ -36,8 +36,3 @@
       class: class_string('item', 'active' => current_page?(edit_user_profile_path(user))) do
       %i.configure.icon
       Edit profile
-
-  - unless current_user == user
-    // Friendship links
-    .right.floated.item.friendship
-      = render_friendship user
