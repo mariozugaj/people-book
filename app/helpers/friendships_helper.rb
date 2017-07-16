@@ -10,8 +10,9 @@ module FriendshipsHelper
   end
 
   def find_friendship(user)
-    Friendship.where('user_id = :user_id OR friend_id = :user_id',
-                     user_id: user.id)
-              .first
+    current_user.friendships
+                .where('user_id = :user_id OR friend_id = :user_id',
+                       user_id: user.id)
+                .first
   end
 end

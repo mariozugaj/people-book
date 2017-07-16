@@ -9,7 +9,7 @@
   // Cover photo and links
   = render 'users/cover_menu', user: @user
 
-  - if @user.friends.any?
+  - if @friends.any?
     // Friends index
     .ui.three.column.grid
       = render partial: 'users/user', collection: @friends, as: :user
