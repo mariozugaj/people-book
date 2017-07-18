@@ -69,17 +69,16 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email if auth.info.email
+    where(email: auth.info.email).first_or_create do |user|
+      break unless auth.info.email
+      user.email = auth.info.email
       user.password = Devise.friendly_token(40)
       user.name = auth.info.name
-      if user.email
-        Profile.create! user: user,
-                        remote_avatar_url: auth.info.image
-        avatars = PhotoAlbum.create(author: user, name: 'Avatars')
-        avatars.images.create(remote_image_url: auth.info.image)
-        PhotoAlbum.create(author: user, name: 'Cover photos')
-      end
+      Profile.create! user: user,
+                      remote_avatar_url: auth.info.image
+      avatars = PhotoAlbum.create(author: user, name: 'Avatars')
+      avatars.images.create(remote_image_url: auth.info.image)
+      PhotoAlbum.create(author: user, name: 'Cover photos')
     end
   end
 
