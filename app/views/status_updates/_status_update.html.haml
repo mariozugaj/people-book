@@ -36,7 +36,7 @@
       .description.status_update__text
         = sanitize status_update.text,
           tags: %w[strong em a h3 h4 h5 h6 p hr ul ol li],
-          attributes: %w[href]
+          attributes: ['href']
 
   - if status_update.image.url
 
