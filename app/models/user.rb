@@ -51,6 +51,9 @@ class User < ApplicationRecord
   # Validations
   validates_presence_of :name, :email, :password
 
+  # Delegations
+  delegate :avatar, to: :profile
+
   def friendships
     Friendship.where('accepted = ?', true)
               .where('user_id = ? OR friend_id = ?', id, id)
