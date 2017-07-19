@@ -198,7 +198,7 @@ likeables.each do |likeable|
                              .sample(likeable.constantize.count * 0.6)
   random_likeables.each do |likeable_object|
     random_users = User.all
-                       .sample(MULTIPLIER * 0.4)
+                       .sample(rand(1..(MULTIPLIER * 0.4)))
 
     random_users.each do |user|
       likeable_object
