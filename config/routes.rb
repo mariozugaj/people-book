@@ -42,4 +42,5 @@ Rails.application.routes.draw do
   end
 
   get :search, to: 'search#index'
+  get :autocomplete, to: 'search#autocomplete'
 end

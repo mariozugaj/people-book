@@ -15,15 +15,15 @@ PeopleBook.SearchModule = (function () {
           prompt: '.search.input',
         },
         apiSettings: {
-          url: '/search/?q={query}',
+          url: '/autocomplete/?q={query}',
         },
         fields: {
           categories: 'results',
           categoryName: 'name',
           categoryResults: 'results',
-          title: 'name',
+          title: 'title',
           url: 'url',
-          image: 'avatar',
+          image: 'image',
           description: 'description',
           action: 'action',
           actionText: 'text',

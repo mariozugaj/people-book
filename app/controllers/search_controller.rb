@@ -1,21 +1,17 @@
 class SearchController < ApplicationController
-
+  SEARCH_CATEGORIES = %w[Users StatusUpdates]
   def index
-    return [] if !search_params
-    @people         = User.includes(:profile)
-                          .ransack(name_cont: params[:q])
-                          .result(distinct: true)
 
-    @status_updates = StatusUpdate.includes(author: :profile)
-                                  .ransack(text_cont: params[:q])
-                                  .result
-    respond_to do |format|
-      format.html
-      format.json {
-        @results_count = @people.size + @status_updates.size
-        @people = @people.limit(3)
-        @status_updates = @status_updates.limit(3)
-      }
+  end
+
+  def autocomplete
+    @search_results = [].tap do |column|
+      search_controllers.each_pair do |name, controller|
+        results = {}
+        results[:name] = name.to_s.underscore.humanize
+        results[:results] = controller.new.result(search_params, limit: 3)
+        column << results
+      end
     end
   end
 
@@ -23,5 +19,13 @@ class SearchController < ApplicationController
 
   def search_params
     @query ||= params[:q]
+  end
+
+  def search_controllers
+    controllers = {}
+    SEARCH_CATEGORIES.each do |category|
+      controllers[category.to_sym] = "Search::#{category}Search".constantize
+    end
+    controllers
   end
 end
