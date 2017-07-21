@@ -30,6 +30,7 @@ PeopleBook.SearchModule = (function () {
           actionUrl: 'url',
         },
         minCharacters: 1,
+        maxResults: 3,
       });
   };
 

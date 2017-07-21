@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  SEARCH_CATEGORIES = %w[Users StatusUpdates]
+  SEARCH_CATEGORIES = %w[Users StatusUpdates Images]
   def index
 
   end
@@ -9,7 +9,7 @@ class SearchController < ApplicationController
       search_controllers.each_pair do |name, controller|
         results = {}
         results[:name] = name.to_s.underscore.humanize
-        results[:results] = controller.new.result(search_params, limit: 3)
+        results[:results] = controller.new(search_params, 3).search_result
         column << results
       end
     end
@@ -24,7 +24,7 @@ class SearchController < ApplicationController
   def search_controllers
     controllers = {}
     SEARCH_CATEGORIES.each do |category|
-      controllers[category.to_sym] = "Search::#{category}Search".constantize
+      controllers[category.to_sym] = "Search::#{category}".constantize
     end
     controllers
   end

@@ -21,6 +21,9 @@ class Image < ApplicationRecord
   has_many :users_who_like_it, through: :likes, source: :user
   has_one :author, through: :photo_album
 
+  # Delegations
+  delegate :name, to: :author, prefix: true
+
   # Uploader
   mount_uploader :image, PhotoAlbumImageUploader
 end
