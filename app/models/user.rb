@@ -54,6 +54,9 @@ class User < ApplicationRecord
   # Delegations
   delegate :avatar, to: :profile
 
+  # Search
+  searchkick word_middle: [:name]
+
   def friendships
     Friendship.where('accepted = ?', true)
               .where('user_id = ? OR friend_id = ?', id, id)
@@ -69,6 +72,15 @@ class User < ApplicationRecord
 
   def friend_with?(user)
     friends.include? user
+  end
+
+  def to_json
+    {
+      title: name,
+      image: avatar.url(:thumb) || '',
+      url: Rails.application.routes.url_helpers.user_path(self),
+      description: profile.hometown || ''
+    }
   end
 
   def self.from_omniauth(auth)

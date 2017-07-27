@@ -24,6 +24,18 @@ class Image < ApplicationRecord
   # Delegations
   delegate :name, to: :author, prefix: true
 
+  # Search
+  searchkick text_middle: %i[description]
+
   # Uploader
   mount_uploader :image, PhotoAlbumImageUploader
+
+  def to_json
+    {
+      title: description,
+      image: image.url(:thumb) || '',
+      url: Rails.application.routes.url_helpers.image_path(self),
+      description: author_name
+    }
+  end
 end

@@ -14,9 +14,9 @@ json.results do
   end
 end
 
-if @search_results.map { |r| r[:results].size }.inject(:+) > 6
+if @search_results.map { |r| r[:count] }.inject(:+) > 6
   json.action do
-    json.url search_path(q: @query)
-    json.text "View all #{@search_results.map { |r| r[:results].size }.inject(:+)} results"
+    json.url search_users_path(q: @search_term)
+    json.text "View all #{@search_results.map { |r| r[:count] }.inject(:+)} results"
   end
 end

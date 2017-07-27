@@ -1,0 +1,24 @@
+= render 'menu'
+
+.row
+  .sixteen.wide.column
+    - if !@resources.nil? && !@resources.empty?
+      .ui.left.aligned.stackable.grid
+        - @resources.each do |resource|
+          .eight.wide.column
+            .ui.segment
+              .ui.divided.link.items
+                = link_to status_update_path(resource), class: 'item' do
+                  - if resource.image.url
+                    .ui.tiny.image
+                      = image_tag resource.image.url(:thumb)
+                  .content
+                    .header= resource.text.truncate(130)
+                    .description= resource.author_name
+    - else
+      .ui.blue.message
+        %h4.header No status updates
+
+.row
+  - if !@resources.nil? && !@resources.empty?
+    = paginate @resources

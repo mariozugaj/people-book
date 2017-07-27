@@ -33,6 +33,19 @@ class StatusUpdate < ApplicationRecord
   # Delegations
   delegate :name, to: :author, prefix: true
 
+  # Search
+  searchkick text_middle: %i[text],
+             batch_size: 200
+
+  def to_json
+    {
+      title: text.truncate(60),
+      image: image.url(:thumb) || '',
+      url: Rails.application.routes.url_helpers.status_update_path(self),
+      description: author_name
+    }
+  end
+
   private
 
   def text_or_image

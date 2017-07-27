@@ -1,0 +1,32 @@
+.row
+  .column
+    .ui.blue.raised.attached.segment
+      %h2.ui.header
+        %i.search.teal.icon
+        .content
+          = "Results for '#{@search_term}'"
+
+    .ui.bottom.attached.pointing.raised.four.item.teal.menu
+      // Users
+      = link_to search_users_path(q: @search_term),
+        class: class_string('item', 'active' => current_page?(search_users_path)) do
+        %i.users.icon
+        Users
+
+      // Status updates
+      = link_to search_status_updates_path(q: @search_term),
+        class: class_string('item', 'active' => current_page?(search_status_updates_path)) do
+        %i.newspaper.icon
+        Status updates
+
+      // Images
+      = link_to search_images_path(q: @search_term),
+        class: class_string('item', 'active' => current_page?(search_images_path)) do
+        %i.image.icon
+        Images
+
+      // Comments
+      = link_to search_comments_path(q: @search_term),
+        class: class_string('item', 'active' => current_page?(search_comments_path)) do
+        %i.comments.icon
+        Comments

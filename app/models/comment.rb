@@ -26,4 +26,19 @@ class Comment < ApplicationRecord
 
   # Scopes
   default_scope { order(created_at: :asc) }
+
+  # Delegations
+  delegate :name, to: :author, prefix: true
+
+  # Search
+  searchkick text_middle: %i[text]
+
+  def to_json
+    {
+      title: text.truncate(60),
+      image: author.avatar.url(:thumb),
+      url: Rails.application.routes.url_helpers.url_for(commentable),
+      description: author.name
+    }
+  end
 end

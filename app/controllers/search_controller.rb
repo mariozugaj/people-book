@@ -1,31 +1,32 @@
 class SearchController < ApplicationController
-  SEARCH_CATEGORIES = %w[Users StatusUpdates Images]
-  def index
+  before_action :set_search_term
 
+  CATEGORIES = {
+    'Users' => [User, :name, :word_middle],
+    'Status updates' => [StatusUpdate, :text, :text_middle],
+    'Comments' => [Comment, :text, :text_middle],
+    'Images' => [Image, :description, :text_middle]
+  }.freeze
+
+  def users
+    @resources = Search::CategorySearch.search(CATEGORIES['Users'], params)
   end
 
-  def autocomplete
-    @search_results = [].tap do |column|
-      search_controllers.each_pair do |name, controller|
-        results = {}
-        results[:name] = name.to_s.underscore.humanize
-        results[:results] = controller.new(search_params, 3).search_result
-        column << results
-      end
-    end
+  def status_updates
+    @resources = Search::CategorySearch.search(CATEGORIES['Status updates'], params)
+  end
+
+  def images
+    @resources = Search::CategorySearch.search(CATEGORIES['Images'], params)
+  end
+
+  def comments
+    @resources = Search::CategorySearch.search(CATEGORIES['Comments'], params)
   end
 
   private
 
-  def search_params
-    @query ||= params[:q]
-  end
-
-  def search_controllers
-    controllers = {}
-    SEARCH_CATEGORIES.each do |category|
-      controllers[category.to_sym] = "Search::#{category}".constantize
-    end
-    controllers
+  def set_search_term
+    @search_term = params[:q]
   end
 end

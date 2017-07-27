@@ -1,0 +1,24 @@
+= render 'menu'
+
+.row
+  .sixteen.wide.column
+    - if !@resources.nil? && !@resources.empty?
+      .ui.left.aligned.stackable.grid
+        - @resources.each do |resource|
+          .eight.wide.column
+            .ui.segment
+              .ui.divided.link.items
+                = link_to url_for(resource.commentable), class: 'item' do
+                  .ui.tiny.image
+                    - if resource.commentable.image.url
+                      = image_tag resource.commentable.author.avatar.url(:thumb)
+                  .content
+                    .header= resource.author_name
+                    .description= resource.text || ''
+    - else
+      .ui.blue.message
+        %h3.header No comments
+
+.row
+  - if !@resources.nil? && !@resources.empty?
+    = paginate @resources
