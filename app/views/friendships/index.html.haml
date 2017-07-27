@@ -5,11 +5,15 @@
   = render 'users/aside', user: @user
 
 .twelve.wide.column
+  .ui.centered.grid
 
-  // Cover photo and links
-  = render 'users/cover_menu', user: @user
+    = render 'users/cover_menu', user: @user
 
-  - if @friends.any?
-    // Friends index
-    .ui.three.column.grid
-      = render partial: 'users/user', collection: @friends, as: :user
+    - if @friends.any?
+      .row
+        .column
+          // Friends index
+          .ui.three.stackable.cards
+            = render partial: 'users/user', collection: @friends, as: :user
+    .row
+      = paginate @friends

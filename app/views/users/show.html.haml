@@ -4,17 +4,22 @@
 .four.wide.column
   = render 'users/aside', user: @user
 
+// User main content
 .twelve.wide.column
+  .ui.centered.grid
 
-  // Cover photo and links
-  = render 'cover_menu', user: @user
+    = render 'cover_menu', user: @user
 
-  // Update status form
+    -# Render status update form if current_user == @user
+    - if @user == current_user
+      // Update status form
+      .row
+        .column
+          = render 'status_updates/form', status_update: @new_status_update
 
-  -# Render status update form if current_user == @user
-  - if @user == current_user
-    = render 'status_updates/form', status_update: @new_status_update
-
-  // Feed
-  .ui.large.feed
-    = render @feed
+    // Feed
+    .row
+      .column
+        .ui.large.feed
+          = render @feed
+          = paginate @feed

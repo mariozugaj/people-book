@@ -3,7 +3,7 @@ class FriendshipsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @friends = @user.friends
+    @friends = @user.friends.page(params[:page])
   end
 
   def create
