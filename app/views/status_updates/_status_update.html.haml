@@ -33,7 +33,7 @@
 
     // Status update text
     .content
-      .description.status_update__text
+      .description.status_update__text.break-word
         = sanitize status_update.text,
           tags: %w[strong em a h3 h4 h5 h6 p hr ul ol li],
           attributes: ['href']

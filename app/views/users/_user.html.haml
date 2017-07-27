@@ -1,26 +1,25 @@
-.column
-  .ui.raised.card
-    // User's image
-    = link_to user_path(user), class: 'image' do
-      = image_tag user.profile.avatar.url :normal
+.ui.raised.card
+  // User's image
+  = link_to user_path(user), class: 'image' do
+    = image_tag user.profile.avatar.url :normal
 
-    .content
-      // Link to user's name
-      = link_to user.name, user, class: 'header'
+  .content
+    // Link to user's name
+    = link_to user.name, user, class: 'header'
 
-      // When did the user join PeopleBook?
-      .meta
-        %span.date
-          Joined
-          = time_ago_in_words user.created_at
-          ago
+    // When did the user join PeopleBook?
+    .meta
+      %span.date
+        Joined
+        = time_ago_in_words user.created_at
+        ago
 
-    // Link to and count of user's friends
-    .extra.content
-      = link_to user_friendships_path(user) do
-        %i.users.icon
-        = pluralize user.reload.friends.count, 'friend'
+  // Link to and count of user's friends
+  .extra.content
+    = link_to user_friendships_path(user) do
+      %i.users.icon
+      = pluralize user.reload.friends.count, 'friend'
 
-      %span.right.floated
-        - unless current_user == user
-          = render_friendship user
+    %span.right.floated
+      - unless current_user == user
+        = render_friendship user

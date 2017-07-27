@@ -5,9 +5,11 @@
   = render 'users/aside', user: current_user
 
 .twelve.wide.column
+  .ui.centered.grid
 
-  // Cover photo and links
-  = render 'users/cover_menu', user: current_user
+    = render 'users/cover_menu', user: current_user
 
-  // Profile edit form
-  = render partial: 'form', locals: { user: current_user, relationship_options: @relationship_options }
+    .row
+      .column
+        // Profile edit form
+        = render partial: 'form', locals: { user: current_user, relationship_options: @relationship_options }

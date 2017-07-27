@@ -14,11 +14,12 @@
 // About
 = render 'users/about', user: user
 
-// Quick friends
-.ui.card
-  .content
-    .ui.three.column.grid
-      .three.column.row
-        .column
-          .ui.header Friends
-      = render partial: 'users/user_thumb', collection: user.friends.limit(12), as: :user
+- if user.friends.any?
+  // Quick friends
+  .ui.card
+    .content
+      .ui.three.column.grid
+        .three.column.row
+          .column
+            .ui.header Friends
+        = render partial: 'users/user_thumb', collection: user.friends.limit(12), as: :user

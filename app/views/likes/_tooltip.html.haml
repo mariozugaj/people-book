@@ -1,10 +1,10 @@
-- if likeable.likes_count.to_i > 0
+- if likeable.likes
   .ui.divided.items
     - likeable.users_who_like_it.limit(5).each do |user|
       .item
         .content
           .ui.avatar.image
-            = image_tag user.profile.avatar.url :thumb
+            = image_tag user.avatar.url :thumb
           %span.description= user.name
 
     - if likeable.likes_count.to_i > 5

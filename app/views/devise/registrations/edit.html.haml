@@ -5,55 +5,57 @@
   = render 'users/aside', user: @user
 
 .twelve.wide.column
+  .ui.centered.grid
 
-  // Cover photo and links
-  = render 'users/cover_menu', user: @user
+    = render 'users/cover_menu', user: @user
 
-  .ui.top.attached.purple.clearing.segment
-    %h2.ui.header
-      %i.settings.icon
-      .content
-        Edit account
-        .sub.header Manage your account
+    .row
+      .column
+        .ui.top.attached.purple.clearing.segment
+          %h2.ui.header
+            %i.settings.icon
+            .content
+              Edit account
+              .sub.header Manage your account
 
-  .ui.attached.segment
-    = form_for(resource, as: resource_name, url: registration_path(resource_name),
-               html: { method: :put, class: 'ui form' }) do |f|
-      = devise_error_messages!
+        .ui.attached.segment
+          = form_for(resource, as: resource_name, url: registration_path(resource_name),
+                     html: { method: :put, class: 'ui form' }) do |f|
+            = devise_error_messages!
 
-      .equal.width.fields
-        .field
-          = f.label :name
-          = f.text_field :name
+            .equal.width.fields
+              .field
+                = f.label :name
+                = f.text_field :name
 
-        .field
-          = f.label :email
-          = f.email_field :email, autofocus: true
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          %div
-            Currently waiting confirmation for: #{resource.unconfirmed_email}
+              .field
+                = f.label :email
+                = f.email_field :email, autofocus: true
+              - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                %div
+                  Currently waiting confirmation for: #{resource.unconfirmed_email}
 
-      .equal.width.fields
-        .field
-          = f.label :password
-          %i (leave blank if you don't want to change it)
-          = f.password_field :password, autocomplete: "off"
-          - if @minimum_password_length
-            %em
-              = @minimum_password_length
-              characters minimum
+            .equal.width.fields
+              .field
+                = f.label :password
+                %i (leave blank if you don't want to change it)
+                = f.password_field :password, autocomplete: "off"
+                - if @minimum_password_length
+                  %em
+                    = @minimum_password_length
+                    characters minimum
 
-        .required.field
-          = f.label :current_password
-          %i (we need your current password to confirm your changes)
-          = f.password_field :current_password, autocomplete: "off"
+              .required.field
+                = f.label :current_password
+                %i (we need your current password to confirm your changes)
+                = f.password_field :current_password, autocomplete: "off"
 
-      .actions
-        = f.submit "Update your account", class: 'ui fluid blue button'
+            .actions
+              = f.submit "Update your account", class: 'ui fluid blue button'
 
-    %h3.ui.center.aligned.header Unhappy?
-    = button_to "Delete my account",
-      registration_path(resource_name),
-      class: 'ui fluid negative basic button',
-      data: { confirm: "Are you sure you want to permanently delete your account?" },
-      method: :delete
+          %h3.ui.center.aligned.header Unhappy?
+          = button_to "Delete my account",
+            registration_path(resource_name),
+            class: 'ui fluid negative basic button',
+            data: { confirm: "Are you sure you want to permanently delete your account?" },
+            method: :delete
