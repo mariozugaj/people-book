@@ -3,7 +3,7 @@ class PhotoAlbumsController < ApplicationController
   before_action :set_photo_album, only: %i[show edit update destroy]
 
   def index
-    @photo_albums = @author.photo_albums.decorate
+    @photo_albums = @author.photo_albums.includes(:images).decorate
   end
 
   def show; end
@@ -70,7 +70,7 @@ class PhotoAlbumsController < ApplicationController
   end
 
   def set_photo_album
-    @photo_album = PhotoAlbum.find(params[:id])
+    @photo_album = PhotoAlbum.includes(:images).find(params[:id])
   end
 
   def photo_album_params

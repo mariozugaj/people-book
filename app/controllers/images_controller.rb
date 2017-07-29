@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
   before_action :set_photo_album, only: %i[create destroy]
-  before_action :set_image, only: %i[show edit update destroy]
+  before_action :set_image, only: %i[show edit]
 
   def show
     @photo_album = @image.photo_album
@@ -19,6 +19,7 @@ class ImagesController < ApplicationController
   end
 
   def update
+    @image = Image.find(params[:id])
     if @image.update(images_params)
       flash[:success] = 'Image was successfuly updated'
       redirect_to @image
@@ -26,6 +27,7 @@ class ImagesController < ApplicationController
   end
 
   def destroy
+    @image = Image.find(params[:id])
     @image.destroy
     flash[:success] = 'Image was successfuly destroyed'
     redirect_to user_photo_album_path(current_user, @photo_album)
@@ -38,7 +40,7 @@ class ImagesController < ApplicationController
   end
 
   def set_image
-    @image = Image.find(params[:id])
+    @image = Image.includes(photo_album: :images).find(params[:id])
   end
 
   def add_more_images(new_images)

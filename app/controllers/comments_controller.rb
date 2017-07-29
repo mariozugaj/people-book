@@ -3,7 +3,9 @@ class CommentsController < ApplicationController
 
   def index
     @commentable = find_polymorphic(params)
-    @comments = @commentable.comments.page(params[:page])
+    @comments = @commentable.comments
+                            .includes(:commentable, author: :profile)
+                            .page(params[:page])
   end
 
   def create
