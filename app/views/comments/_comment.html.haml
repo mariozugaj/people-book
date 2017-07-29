@@ -21,13 +21,14 @@
     // Comment actions
     .likes.actions
 
-      // Like
-      = render_likes comment
+      - if policy(comment).like?
+        // Like
+        = render_likes comment
 
       %a.likes.count{ 'data-link': comment_likes_path(comment),
         'data-behavior': 'like-count-container',
         'data-inverted': '' }
-        = pluralize comment.reload.likes_count, 'like'
+        = pluralize comment.likes_count, 'like'
 
       - if policy(comment).destroy?
         // Delete comment button

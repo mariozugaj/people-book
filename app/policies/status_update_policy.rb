@@ -22,7 +22,7 @@ class StatusUpdatePolicy
     owner?
   end
 
-  def comment?
+  def feedback?
     friend? || owner?
   end
 
