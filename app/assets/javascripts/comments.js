@@ -98,7 +98,7 @@ PeopleBook.CommentsModule = (function () {
     var $comment = $(comment);
 
     if ($container.length == 0) {
-      _getComments(link, parent);
+      _showComments(link, parent);
     };
 
     $comment.appendTo($container).hide().slideDown('fast', function () {

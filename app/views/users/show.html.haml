@@ -2,7 +2,7 @@
 
 // User aside info
 .four.wide.column
-  = render 'users/aside', user: @user, user_friends: @user_friends
+  = render 'users/aside', user: @user
 
 // User main content
 .twelve.wide.column
@@ -22,4 +22,4 @@
       .column
         .ui.large.feed
           = render @feed
-          = paginate @feed
+    = paginate @feed

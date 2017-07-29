@@ -39,13 +39,13 @@
                       class: 'ui red label'
 
         // Author's avatar
-        = link_to user_path(@image.author) do
-          = image_tag @image.author.profile.avatar.url(:thumb),
+        = link_to user_path(@author) do
+          = image_tag @author.avatar.url(:thumb),
             class: 'ui left floated avatar image'
 
         // Author's name
         .header
-          = link_to @image.author.name, user_path(@image.author)
+          = link_to @author.name, user_path(@author)
 
         // Time at image creation
         .meta

@@ -5,11 +5,16 @@
 
   /* Main content
   .ten.wide.column
+    .ui.centered.grid
 
-    /* New status update form
-    = render 'status_updates/form', status_update: @new_status_update
+      /* New status update form
+      .row
+        .column
+          = render 'status_updates/form', status_update: @new_status_update
 
-    /* Feed
-    .ui.large.feed
-      = render @feed
+      /* Feed
+      .row
+        .column
+          .ui.large.feed
+            = render @feed
       = paginate @feed
