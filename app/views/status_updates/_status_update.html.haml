@@ -1,4 +1,4 @@
-.ui.fluid.card.status_update{ 'data-id': status_update.id, 'data-type': status_update.class }
+.ui.fluid.card.commentable{ 'data-id': status_update.id, 'data-type': status_update.class }
 
   // Status update's author's avatar, full name and date
   .content
@@ -46,9 +46,3 @@
 
   // Status update feedback actions/statistics
   = render 'shared/feedback_actions', feedbackable: status_update
-
-  // Status update comments
-  .comments.content{ style: 'display: none;' }
-    %h4 Comments
-    .ui.comments{ style: 'max-width: 100%' }
-      = render status_update.comments

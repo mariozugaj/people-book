@@ -12,7 +12,7 @@
     %i.users.icon
     %span Friends
     .ui.left.pointing.friend_count.teal.label
-      = user.friends.count
+      = user.friends.size
 
   // User photo albums link
   = link_to user_photo_albums_path(user),
@@ -20,7 +20,7 @@
     %i.camera.retro.icon
     %span Photo Albums
     .ui.left.pointing.teal.label
-      = user.photo_albums.count
+      = user.photo_albums.size
 
   -# If user == current_user, show edit links
   - if policy(user.profile).edit?

@@ -1,6 +1,12 @@
 class LikesController < ApplicationController
   include FindPolymorphic
 
+  def index
+    @likeable = find_polymorphic(params)
+    @users_who_like_it = @likeable.users_who_like_it
+    render :index, layout: false
+  end
+
   def create
     @likeable = find_polymorphic(params)
     @like = @likeable.likes.build(like_params)

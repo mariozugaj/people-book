@@ -1,5 +1,5 @@
 .column
   .card
-    .ui.tiny.image{ 'data-tooltip': user.name }
+    .ui.tiny.image{ 'data-tooltip': user.name, 'data-inverted': '' }
       = link_to user do
         = image_tag user.profile.avatar.url :thumb

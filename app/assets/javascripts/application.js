@@ -25,6 +25,5 @@ document.addEventListener('turbolinks:load', function () {
   PeopleBook.FriendshipsModule.init();
   PeopleBook.LikesModule.init();
   PeopleBook.SearchModule.init();
-  PeopleBook.ImagesModule.init();
   new Notifications;
 });

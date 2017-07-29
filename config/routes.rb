@@ -15,11 +15,11 @@ Rails.application.routes.draw do
 
   # Concerns
   concern :commentable do
-    resources :comments, only: %i[create destroy], concerns: :likeable
+    resources :comments, only: %i[index create destroy], concerns: :likeable
   end
 
   concern :likeable do
-    resources :likes, only: %i[create destroy]
+    resources :likes, only: %i[index create destroy]
   end
 
   # Users and nested resources

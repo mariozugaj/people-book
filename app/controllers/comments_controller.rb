@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
   include FindPolymorphic
 
+  def index
+    @commentable = find_polymorphic(params)
+    @comments = @commentable.comments.page(params[:page])
+  end
+
   def create
     @commentable = find_polymorphic(params)
     @comment = @commentable.comments.build(comment_params)

@@ -11,7 +11,7 @@ PeopleBook.ImagesModule = (function () {
     if (document.body.contains(imageContainer)) {
       var commentsContainer = document.querySelector('.image_show_card');
       var imageContainerHeight = imageContainer.offsetHeight;
-      commentsContainer.style.maxHeight = imageContainerHeight + 'px';
+      commentsContainer.style.height = imageContainerHeight + 'px';
     }
   };
 

@@ -1,17 +1,25 @@
 .content.statistics
   // Like action and statistics
+  - comments_path = send("#{feedbackable.class.to_s.underscore.downcase}_comments_path", feedbackable)
+  - likes_path = send("#{feedbackable.class.to_s.underscore.downcase}_likes_path", feedbackable)
   %span
+
     = render_likes feedbackable
-    %span{ 'data-html': "#{render 'likes/tooltip', likeable: feedbackable}",
-      'data-behavior': 'like-count-container' }
+
+    %span{ 'data-link': likes_path,
+      'data-behavior': 'like-count-container',
+      'data-inverted': '' }
       = pluralize feedbackable.reload.likes_count, 'like'
 
   // Comment action and statistics
   %span.whitespace--left
+
     - if policy(feedbackable).comment?
-      %a
+      %a{ 'data-tooltip': 'Comment', 'data-inverted': ''}
         %i.comment.icon{ 'data-behavior': 'comment-link' }
-    %a.comments_count{ 'data-behavior': 'show-comments' }
+
+    %a.comments_count{ 'data-behavior': 'show-comments',
+      'data-link': comments_path }
       = pluralize feedbackable.reload.comments_count, 'comment'
 
 - if policy(feedbackable).comment?

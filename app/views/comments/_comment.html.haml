@@ -24,8 +24,9 @@
       // Like
       = render_likes comment
 
-      %a.likes.count{ 'data-html': "#{render 'likes/tooltip', likeable: comment}",
-        'data-behavior': 'like-count-container' }
+      %a.likes.count{ 'data-link': comment_likes_path(comment),
+        'data-behavior': 'like-count-container',
+        'data-inverted': '' }
         = pluralize comment.reload.likes_count, 'like'
 
       - if policy(comment).destroy?

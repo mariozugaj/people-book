@@ -20,8 +20,8 @@
         = image_tag @image.image.url(:normal)
 
   // Image aside
-  .ui.five.wide.column{ 'data-id': @image.id, 'data-type': @image.class }
-    .ui.fluid.card.image_show_card
+  .ui.five.wide.column
+    .ui.fluid.card.image_show_card.commentable{ 'data-id': @image.id, 'data-type': @image.class }
 
       // Header info
       .content
@@ -60,12 +60,6 @@
 
       // Image feedback actions/statistics
       = render 'shared/feedback_actions', feedbackable: @image
-
-      // Image comments
-      .comments.content
-        %h5 Comments
-        .ui.comments
-          = render @image.comments
 
 .row
   .column
