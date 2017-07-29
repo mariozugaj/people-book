@@ -39,6 +39,8 @@ class User < ApplicationRecord
            class_name: 'Friendship',
            foreign_key: 'user_id',
            dependent: :destroy
+  has_many :friendships
+  has_many :friends, through: :friendships
   has_many :likes, dependent: :destroy
   has_many :comments, foreign_key: 'author_id', dependent: :destroy
   has_many :images, through: :photo_albums
@@ -81,6 +83,12 @@ class User < ApplicationRecord
       url: Rails.application.routes.url_helpers.user_path(self),
       description: profile.hometown || ''
     }
+  end
+
+  def feed
+    StatusUpdate.includes({ author: [:profile] })
+                .where(author_id: friends_ids << id)
+                .order(created_at: :desc)
   end
 
   def self.from_omniauth(auth)
