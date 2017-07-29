@@ -3,8 +3,7 @@ class LikesController < ApplicationController
 
   def index
     @likeable = find_polymorphic(params)
-    @users_who_like_it = @likeable.users_who_like_it
-    render :index, layout: false
+    render partial: 'tooltip', locals: { likeable: @likeable }
   end
 
   def create

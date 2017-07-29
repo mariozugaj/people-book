@@ -1,0 +1,6 @@
+- unless likeable.users_who_like_it.blank?
+  = likeable.users_who_like_it.limit(5).map(&:name).join(', ')
+
+  - if likeable.users_who_like_it.size > 5
+    +
+    = pluralize (likeable.users_who_like_it.size - 5), 'other'

@@ -7,9 +7,9 @@ PeopleBook.LikesModule = (function () {
   };
 
   var _showTooltip = function () {
-    $("[data-behavior='like-count-container']").on('mouseover', function (e) {
-      if (e.target.innerText === '0 likes ') {
-        return e.target.dataset.tooltip = 'No one likes it yet. Be the first!';
+    $('.commentable').on('mouseover', "[data-behavior='like-count-container']", function (e) {
+      if (e.target.innerText.trim() === '0 likes') {
+        return e.target.dataset.tooltip = 'No one likes it yet.';
       };
 
       var link = e.target.dataset.link;
