@@ -57,7 +57,7 @@ class User < ApplicationRecord
   delegate :avatar, to: :profile
 
   # Search
-  searchkick word_middle: [:name]
+  searchkick text_middle: [:name]
 
   def friendships
     Friendship.where('accepted = ?', true)
@@ -83,12 +83,6 @@ class User < ApplicationRecord
       url: Rails.application.routes.url_helpers.user_path(self),
       description: profile.hometown || ''
     }
-  end
-
-  def feed
-    StatusUpdate.includes({ author: [:profile] })
-                .where(author_id: friends_ids << id)
-                .order(created_at: :desc)
   end
 
   def self.from_omniauth(auth)
