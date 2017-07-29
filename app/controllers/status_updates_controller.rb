@@ -1,7 +1,10 @@
 class StatusUpdatesController < ApplicationController
-  before_action :set_status_update, only: %i[show edit update destroy]
+  before_action :set_status_update, only: %i[edit update destroy]
 
-  def show; end
+  def show
+    @status_update = StatusUpdate.includes(author: :profile)
+                                 .find(params[:id])
+  end
 
   def create
     @status_update = StatusUpdate.new(status_update_params)
@@ -52,7 +55,7 @@ class StatusUpdatesController < ApplicationController
   private
 
   def set_status_update
-    @status_update = StatusUpdate.includes(comments: [author: :profile]).find(params[:id])
+    @status_update = StatusUpdate.find(params[:id])
   end
 
   def status_update_params
