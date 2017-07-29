@@ -163,13 +163,10 @@ puts 'done!'
 
 print 'Creating comments...'
 
-commentables = %w[Image StatusUpdate]
+commentables = [Image, StatusUpdate]
 
 commentables.each do |commentable|
-  random_commentables = commentable.constantize
-                                   .all
-                                   .sample(commentable.constantize
-                                                           .count * 0.6)
+  random_commentables = commentable.all.sample(commentable.count * 0.6)
   random_commentables.each do |commentable_object|
     random_users =
       User.all
@@ -190,20 +187,16 @@ puts 'done!'
 # Create status update, comment and image likes
 print 'Creating likes...'
 
-likeables = %w[Image StatusUpdate Comment]
+likeables = [Image, StatusUpdate, Comment]
 
 likeables.each do |likeable|
-  random_likeables = likeable.constantize
-                             .all
-                             .sample(likeable.constantize.count * 0.6)
+  random_likeables = likeable.all.sample(likeable.count * 0.6)
+
   random_likeables.each do |likeable_object|
-    random_users = User.all
-                       .sample(rand(1..(MULTIPLIER * 0.4)))
+    random_users = User.all.sample(rand(1..(MULTIPLIER * 0.4)))
 
     random_users.each do |user|
-      likeable_object
-        .likes
-        .create(user: user)
+      likeable_object.likes.create(user: user)
     end
   end
 end
