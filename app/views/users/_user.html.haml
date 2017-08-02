@@ -18,7 +18,7 @@
   .extra.content
     = link_to user_friendships_path(user) do
       %i.users.icon
-      = pluralize user.reload.friends.count, 'friend'
+      = pluralize user.friendships.size, 'friend'
 
     %span.right.floated
       - unless current_user == user

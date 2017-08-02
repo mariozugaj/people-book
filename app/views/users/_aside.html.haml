@@ -4,7 +4,7 @@
     - if current_user == user
       = link_to 'Change avatar', user_photo_album_path(current_user, user.photo_albums.where(name: 'Avatars').first),
         class: 'ui blue ribbon label'
-    = image_tag user.profile.avatar.url :normal, alt: user.name
+    = image_tag user.avatar.url :normal, alt: user.name
 
 // Friendship
 - unless current_user == user
@@ -14,7 +14,7 @@
 // About
 = render 'users/about', user: user
 
-- if user.friends.any?
+- if user.friendships.any?
   // Quick friends
   .ui.card
     .content
@@ -23,5 +23,5 @@
           .column
             .ui.header Friends
         = render partial: 'users/user_thumb',
-          collection: user.friends.includes(:profile).limit(12),
+          collection: user.friends.limit(12).includes(:profile),
           as: :user

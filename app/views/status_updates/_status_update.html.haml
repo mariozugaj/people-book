@@ -17,7 +17,7 @@
 
     // Author's avatar
     = link_to user_path(status_update.author) do
-      = image_tag status_update.author.profile.avatar.url(:thumb),
+      = image_tag status_update.author.avatar.url(:thumb),
         class: 'ui left floated avatar image'
 
     // Author's name
