@@ -31,6 +31,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_record_query_trace (1.5.4)
     activejob (5.1.2)
       activesupport (= 5.1.2)
       globalid (>= 0.3.6)
@@ -262,6 +263,8 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.3)
+    rack-mini-profiler (0.10.5)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.1.2)
@@ -406,6 +409,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_record_query_trace (~> 1.5, >= 1.5.4)
   annotate
   autoprefixer-rails
   aws-sdk
@@ -437,6 +441,7 @@ DEPENDENCIES
   pry-rails (~> 0.3.6)
   puma (~> 3.7)
   pundit
+  rack-mini-profiler (~> 0.10.5)
   rails (~> 5.1.1)
   redis (~> 3.0)
   rest-client (~> 2.0, >= 2.0.2)
