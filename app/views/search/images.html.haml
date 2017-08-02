@@ -1,17 +1,16 @@
 = render 'menu'
 
-.row
-  .sixteen.wide.column
-    - if !@resources.nil? && !@resources.empty?
+- if !@resources.blank?
+  .row
+    .sixteen.wide.column
       .ui.four.stackable.cards
         - @resources.each do |resource|
           = link_to image_path(resource), class: 'ui card' do
             .ui.rounded.fluid.image
               = image_tag resource.image.url(:mini)
-    - else
-      .ui.blue.message
-        %h3.header No images
-
-.row
-  - if !@resources.nil? && !@resources.empty?
+  .row
     = paginate @resources
+
+- else
+  .ui.blue.message
+    %h3.header No images

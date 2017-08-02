@@ -1,15 +1,14 @@
 = render 'menu'
 
-.row
-  .sixteen.wide.column
-    - if !@resources.nil? && !@resources.empty?
+- if !@resources.blank?
+  .row
+    .sixteen.wide.column
       .ui.four.stackable.cards
         - @resources.each do |resource|
           = render resource
-    - else
-      .ui.blue.message
-        %h4.header No users
-
-.row
-  - if !@resources.nil? && !@resources.empty?
+  .row
     = paginate @resources
+
+- else
+  .ui.blue.message
+    %h4.header No users

@@ -3,9 +3,7 @@
   method: :get,
   local: true do |form|
 
-  .ui.action.input
-    = form.text_field :q, placeholder: 'Search people, updates...',
-      class: 'search input'
-    = form.button class: 'ui teal icon search button' do
+  .ui.link.icon.input
+    %input.search.input{ name: 'q', placeholder: 'Search people, updates...'}
       %i.ui.search.icon
   .results

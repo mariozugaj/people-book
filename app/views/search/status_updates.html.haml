@@ -1,8 +1,8 @@
 = render 'menu'
 
-.row
-  .sixteen.wide.column
-    - if !@resources.nil? && !@resources.empty?
+- if !@resources.blank?
+  .row
+    .sixteen.wide.column
       .ui.left.aligned.stackable.grid
         - @resources.each do |resource|
           .eight.wide.column
@@ -15,10 +15,9 @@
                   .content
                     .header= resource.text.truncate(130)
                     .description= resource.author_name
-    - else
-      .ui.blue.message
-        %h4.header No status updates
-
-.row
-  - if !@resources.nil? && !@resources.empty?
+  .row
     = paginate @resources
+
+- else
+  .ui.blue.message
+    %h4.header No status updates
