@@ -6,12 +6,11 @@
         class: 'ui blue ribbon label'
     = image_tag user.avatar.url :normal, alt: user.name
 
-// Friendship
 - unless current_user == user
+  // Friendship
   .ui.centered.segment
     = render_friendship user
 
-// About
 = render 'users/about', user: user
 
 - if user.friendships.any?
