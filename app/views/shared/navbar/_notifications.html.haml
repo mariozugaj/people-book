@@ -1,4 +1,3 @@
-//Notifications
 .ui.floating.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications',
   'data-link': 'notifications-link',
   'data-notifications': (render template: 'notifications/index',
@@ -16,7 +15,7 @@
       // See all notifications link
       = link_to 'See all', notifications_path, class: 'active item center-text'
 
-    // Notifications
+    // Notification items
     .items{ 'data-behavior': 'notification-items' }
 
     - unless @notifications.blank?
@@ -25,4 +24,4 @@
         class: 'active item center-text',
         method: 'POST',
         data: { confirm: 'Are you sure?'} do
-        Clear all notifications
+        Clear all

@@ -1,7 +1,9 @@
+- message = (notification.recipient == current_user ? 'your comment' : "#{notification.recipient.name}'s comment")
+
 .item
   = link_to send("#{notification.notifiable.commentable_type.underscore.downcase}_path", notification.notifiable.commentable),
     class: 'content' do
 
     = render partial: 'notifications/shared/notification_body',
       locals: { notification: notification,
-      message: 'your comment' }
+      message: message }

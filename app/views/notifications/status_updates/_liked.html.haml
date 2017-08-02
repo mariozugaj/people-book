@@ -1,7 +1,9 @@
+- message = (notification.recipient == current_user ? 'your status update' : "#{notification.recipient.name}'s status update")
+
 .item
   = link_to send("#{notification.notifiable_type.underscore.downcase}_path", notification.notifiable),
     class: 'content' do
 
     = render partial: 'notifications/shared/notification_body',
       locals: { notification: notification,
-      message: 'your status update' }
+      message: message }

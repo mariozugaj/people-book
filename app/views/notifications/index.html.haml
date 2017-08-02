@@ -5,25 +5,29 @@
         %i.bell.teal.icon
         .content Notifications
 
-      - if @all_notifications.present?
-        // Link to the photo album
+      - if @all_notifications.exists?
+        // Link to clear notifications
         = link_to clear_notifications_path,
           class: 'ui basic red right floated button',
           method: 'POST',
           data: { confirm: 'Are you sure?'} do
           Clear all notifications
 
-.ui.two.column.row
-  .column
-    - if @all_notifications.present?
-      .ui.segment
-        .ui.divided.items
-          - @all_notifications.each do |notification|
-            = render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}",
-                                          locals: { notification: notification },
-                                          formats: [:html]
-    - else
-      .ui.message
-        .content
-          .header
-            No new notifications yet
+- if @all_notifications.exists?
+  .row
+    .sixteen.wide.column
+      .ui.left.aligned.stackable.grid
+
+        - @all_notifications.each do |notification|
+          .eight.wide.column
+            .ui.segment
+              = render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}",
+                                            locals: { notification: notification },
+                                            formats: [:html]
+- else
+  .ui.blue.message
+    .content
+      .header
+        No new notifications
+.row
+  = paginate @all_notifications
