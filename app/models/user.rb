@@ -58,6 +58,7 @@ class User < ApplicationRecord
 
   # Search
   searchkick text_middle: [:name]
+  scope :search_import, -> { includes(:profile) }
 
   def friendships
     Friendship.where('accepted = ?', true)
@@ -73,10 +74,10 @@ class User < ApplicationRecord
   end
 
   def friend_with?(user)
-    friends.include? user
+    friends_ids.include? user.id
   end
 
-  def to_json
+  def search_info
     {
       title: name,
       image: avatar.url(:thumb) || '',

@@ -22,7 +22,7 @@ class StatusUpdate < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :commenters, through: :comments, source: :author
   has_many :likes, as: :likeable, dependent: :destroy
-  has_many :users_who_like_it, through: :likes, source: :user
+  has_many :likers, through: :likes, source: :user
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   # Validations
@@ -36,8 +36,9 @@ class StatusUpdate < ApplicationRecord
   # Search
   searchkick text_middle: %i[text],
              batch_size: 200
+  scope :search_import, -> { includes(:author) }
 
-  def to_json
+  def search_info
     {
       title: text.truncate(60),
       image: image.url(:thumb) || '',

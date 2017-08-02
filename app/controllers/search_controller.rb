@@ -2,10 +2,10 @@ class SearchController < ApplicationController
   before_action :set_search_term
 
   CATEGORIES = {
-    'Users' => [User, :name],
-    'Status updates' => [StatusUpdate, :text],
-    'Comments' => [Comment, :text],
-    'Images' => [Image, :description]
+    'Users' => [User, :name, :profile],
+    'Status updates' => [StatusUpdate, :text, :author],
+    'Comments' => [Comment, :text, [:commentable, author: :profile]],
+    'Images' => [Image, :description, author: :profile]
   }.freeze
 
   def users

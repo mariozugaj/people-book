@@ -17,7 +17,7 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true, counter_cache: true
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
   has_many :likes, as: :likeable, dependent: :destroy
-  has_many :users_who_like_it, through: :likes, source: :user
+  has_many :likers, through: :likes, source: :user
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   # Validations
@@ -32,8 +32,9 @@ class Comment < ApplicationRecord
 
   # Search
   searchkick text_middle: %i[text]
+  scope :search_import, -> { includes(:commentable, author: :profile) }
 
-  def to_json
+  def search_info
     {
       title: text.truncate(60),
       image: author.avatar.url(:thumb),

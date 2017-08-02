@@ -13,7 +13,7 @@ module Search
           category_results = Search::CategorySearch.search(category_options, params)
           results[:name] = name
           results[:count] = category_results.total_count
-          results[:results] = category_results.first(2).map(&:to_json)
+          results[:results] = category_results.first(2).map(&:search_info)
           column << results
         end
       end
