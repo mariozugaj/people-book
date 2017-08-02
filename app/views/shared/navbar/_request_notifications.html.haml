@@ -1,16 +1,13 @@
 .ui.floating.pointing.top.right.dropdown.item
 
   // Notifications bell icon and label
-  .right.pointing.ui.red.label= current_user.received_friend_requests.count
+  .right.pointing.ui.red.label= @friend_requests.size
   %i.users.icon
 
   // Notifications dropdown
   .menu
-    - unless current_user.received_friend_requests.any?
-      .item
-        %span No new friend requests. Make some new friends?
-    - else
-      - friend_requests.each do |request|
+    - if @friend_requests.any?
+      - @friend_requests.each do |request|
         .item
           .request.content
             .description
@@ -30,3 +27,6 @@
                 user_friendship_path(request.user.id, request.id),
                 method: 'delete',
                 class: 'ui mini negative request button'
+    - else
+      .item
+        %span No new friend requests. Make some new friends?

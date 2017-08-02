@@ -12,14 +12,14 @@
   .menu
     - if @notifications.empty?
       %span.item No new notifications
-    - if @all_notifications.size > 7
+    - if @notifications_count > 7
       // See all notifications link
       = link_to 'See all', notifications_path, class: 'active item center-text'
 
     // Notifications
     .items{ 'data-behavior': 'notification-items' }
 
-    - if @notifications.any?
+    - if @notifications.empty?
       // Clear notifications link
       = link_to clear_notifications_path,
         class: 'active item center-text',

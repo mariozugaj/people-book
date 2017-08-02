@@ -9,7 +9,7 @@
 
     = render 'users/cover_menu', user: @user
 
-    - if @friends.any?
+    - if @friends.present?
       .row
         .column
           // Friends index

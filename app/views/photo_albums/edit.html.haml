@@ -30,7 +30,7 @@
   .ui.attached.segment
     = render 'photo_albums/form', author: current_user
 
-  - if @photo_album.persisted? && @photo_album.images.any?
+  - if @photo_album.persisted? && @photo_album.images.present?
     .ui.attached.segment
       .ui.small.images
         - @photo_album.images.each do |image|

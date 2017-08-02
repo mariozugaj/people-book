@@ -1,4 +1,4 @@
-- if flash.any?
+- if flash.present?
   - flash.each do |type, message|
     %div{ class: "ui row message #{flash_class(type)}"}
       .header= message

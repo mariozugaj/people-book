@@ -26,7 +26,7 @@
               New Photo Album
 
     // Photo albums index
-    - if @photo_albums.any?
+    - if @photo_albums.present?
       .row
         .column
           .ui.three.stackable.cards
@@ -35,6 +35,6 @@
                 = image_tag photo_album.first_image
                 .content
                   .header= photo_album.name
-                  .description= pluralize photo_album.images.count, 'photo'
+                  .description= pluralize photo_album.images.size, 'photo'
     - else
       %h3.ui.header No photo albums yet

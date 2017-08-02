@@ -2,7 +2,7 @@
 
 .row
   .sixteen.wide.column
-    - if !@resources.nil? && !@resources.empty?
+    - if !@resources.blank?
       .ui.left.aligned.stackable.grid
         - @resources.each do |resource|
           .eight.wide.column
@@ -10,15 +10,14 @@
               .ui.divided.link.items
                 = link_to url_for(resource.commentable), class: 'item' do
                   .ui.tiny.image
-                    - if resource.commentable.image.url
-                      = image_tag resource.commentable.author.avatar.url(:thumb)
+                    = image_tag resource.commentable.author.avatar.url(:thumb)
                   .content
                     .header= resource.author_name
-                    .description= resource.text || ''
+                    .description= resource.text.truncate(130) || ''
     - else
       .ui.blue.message
         %h3.header No comments
 
 .row
-  - if !@resources.nil? && !@resources.empty?
+  - unless @resources.blank?
     = paginate @resources

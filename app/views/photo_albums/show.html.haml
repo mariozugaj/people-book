@@ -37,7 +37,7 @@
 
         // Photo albums index
         .ui.attached.segment
-          - if @photo_album.images.any?
+          - if @photo_album.images.present?
             .ui.three.column.grid
               - @photo_album.images.each do |image|
                 .column
