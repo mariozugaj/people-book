@@ -1,4 +1,4 @@
-.ui.fluid.card.commentable{ 'data-id': status_update.id, 'data-type': status_update.class }
+.ui.fluid.card.commentable.lazy_image{ 'data-id': status_update.id, 'data-type': status_update.class }
 
   // Status update's author's avatar, full name and date
   .content
@@ -42,7 +42,7 @@
 
     // Status update image
     .ui.centered.image
-      = image_tag status_update.image.url :normal
+      = image_tag 'placeholder_status.jpg', data: { 'src': status_update.image.url(:normal) }
 
   -# Status update feedback actions/statistics
   = render 'shared/feedback_actions', feedbackable: status_update

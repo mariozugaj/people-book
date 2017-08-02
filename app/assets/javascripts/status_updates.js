@@ -5,6 +5,7 @@ PeopleBook.StatusUpdatesModule = (function () {
   var init = function () {
     _statusUpdatetFocusListener();
     _cancelStatusUpdateLinkListener();
+    _statusUpdateImageLoad();
   };
 
   var _statusUpdatetFocusListener = function () {
@@ -19,6 +20,15 @@ PeopleBook.StatusUpdatesModule = (function () {
       e.preventDefault();
       var $actions = $(this).parent();
       $actions.slideUp('fast');
+    });
+  };
+
+  var _statusUpdateImageLoad = function () {
+    $('.lazy_image .image img')
+      .visibility({
+        type       : 'image',
+        transition : 'fade in',
+        duration   : 1000,
     });
   };
 
