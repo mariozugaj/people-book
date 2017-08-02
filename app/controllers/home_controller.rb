@@ -11,7 +11,8 @@ class HomeController < ApplicationController
       Notification.includes([:recipient, :notifiable, actor: :profile])
                   .where.not(actor: current_user)
                   .where(actor_id: current_user.friends_ids)
+                  .where('created_at > ?', 10.hours.ago)
                   .order(created_at: :desc)
-                  .recent
+                  .limit(10)
   end
 end
