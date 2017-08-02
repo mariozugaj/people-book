@@ -19,7 +19,7 @@
     // Notifications
     .items{ 'data-behavior': 'notification-items' }
 
-    - if @notifications.empty?
+    - unless @notifications.blank?
       // Clear notifications link
       = link_to clear_notifications_path,
         class: 'active item center-text',
