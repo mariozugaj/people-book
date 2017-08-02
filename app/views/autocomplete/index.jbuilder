@@ -5,7 +5,7 @@ json.results do
       json.results do
         json.array! category[:results] do |result|
           json.title result[:title]
-          json.image result[:image] if result[:image]
+          json.image result[:image] || ''
           json.url result[:url]
           json.description result[:description] || ''
         end

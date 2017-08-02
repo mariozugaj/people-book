@@ -80,7 +80,7 @@ class User < ApplicationRecord
   def search_info
     {
       title: name,
-      image: avatar.url(:thumb) || '',
+      image: avatar.url(:thumb),
       url: Rails.application.routes.url_helpers.user_path(self),
       description: profile.hometown || ''
     }
