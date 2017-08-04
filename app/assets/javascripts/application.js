@@ -11,13 +11,12 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require jquery3
 //= require jquery_ujs
 //= require semantic-ui
 //= require_tree .
 
-document.addEventListener('turbolinks:load', function () {
+document.addEventListener('DOMContentLoaded', function () {
   PeopleBook.StatusUpdatesModule.init();
   PeopleBook.CommentsModule.init();
   PeopleBook.DropdownsModule.init();

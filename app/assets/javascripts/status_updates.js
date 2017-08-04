@@ -1,7 +1,6 @@
 var PeopleBook = PeopleBook || {};
 
 PeopleBook.StatusUpdatesModule = (function () {
-
   var init = function () {
     _statusUpdatetFocusListener();
     _cancelStatusUpdateLinkListener();
