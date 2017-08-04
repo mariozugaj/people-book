@@ -29,8 +29,8 @@ PeopleBook.SearchModule = (function () {
           actionText: 'text',
           actionUrl: 'url',
         },
-        minCharacters: 3,
-        maxResults: 3,
+        minCharacters: 1,
+        maxResults: 4,
       });
   };
 

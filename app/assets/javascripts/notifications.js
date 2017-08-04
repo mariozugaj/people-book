@@ -7,8 +7,9 @@ Notifications = (function () {
     this.handleClick = bind(this.handleClick, this);
     this.notifications = $("[data-behavior='notifications']");
     if (this.notifications.length > 0) {
-      this.handleSucess(this.notifications.data('notifications'));
       $("[data-link='notifications-link']").on('click', this.handleClick);
+      this.handleSucess(this.notifications.data('notifications'));
+
       /*setInterval(((function (_this) {
         return function () {
           return _this.getNewNotifications();
