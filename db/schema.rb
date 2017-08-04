@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713095612) do
+ActiveRecord::Schema.define(version: 20170803080144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,7 @@ ActiveRecord::Schema.define(version: 20170713095612) do
     t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_comments_on_author_id"
-    t.index ["commentable_id", "commentable_type", "text", "author_id"], name: "index_on_commentable"
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["commentable_type", "commentable_id", "author_id"], name: "by_commentable_and_author"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -35,7 +33,6 @@ ActiveRecord::Schema.define(version: 20170713095612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id", "friend_id", "accepted"], name: "index_friendships_on_user_id_and_friend_id_and_accepted"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
@@ -56,9 +53,7 @@ ActiveRecord::Schema.define(version: 20170713095612) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["likeable_id", "likeable_type", "user_id"], name: "index_on_likeable"
-    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
+    t.index ["likeable_type", "likeable_id", "user_id"], name: "by_likeable_and_user"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -71,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170713095612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
-    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
+    t.index ["read_at"], name: "index_notifications_on_read_at"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
@@ -81,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170713095612) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_photo_albums_on_author_id"
+    t.index ["author_id", "name"], name: "index_photo_albums_on_author_id_and_name"
   end
 
   create_table "profiles", force: :cascade do |t|

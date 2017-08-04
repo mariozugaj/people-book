@@ -7,6 +7,5 @@ class CreateFriendships < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :friendships, %i[user_id friend_id accepted]
   end
 end

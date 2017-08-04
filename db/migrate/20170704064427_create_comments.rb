@@ -8,7 +8,5 @@ class CreateComments < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :comments, %i[commentable_id commentable_type text author_id],
-              name: :index_on_commentable
   end
 end
