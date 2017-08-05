@@ -2,7 +2,7 @@ class AutocompleteController < ApplicationController
   before_action :set_search_term
 
   def index
-    @search_results = Search::Autocomplete.new(params).search
+    @search_results = Search::Autocomplete.new(@search_term).results
   end
 
   private
