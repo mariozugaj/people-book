@@ -21,7 +21,7 @@ PeopleBook.FlashModule = (function () {
 
   var _stickFlashToTop = function () {
     $(window).scroll(function () {
-      $('#flash').css('top', Math.max(0, 54 - $(this).scrollTop()));
+      $('#flash').css('top', Math.max(54, 54 - $(this).scrollTop()));
     });
   };
 
