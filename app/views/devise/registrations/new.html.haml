@@ -3,7 +3,7 @@
     .ui.secondary.raised.segment
       %h2.ui.center.aligned.header Sign up
       = form_with model: resource, as: resource_name, url: registration_path(resource_name),
-                 html: { class: 'ui form' } do |f|
+                 html: { class: 'ui form' }, local: true do |f|
         = devise_error_messages!
 
         .required.field
@@ -20,11 +20,6 @@
             %em
               (#{@minimum_password_length} characters minimum)
           = f.password_field :password, autocomplete: 'off', required: true
-
-        .required.field
-          .ui.checkbox
-            %input{ type: 'checkbox', name: 'checkbox'}
-            %label I agree to the Terms and Conditions
 
         .actions
           = f.submit 'Sign up for PeopleBook', class: 'ui fluid positive button'
