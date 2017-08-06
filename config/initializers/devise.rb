@@ -276,7 +276,7 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
   config.omniauth :facebook, Figaro.env.fb_app_id, Figaro.env.fb_app_secret,
-                  callback_url: 'http://localhost:3000/users/auth/facebook/callback',
+                  callback_url: Figaro.env.facebook_callback,
                   scope: 'email', display: 'page',
                   image_size: { width: 290, height: 290 },
                   secure_image_url: true,
