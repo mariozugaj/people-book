@@ -51,6 +51,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem "database_cleaner"
   gem 'factory_girl_rails'
+  gem 'letter_opener', '~> 1.4', '>= 1.4.1'
   gem 'rspec-rails'
   gem "rubycritic", require: false
   gem 'selenium-webdriver'
