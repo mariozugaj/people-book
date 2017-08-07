@@ -1,6 +1,6 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.FlashModule = (function () {
+App.Flash = (function () {
 
   var init = function () {
     _flashListener();
@@ -29,3 +29,7 @@ PeopleBook.FlashModule = (function () {
     init: init,
   };
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.Flash.init();
+});

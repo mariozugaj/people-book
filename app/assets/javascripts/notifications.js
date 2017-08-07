@@ -9,12 +9,11 @@ Notifications = (function () {
     if (this.notifications.length > 0) {
       $("[data-link='notifications-link']").on('click', this.handleClick);
       this.handleSucess(this.notifications.data('notifications'));
-
-      /*setInterval(((function (_this) {
+      setInterval(((function (_this) {
         return function () {
           return _this.getNewNotifications();
         };
-      })(this)), 5000);*/
+      })(this)), 5000);
     }
   }
 
@@ -62,3 +61,7 @@ Notifications = (function () {
   return Notifications;
 
 })();
+
+$(function () {
+  return new Notifications;
+});

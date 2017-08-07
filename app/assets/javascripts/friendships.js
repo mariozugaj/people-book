@@ -1,6 +1,6 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.FriendshipsModule = (function () {
+App.Friendships = (function () {
 
   var init = function () {
     _friendshipButtonListener();
@@ -28,3 +28,7 @@ PeopleBook.FriendshipsModule = (function () {
     init: init,
   };
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.Friendships.init();
+});

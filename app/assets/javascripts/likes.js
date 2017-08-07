@@ -1,6 +1,6 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.LikesModule = (function () {
+App.Likes = (function () {
 
   var init = function () {
     _showTooltip();
@@ -49,3 +49,7 @@ PeopleBook.LikesModule = (function () {
   };
 
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.Likes.init();
+});

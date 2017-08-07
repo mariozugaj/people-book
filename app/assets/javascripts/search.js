@@ -1,6 +1,6 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.SearchModule = (function () {
+App.Search = (function () {
 
   var init = function () {
     _searchListener();
@@ -49,3 +49,7 @@ PeopleBook.SearchModule = (function () {
   };
 
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.Search.init();
+});

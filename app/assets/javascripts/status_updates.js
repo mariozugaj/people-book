@@ -1,10 +1,9 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.StatusUpdatesModule = (function () {
+App.StatusUpdates = (function () {
   var init = function () {
     _statusUpdatetFocusListener();
     _cancelStatusUpdateLinkListener();
-    _statusUpdateImageLoad();
   };
 
   var _statusUpdatetFocusListener = function () {
@@ -22,17 +21,12 @@ PeopleBook.StatusUpdatesModule = (function () {
     });
   };
 
-  var _statusUpdateImageLoad = function () {
-    $('.lazy_image .image img')
-      .visibility({
-        type       : 'image',
-        transition : 'fade in',
-        duration   : 1000,
-    });
-  };
-
   return {
     init: init,
   };
 
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.StatusUpdates.init();
+});

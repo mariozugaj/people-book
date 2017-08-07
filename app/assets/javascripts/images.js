@@ -1,9 +1,10 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.ImagesModule = (function () {
+App.Images = (function () {
 
   var init = function () {
     _setCommentsSize();
+    _lazyImageLoad();
   };
 
   var _setCommentsSize = function () {
@@ -15,8 +16,21 @@ PeopleBook.ImagesModule = (function () {
     }
   };
 
+  var _lazyImageLoad = function () {
+    $('.lazy_image .image img')
+      .visibility({
+        type       : 'image',
+        transition : 'fade in',
+        duration   : 1000,
+    });
+  };
+
   return {
     init: init,
   };
 
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.Images.init();
+});

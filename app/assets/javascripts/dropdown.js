@@ -1,6 +1,6 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.DropdownsModule = (function () {
+App.Dropdowns = (function () {
 
   var init = function () {
     _dropdownListeners();
@@ -20,3 +20,7 @@ PeopleBook.DropdownsModule = (function () {
     init: init,
   };
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.Dropdowns.init();
+});

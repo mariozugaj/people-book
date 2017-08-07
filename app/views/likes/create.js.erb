@@ -5,7 +5,7 @@ var action = "<%= j render partial: 'likes/unlike', locals: { likeable: @likeabl
 var tooltip = "<%= j render partial: 'likes/tooltip', locals: { likeable: @like.likeable } %>"
 
 
-PeopleBook.LikesModule.renderLikes('<%= @likeable.id %>',
+App.Likes.renderLikes('<%= @likeable.id %>',
                                    '<%= @likeable.class %>',
                                    likeCount,
                                    action,

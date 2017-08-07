@@ -1,6 +1,6 @@
-var PeopleBook = PeopleBook || {};
+var App = App || {};
 
-PeopleBook.CommentsModule = (function () {
+App.Comments = (function () {
 
   var init = function () {
     _commentLinkListener();
@@ -82,7 +82,7 @@ PeopleBook.CommentsModule = (function () {
       success: function (data) {
         $uiComments.html(data).hide().appendTo($commentsContainer);
         $uiLoader.remove();
-        PeopleBook.ImagesModule.init();
+        App.Images.init();
         $uiComments.slideDown('slow');
       },
     });
@@ -134,3 +134,7 @@ PeopleBook.CommentsModule = (function () {
   };
 
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.Comments.init();
+});
