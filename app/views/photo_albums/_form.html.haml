@@ -1,6 +1,7 @@
 = form_with model: [author, @photo_album],
   class: 'ui form',
-  multipart: true do |form|
+  multipart: true,
+  local: true do |form|
 
   .field
     = form.label :name

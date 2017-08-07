@@ -5,7 +5,8 @@
     .ui.blue.secondary.raised.segment
       %h2.ui.center.aligned.header= yield :title
       = form_for(resource, as: resource_name, url: session_path(resource_name),
-                 html: { class: 'ui form'}) do |f|
+                 html: { class: 'ui form'},
+                 local: true) do |f|
         = devise_error_messages!
 
         .required.field

@@ -2,7 +2,8 @@
   .content
     = form_with model: (status_update.persisted? ? status_update : [current_user, status_update]),
       multipart: true,
-      class: 'ui form' do |form|
+      class: 'ui form',
+      local: true do |form|
 
       = hidden_field_tag 'status_update[author_id]', current_user.id
 

@@ -20,7 +20,8 @@
 
         .ui.attached.segment
           = form_for(resource, as: resource_name, url: registration_path(resource_name),
-                     html: { method: :put, class: 'ui form' }) do |f|
+                     html: { method: :put, class: 'ui form' },
+                     local: true) do |f|
             = devise_error_messages!
 
             .equal.width.fields

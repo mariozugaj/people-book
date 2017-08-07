@@ -6,7 +6,10 @@
       .sub.header Manage your profile
 
 .ui.attached.segment
-  = form_with model: [user, user.profile], multipart: true, class: 'ui form' do |form|
+  = form_with model: [user, user.profile],
+    multipart: true,
+    class: 'ui form',
+    local: true do |form|
 
     .equal.width.fields
       .field

@@ -3,7 +3,8 @@
     .ui.secondary.raised.segment
       %h2.ui.center.aligned.header Sign up
       = form_with model: resource, as: resource_name, url: registration_path(resource_name),
-                 html: { class: 'ui form' }, local: true do |f|
+                 html: { class: 'ui form' },
+                 local: true do |f|
         = devise_error_messages!
 
         .required.field
