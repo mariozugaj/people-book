@@ -58,16 +58,16 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (8.0.0)
     ast (2.3.0)
-    autoprefixer-rails (7.1.1.3)
+    autoprefixer-rails (7.1.2.4)
       execjs
-    aws-sdk (2.10.7)
-      aws-sdk-resources (= 2.10.7)
-    aws-sdk-core (2.10.7)
+    aws-sdk (2.10.21)
+      aws-sdk-resources (= 2.10.21)
+    aws-sdk-core (2.10.21)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.7)
-      aws-sdk-core (= 2.10.7)
-    aws-sigv4 (1.0.0)
+    aws-sdk-resources (2.10.21)
+      aws-sdk-core (= 2.10.21)
+    aws-sigv4 (1.0.1)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -75,7 +75,7 @@ GEM
     bcrypt (3.1.11)
     bindex (0.5.0)
     builder (3.2.3)
-    bullet (5.5.1)
+    bullet (5.6.1)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
@@ -90,8 +90,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
-    carrierwave-aws (1.1.0)
-      aws-sdk (~> 2.0)
+    carrierwave-aws (1.2.0)
+      aws-sdk (~> 2.1)
       carrierwave (>= 0.7, < 2.0)
     childprocess (0.7.1)
       ffi (~> 1.0, >= 1.0.11)
@@ -144,7 +144,7 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
-    faker (1.7.3)
+    faker (1.8.4)
       i18n (~> 0.5)
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
@@ -189,9 +189,6 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-turbolinks (2.1.0)
-      railties (>= 3.1.0)
-      turbolinks
     jwt (1.5.6)
     kaminari (1.0.1)
       activesupport (>= 4.1.0)
@@ -222,7 +219,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_magick (4.7.2)
+    mini_magick (4.8.0)
     mini_portile2 (2.2.0)
     minitest (5.10.2)
     multi_json (1.12.1)
@@ -353,7 +350,7 @@ GEM
       activemodel (>= 4.1)
       elasticsearch (>= 1)
       hashie
-    selenium-webdriver (3.4.3)
+    selenium-webdriver (3.4.4)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
     sexp_processor (4.9.0)
@@ -377,9 +374,6 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.3)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -412,56 +406,54 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_query_trace (~> 1.5, >= 1.5.4)
-  annotate
-  autoprefixer-rails
-  aws-sdk
-  bullet
+  annotate (~> 2.7, >= 2.7.2)
+  autoprefixer-rails (~> 7.1, >= 7.1.2.4)
+  aws-sdk (~> 2.10, >= 2.10.21)
+  bullet (~> 5.6, >= 5.6.1)
   byebug
   capybara (~> 2.13)
-  carrierwave
-  carrierwave-aws
+  carrierwave (~> 1.1)
+  carrierwave-aws (~> 1.2)
   coffee-rails (~> 4.2)
-  css-class-string
-  database_cleaner
-  devise
-  draper
-  factory_girl_rails
-  faker
-  figaro
-  haml-rails
+  css-class-string (~> 0.1.1)
+  database_cleaner (~> 1.6, >= 1.6.1)
+  devise (~> 4.3)
+  draper (~> 3.0)
+  factory_girl_rails (~> 4.8)
+  faker (~> 1.8, >= 1.8.4)
+  figaro (~> 1.1, >= 1.1.1)
+  haml-rails (~> 1.0)
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3, >= 4.3.1)
-  jquery-turbolinks
-  kaminari
+  kaminari (~> 1.0, >= 1.0.1)
   letter_opener (~> 1.4, >= 1.4.1)
   listen (>= 3.0.5, < 3.2)
-  mini_magick
-  omniauth
-  omniauth-facebook
+  mini_magick (~> 4.8)
+  omniauth (~> 1.6, >= 1.6.1)
+  omniauth-facebook (~> 4.0)
   pg (~> 0.18)
   pry (~> 0.10.4)
   pry-byebug (~> 3.4, >= 3.4.2)
   pry-rails (~> 0.3.6)
   puma (~> 3.7)
-  pundit
+  pundit (~> 1.1)
   rack-mini-profiler (~> 0.10.5)
   rails (~> 5.1.1)
   redis (~> 3.0)
   rest-client (~> 2.0, >= 2.0.2)
-  rspec-rails
-  rubycritic
+  rspec-rails (~> 3.6)
+  rubycritic (~> 3.2, >= 3.2.3)
   sass-rails (~> 5.0)
   searchkick (~> 2.3, >= 2.3.1)
-  selenium-webdriver
+  selenium-webdriver (~> 3.4, >= 3.4.4)
   semantic-ui-sass!
   spring
   spring-watcher-listen (~> 2.0.0)
-  therubyracer
-  turbolinks (~> 5)
+  therubyracer (~> 0.12.3)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
-  wikipedia-client
+  wikipedia-client (~> 1.7)
 
 RUBY VERSION
    ruby 2.4.0p0
