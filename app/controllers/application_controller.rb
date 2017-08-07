@@ -7,11 +7,9 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :set_notifications,
-                if: :user_signed_in?,
-                except: %i[create update destroy autocomplete]
+                if: :user_signed_in?
   before_action :set_requests,
-                if: :user_signed_in?,
-                except: %i[create update destroy autocomplete]
+                if: :user_signed_in?
 
   def set_notifications
     @notifications = Notification.includes(:actor, :notifiable)

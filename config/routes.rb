@@ -11,6 +11,7 @@ Rails.application.routes.draw do
              {
                omniauth_callbacks: 'users/omniauth_callbacks',
                registrations: 'users/registrations'
+
              }
 
   # Concerns
@@ -45,4 +46,6 @@ Rails.application.routes.draw do
   namespace :search do
     get :users, :status_updates, :images, :comments
   end
+
+  get :check_email, to: 'users#check_email'
 end
