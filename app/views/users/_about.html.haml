@@ -14,7 +14,7 @@
       .item
         %i.calendar.icon
         %p.middle.aligned.content
-          = user.profile.birthday.nil? ? 'Age' : "#{user.profile.age} years old"
+          = user.profile.birthday.blank? ? 'Age' : "#{user.profile.age} years old"
       // Education
       .item
         %i.student.icon
