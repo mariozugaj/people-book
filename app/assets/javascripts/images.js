@@ -3,16 +3,15 @@ var App = App || {};
 App.Images = (function () {
 
   var init = function () {
-    _setCommentsSize();
     _lazyImageLoad();
   };
 
-  var _setCommentsSize = function () {
+  var setCommentsSize = function () {
     var imageContainer = document.querySelector('[data-behavior="image-container"]');
     if (document.body.contains(imageContainer)) {
       var commentsContainer = document.querySelector('.image_show_card');
       var imageContainerHeight = imageContainer.offsetHeight;
-      commentsContainer.style.height = imageContainerHeight + 'px';
+      commentsContainer.style.maxHeight = imageContainerHeight + 'px';
     }
   };
 
@@ -27,6 +26,7 @@ App.Images = (function () {
 
   return {
     init: init,
+    setCommentsSize: setCommentsSize,
   };
 
 })();

@@ -82,7 +82,7 @@ App.Comments = (function () {
       success: function (data) {
         $uiComments.html(data).hide().appendTo($commentsContainer);
         $uiLoader.remove();
-        App.Images.init();
+        App.Images.setCommentsSize();
         $uiComments.slideDown('slow');
       },
     });
