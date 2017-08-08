@@ -1,7 +1,8 @@
 .ui.floating.pointing.top.right.dropdown.item
 
   // Notifications bell icon and label
-  .right.pointing.ui.red.label= @friend_requests.size
+  %div{ class: class_string('right pointing ui label',
+    'red' => @friend_requests.exists?) }= @friend_requests.size
   %i.users.icon
 
   // Notifications dropdown
