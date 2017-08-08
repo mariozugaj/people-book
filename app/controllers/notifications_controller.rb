@@ -1,10 +1,18 @@
 class NotificationsController < ApplicationController
   def index
-    @notifications ||= Notification.where(recipient: current_user).recent
-    @all_notifications ||= Notification.where(recipient: current_user)
-                                       .order(created_at: :desc)
-                                       .page(params[:page])
-
+    respond_to do |format|
+      format.json do
+        @notifications ||= Notification.includes(:recipient, :notifiable, :actor)
+                                       .where(recipient: current_user)
+                                       .recent
+        @count = Notification.where(recipient: current_user).size
+      end
+      format.html do
+        @all_notifications = Notification.where(recipient: current_user)
+                                         .order(created_at: :desc)
+                                         .page(params[:page])
+      end
+    end
   end
 
   def mark_as_read

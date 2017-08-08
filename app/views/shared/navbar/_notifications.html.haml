@@ -1,27 +1,11 @@
-.ui.floating.top.right.pointing.dropdown.item#notifications{ 'data-behavior': 'notifications',
-  'data-link': 'notifications-link',
-  'data-notifications': (render template: 'notifications/index',
-  formats: [:json]) }
+.ui.floating.top.right.pointing.scrolling.dropdown.item#notifications{ 'data-behavior': 'notifications',
+  'data-link': 'notifications-link' }
 
   /* Notifications bell icon and label
-  .right.pointing.ui.red.label{ 'data-behavior': 'unread-count' } 0
+  .right.pointing.ui.label{ 'data-behavior': 'unread-count' } 0
   %i.bell.icon
 
   /* Notifications dropdown
   .menu
-    - if @notifications.empty?
-      %span.item No new notifications
-    - if @notifications_count > 7
-      // See all notifications link
-      = link_to 'See all', notifications_path, class: 'active item center-text'
-
     // Notification items
     .items{ 'data-behavior': 'notification-items' }
-
-    - unless @notifications.blank?
-      // Clear notifications link
-      = link_to clear_notifications_path,
-        class: 'active item center-text',
-        method: 'POST',
-        data: { confirm: 'Are you sure?'} do
-        Clear all

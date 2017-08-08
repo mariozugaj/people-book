@@ -5,16 +5,13 @@ Notifications = (function () {
   function Notifications() {
     this.handleSucess = bind(this.handleSucess, this);
     this.handleClick = bind(this.handleClick, this);
-    this.notifications = $("[data-behavior='notifications']");
-    if (this.notifications.length > 0) {
-      $("[data-link='notifications-link']").on('click', this.handleClick);
-      this.handleSucess(this.notifications.data('notifications'));
-      setInterval(((function (_this) {
-        return function () {
-          return _this.getNewNotifications();
-        };
-      })(this)), 5000);
-    }
+    $("[data-link='notifications-link']").on('click', this.handleClick);
+    this.getNewNotifications();
+    setInterval(((function (_this) {
+      return function () {
+        return _this.getNewNotifications();
+      };
+    })(this)), 5000);
   }
 
   Notifications.prototype.getNewNotifications = function () {
@@ -32,29 +29,41 @@ Notifications = (function () {
       dataType: 'JSON',
       method: 'POST',
       success: function () {
-        return $("[data-behavior='unread-count']").text(0);
+        return $("[data-behavior='unread-count']").text(0).removeClass('red');
       },
     });
   };
 
   Notifications.prototype.handleSucess = function (data) {
-    var items, unreadCount;
-    items = $.map(data, function (notification) {
+    var items, unreadCount, $unreadLabel, $notificationsContainer, itemsLenght;
+    items = $.map(data.results.notifications, function (notification) {
       return notification.template;
     });
-    var notificationsIndex = $("[data-behavior='notifications-index']");
-
+    $unreadLabel = $("[data-behavior='unread-count']");
+    $notificationsContainer = $("[data-behavior='notification-items']");
     unreadCount = 0;
-    $.each(data, function (i, notification) {
+    itemsLength = items.length;
+
+    $.each(data.results.notifications, function (i, notification) {
       if (notification.unread) {
         return unreadCount += 1;
       }
     });
 
-    $("[data-behavior='unread-count']").text(unreadCount);
-    $("[data-behavior='notification-items']").html(items);
-    if (notificationsIndex.length > 0) {
-      notificationsIndex.html(items);
+    if (unreadCount > 0) {
+      $unreadLabel.addClass('red');
+      $unreadLabel.text(unreadCount);
+    };
+
+    if (itemsLength > 0) {
+      $notificationsContainer.siblings().remove();
+      $notificationsContainer.html(items);
+    } else {
+      $("<span class='item'>No new notifications</span>").insertBefore($notificationsContainer);
+    };
+
+    if (data.results.total > itemsLength) {
+      $("<a class='active item center-text' href='/notifications'>See all</a>").insertBefore($notificationsContainer);
     }
   };
 

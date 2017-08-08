@@ -1,4 +1,4 @@
-- message = (notification.recipient == current_user ? 'your comment' : "#{notification.recipient.name}'s comment")
+- message = (notification.notifiable.author == current_user ? 'your comment' : "#{notification.notifiable.author.name}'s comment")
 
 .item
   = link_to send("#{notification.notifiable.commentable_type.underscore.downcase}_path", notification.notifiable.commentable),
