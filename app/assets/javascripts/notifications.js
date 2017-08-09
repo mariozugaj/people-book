@@ -7,11 +7,6 @@ Notifications = (function () {
     this.handleClick = bind(this.handleClick, this);
     $("[data-link='notifications-link']").on('click', this.handleClick);
     this.getNewNotifications();
-    setInterval(((function (_this) {
-      return function () {
-        return _this.getNewNotifications();
-      };
-    })(this)), 5000);
   }
 
   Notifications.prototype.getNewNotifications = function () {

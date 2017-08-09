@@ -2,7 +2,9 @@ class NotificationsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        @notifications ||= Notification.includes(:recipient, :notifiable, :actor)
+        @notifications ||= Notification.includes(:recipient,
+                                                 :notifiable,
+                                                 actor: :profile)
                                        .where(recipient: current_user)
                                        .recent
         @count = Notification.where(recipient: current_user).size
