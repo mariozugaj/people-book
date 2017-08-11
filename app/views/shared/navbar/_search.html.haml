@@ -1,9 +1,9 @@
 = form_with url: search_users_path,
   class: 'ui category search item',
   method: :get,
-  local: true do |form|
+  local: true do
 
   .ui.link.icon.input
-    %input.search.input{ name: 'q', placeholder: 'Search people, updates...'}
+    %input.prompt{ name: 'q', placeholder: 'Search people, updates...'}
       %i.ui.search.icon
   .results
