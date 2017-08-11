@@ -22,6 +22,13 @@
     .ui.left.pointing.teal.label
       = user.photo_albums.size
 
+  - if current_user != user && current_user.friend_with?(user)
+    // Send message to user
+    = link_to new_message_path(receiver_id: user),
+      class: 'item' do
+      %i.comment.icon
+      %span Send message
+
   -# If user == current_user, show edit links
   - if policy(user.profile).edit?
 

@@ -1,0 +1,14 @@
+- friend = conversation.other_user(current_user)
+= link_to conversation,
+  class: class_string('item conversation', 'active' => current_page?(conversation_path(conversation)),),
+  data: { 'id': conversation.id, 'behavior': 'conversation-link' } do
+  .ui.tiny.image
+    = image_tag friend.avatar.url :mini
+  .content
+    %span.header= friend.name
+    .description
+      = emojify conversation.messages.first.body.truncate(25)
+    .extra
+      %span.date #{time_ago_in_words conversation.messages.first.created_at} ago
+      - if conversation.messages.not_sent_by(current_user).unread.exists?
+        %span.ui.red.empty.circular.label

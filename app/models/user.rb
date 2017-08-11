@@ -18,6 +18,7 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  slug                   :string
 #
 
 class User < ApplicationRecord
@@ -49,6 +50,9 @@ class User < ApplicationRecord
            class_name: 'Notification',
            foreign_key: :actor_id,
            dependent: :destroy
+  has_many :conversations, ->(user) { Conversation.with_user(user) }
+  has_many :messages
+
 
   # Validations
   validates_presence_of :name, :email, :password
@@ -84,6 +88,12 @@ class User < ApplicationRecord
       url: Rails.application.routes.url_helpers.user_path(self),
       description: profile.hometown || ''
     }
+  end
+
+  def unread_conversations_count
+    conversations
+      .select { |c| c.messages.not_sent_by(self).unread.exists? }
+      .count
   end
 
   def self.from_omniauth(auth)

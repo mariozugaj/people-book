@@ -3,17 +3,15 @@ var App = App || {};
 App.Search = (function () {
 
   var init = function () {
-    _searchListener();
+    _globalAutocomplete();
     _searchValidator();
+    _usersAutocomplete();
   };
 
-  var _searchListener = function () {
+  var _globalAutocomplete = function () {
     $('.ui.category.search')
       .search({
         type: 'category',
-        selector: {
-          prompt: '.search.input',
-        },
         apiSettings: {
           url: '/autocomplete/?q={query}',
         },
@@ -31,6 +29,7 @@ App.Search = (function () {
         },
         minCharacters: 1,
         maxResults: 4,
+        showNoResults: true,
       });
   };
 
@@ -41,6 +40,22 @@ App.Search = (function () {
         fields: {
           q: 'empty',
         },
+      });
+  };
+
+  var _usersAutocomplete = function () {
+    $('.ui.search.users')
+      .search({
+        apiSettings: {
+          url: '/autocomplete/friends?q={query}',
+        },
+        fields: {
+          title: 'title',
+          url: 'url',
+          image: 'image',
+          url: 'url',
+        },
+        showNoResults: true,
       });
   };
 

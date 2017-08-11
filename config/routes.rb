@@ -37,15 +37,29 @@ Rails.application.routes.draw do
     end
   end
 
+  # Notifications
   resources :notifications, only: :index do
     post 'mark_as_read', on: :collection
     post 'clear', on: :collection
   end
 
+  # Autocomplete & Search
   get :autocomplete, to: 'autocomplete#index'
+
+  namespace :autocomplete do
+    get :friends
+  end
+
   namespace :search do
     get :users, :status_updates, :images, :comments
   end
 
+  # Email check
   get :check_email, to: 'users#check_email'
+
+  # Conversations and messages
+  resources :conversations, only: %i[index show] do
+    get :unread_count, on: :collection
+  end
+  resources :messages, only: %i[new create]
 end

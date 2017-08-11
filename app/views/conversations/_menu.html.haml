@@ -1,0 +1,14 @@
+.five.wide.column
+  .ui.segment
+    %h3.ui.dividing.header Conversations
+    .ui.search.users
+      .ui.fluid.icon.input
+        %input.prompt{ placeholder: 'Search friends to speak with', type: 'text', name: :q }
+        %i.search.icon
+      .results
+
+    .ui.divided.link.items.conversations
+      - if @conversations.present?
+        = render @conversations
+      - else
+        %p No conversations. Start a new one?

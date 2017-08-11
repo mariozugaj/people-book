@@ -1,0 +1,9 @@
+.comment
+  %a.avatar
+    = image_tag message.user.avatar.url :thumb
+  .content
+    %a.author= message.user.name
+    .metadata
+      %span.date= l(message.created_at, format: '%B, %d %Y %H:%M')
+    .text
+      = emojify message.body

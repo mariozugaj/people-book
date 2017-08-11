@@ -92,4 +92,22 @@
 /*--------- Activity -----------*/
 .activity.feed
   max-height: 405px
-  overflow-y: scroll
+  overflow-y: auto
+
+/*--------- Messages -----------*/
+
+.messages
+  height: 61vh
+  overflow-y: auto
+
+.conversations
+  height: 70vh
+  overflow-y: auto
+
+.ui.divided.link.items.conversations > .conversation:first-child
+  padding-top: 1em !important
+
+.active.conversation
+  background-color: rgba(0, 0, 0, 0.03) !important
+  color: rgba(0,0,0, 0.95) !important
+  outline: 0 !important
