@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
     @message = current_user.messages.build(message_params)
     @message.conversation_id = @conversation.id
     @message.save!
+    @conversation.touch
     respond_to do |format|
       format.html { redirect_to @conversation }
       format.js
@@ -35,10 +36,11 @@ class MessagesController < ApplicationController
     end
 
     def set_conversations
-      @conversations = current_user.conversations
-                                   .includes(:messages,
-                                             sender: :profile,
-                                             receiver: :profile)
-                                   .order('messages.created_at desc')
+      @conversations = current_user
+                       .conversations
+                       .includes({ sender: :profile },
+                                 { receiver: :profile },
+                                 :messages)
+                       .order(updated_at: :desc)
     end
 end

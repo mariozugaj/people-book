@@ -27,10 +27,11 @@ class ConversationsController < ApplicationController
     end
 
     def set_conversations
-      @conversations = current_user.conversations
-                                   .includes(:messages,
-                                             sender: :profile,
-                                             receiver: :profile)
-                                   .order('messages.created_at desc')
+      @conversations = current_user
+                       .conversations
+                       .includes({ sender: :profile },
+                                 { receiver: :profile },
+                                 :messages)
+                       .order(updated_at: :desc)
     end
 end
