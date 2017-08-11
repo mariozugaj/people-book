@@ -4,10 +4,8 @@ class ConversationBroadcastJob < ApplicationJob
   def perform(message_id)
     message = Message.find(message_id)
     ActionCable.server
-               .broadcast "conversations:#{message.user.id}",
-                          message: render_message(message),
-                          conversation_id: message.conversation_id,
-                          unread_count: message.user.unread_conversations_count
+               .broadcast "conversations:#{message.conversation_id}:messages",
+                          message: render_message(message)
   end
 
   private

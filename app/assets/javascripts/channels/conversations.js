@@ -1,19 +1,40 @@
-App.ConversationsUpdate = App.cable.subscriptions.create('ConversationsChannel', {
-  connected: function () {
-    // Called when the subscription is ready for use on the server
+App.conversations = App.cable.subscriptions.create('ConversationsChannel', {
+  collection: function () {
+    return $("[data-channel='messages']");
   },
 
-  disconnected: function () {
-    // Called when the subscription has been terminated by the server
+  connected: function () {
+    return setTimeout((function (_this) {
+      return function () {
+        _this.followCurrentConversation();
+        return _this.installPageChangeCallback();
+      };
+    })(this), 1000);
   },
 
   received: function (data) {
-    if (($('#messages').length > 0) && (data.conversation_id === $('#messages').data('conversation-id'))) {
-      var $messages = $('.messages');
-      $('#messages').append(data.message);
-      $messages.scrollTop($messages[0].scrollHeight);
+    var $messages = $('.messages');
+    this.collection().append(data.message);
+    return $messages.scrollTop($messages[0].scrollHeight);
+  },
+
+  followCurrentConversation: function () {
+    var conversationId;
+    if (conversationId = this.collection().data('conversation-id')) {
+      return this.perform('follow', {
+        conversation_id: conversationId,
+      });
     } else {
-      App.Conversations.updateUnreadCount(data.unread_count);
+      return this.perform('unfollow');
+    }
+  },
+
+  installPageChangeCallback: function () {
+    if (!this.installedPageChangeCallback) {
+      this.installedPageChangeCallback = true;
+      return $(document).on('DOMContentLoaded', function () {
+        return App.conversations.followCurrentConversation();
+      });
     }
   },
 });

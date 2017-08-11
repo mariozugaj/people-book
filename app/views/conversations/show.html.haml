@@ -7,7 +7,7 @@
         user_path(@conversation.other_user(current_user)),
         class: 'ui header'
     .ui.attached.segment.messages
-      .ui.large.comments#messages{ 'data-conversation-id': @conversation.id }
+      .ui.large.comments{ 'data-channel': 'messages', 'data-conversation-id': @conversation.id }
         = render @conversation.messages
     .ui.bottom.attached.segment
       = render 'messages/form'

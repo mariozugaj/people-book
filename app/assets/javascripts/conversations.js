@@ -5,7 +5,6 @@ App.Conversations = (function () {
   var init = function () {
     _scrollToBottom();
     _submitMessageForm();
-    _markAsRead();
     _getUnreadCount();
   };
 
@@ -38,16 +37,6 @@ App.Conversations = (function () {
     }
   };
 
-  var _markAsRead = function () {
-    $(document).on('click', "[data-behavior='conversation-link']", function () {
-      return $.ajax({
-        url: '/conversations/' + $(this).data('id') + '/mark_as_read',
-        dataType: 'JSON',
-        method: 'POST',
-      });
-    });
-  };
-
   var _getUnreadCount = function () {
     return $.ajax({
       url: '/conversations/unread_count',
@@ -59,7 +48,6 @@ App.Conversations = (function () {
 
   return {
     init: init,
-    updateUnreadCount: updateUnreadCount,
   };
 
 })();

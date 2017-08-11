@@ -1,9 +1,10 @@
 class ConversationsChannel < ApplicationCable::Channel
-  def subscribed
-    stream_from "conversations:#{current_user.id}"
+  def follow(data)
+    stop_all_streams
+    stream_from "conversations:#{data['conversation_id'].to_i}:messages"
   end
 
-  def unsubscribed
+  def unfollow
     stop_all_streams
   end
 end
