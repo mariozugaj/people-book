@@ -1,4 +1,8 @@
 .row
   = render 'conversations/menu'
 
-  .eleven.wide.column
+  .eleven.wide.middle.aligned.column
+    %h2.ui.center.aligned.icon.header
+      %i.comments.outline.icon
+      = @quote['text']
+    %h3= @quote['author']

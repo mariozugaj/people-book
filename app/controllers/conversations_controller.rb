@@ -4,6 +4,7 @@ class ConversationsController < ApplicationController
   before_action :check_participating!, only: :show
 
   def index
+    @quote = JSON.parse(File.read(Rails.root.join('public/quotes.json'))).sample
   end
 
   def show
