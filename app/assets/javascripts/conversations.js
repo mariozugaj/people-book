@@ -27,23 +27,28 @@ App.Conversations = (function () {
     }
   };
 
+  var conversationCounter = function () {
+    return $("[data-behavior='unread-msg-count']");
+  };
+
   var updateUnreadCount = function (unreadCount) {
-    var $count = $("[data-behavior='unread-msg-count']");
-    $count.text(unreadCount);
+    conversationCounter().text(unreadCount);
     if (unreadCount > 0) {
-      $count.addClass('red');
+      conversationCounter().addClass('red');
     } else {
-      $count.removeClass('red');
+      conversationCounter().removeClass('red');
     }
   };
 
   var _getUnreadCount = function () {
-    return $.ajax({
-      url: '/conversations/unread_count',
-      dataType: 'JSON',
-      method: 'GET',
-      success: updateUnreadCount,
-    });
+    if (conversationCounter().length > 0) {
+      return $.ajax({
+        url: '/conversations/unread_count',
+        dataType: 'JSON',
+        method: 'GET',
+        success: updateUnreadCount,
+      });
+    }
   };
 
   return {

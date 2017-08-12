@@ -5,8 +5,11 @@ Notifications = (function () {
   function Notifications() {
     this.handleSucess = bind(this.handleSucess, this);
     this.handleClick = bind(this.handleClick, this);
-    $("[data-link='notifications-link']").on('click', this.handleClick);
+    var notificationCounter = $("[data-behavior='unread-count']");
+    if (notificationCounter.length > 0) {
+     $("[data-link='notifications-link']").on('click', this.handleClick);
     this.getNewNotifications();
+    }
   }
 
   Notifications.prototype.getNewNotifications = function () {
