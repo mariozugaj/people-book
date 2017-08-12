@@ -30,6 +30,9 @@ class Profile < ApplicationRecord
   # Validations
   validates_presence_of :user
 
+  # Slug
+  include Slug
+
   RELATIONSHIP_OPTIONS = ['Single',
                           'In a relationship',
                           'Engaged',

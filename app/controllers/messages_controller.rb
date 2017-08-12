@@ -8,8 +8,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @conversation ||= Conversation.create(sender_id: current_user.id,
-                                          receiver_id: @receiver.id)
+    @conversation ||= Conversation.create(sender: current_user,
+                                          receiver: @receiver)
     @message = current_user.messages.build(message_params)
     @message.conversation_id = @conversation.id
     @message.save!
@@ -27,11 +27,11 @@ class MessagesController < ApplicationController
     end
 
     def find_conversation
-      @receiver = User.find(params[:receiver_id]) if params[:receiver_id]
+      @receiver = User.find_by_slug(params[:receiver_id]) if params[:receiver_id]
       @conversation = if @receiver
                         Conversation.between(current_user, @receiver).first
                       else
-                        Conversation.find(params[:conversation_id])
+                        Conversation.find_by_slug(params[:conversation_id])
                       end
     end
 

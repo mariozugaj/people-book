@@ -20,4 +20,7 @@ class Like < ApplicationRecord
   validates_uniqueness_of :user_id,
                           scope: %i[likeable_id likeable_type],
                           message: 'can\'t like more than once'
+
+  # Slug
+  include Slug
 end

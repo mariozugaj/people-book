@@ -26,7 +26,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = Like.find(params[:id])
+    @like = Like.find_by_slug(params[:id])
     @like.destroy
     flash[:success] = 'You dont\' like it anymore'
     respond_to do |format|

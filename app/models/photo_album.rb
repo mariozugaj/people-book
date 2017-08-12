@@ -23,5 +23,9 @@ class PhotoAlbum < ApplicationRecord
   # Validations
   validates_presence_of :name, :author
 
+  # Default photo album image
   DEFAULT_IMAGE = 'https://s3.eu-central-1.amazonaws.com/chanjman-peoplebook/missing/photo_album/missing.jpg'
+
+  # Slug
+  include Slug
 end

@@ -24,7 +24,7 @@ class ConversationsController < ApplicationController
 
     def set_conversation
       @conversation = Conversation.includes(messages: [user: :profile])
-                                  .find(params[:id])
+                                  .find_by_slug(params[:id])
     end
 
     def set_conversations

@@ -40,6 +40,7 @@ gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'sass-rails', '~> 5.0'
 gem 'searchkick', '~> 2.3', '>= 2.3.1'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
+gem 'stringex', '~> 2.7', '>= 2.7.1'
 gem 'therubyracer', '~> 0.12.3'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '>= 1.3.0'

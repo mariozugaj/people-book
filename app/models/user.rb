@@ -53,7 +53,6 @@ class User < ApplicationRecord
   has_many :conversations, ->(user) { Conversation.with_user(user) }
   has_many :messages
 
-
   # Validations
   validates_presence_of :name, :email, :password
 
@@ -63,6 +62,9 @@ class User < ApplicationRecord
   # Search
   searchkick text_middle: [:name]
   scope :search_import, -> { includes(:profile) }
+
+  # Slug
+  include Slug
 
   def friendships
     Friendship.where('accepted = ?', true)

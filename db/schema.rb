@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809120450) do
+ActiveRecord::Schema.define(version: 20170812172529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["commentable_type", "commentable_id", "author_id"], name: "by_commentable_and_author"
   end
 
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.integer "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["sender_id", "receiver_id"], name: "index_conversations_on_sender_id_and_receiver_id", unique: true
   end
 
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.boolean "accepted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
@@ -52,6 +55,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.bigint "photo_album_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["photo_album_id"], name: "index_images_on_photo_album_id"
   end
 
@@ -61,6 +65,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["likeable_type", "likeable_id", "user_id"], name: "by_likeable_and_user"
   end
 
@@ -71,6 +76,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -84,6 +90,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["read_at"], name: "index_notifications_on_read_at"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
@@ -95,6 +102,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["author_id", "name"], name: "index_photo_albums_on_author_id_and_name"
   end
 
@@ -112,6 +120,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.string "cover_photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -123,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170809120450) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["author_id"], name: "index_status_updates_on_author_id"
   end
 

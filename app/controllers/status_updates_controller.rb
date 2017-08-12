@@ -3,7 +3,7 @@ class StatusUpdatesController < ApplicationController
 
   def show
     @status_update = StatusUpdate.includes(author: :profile)
-                                 .find(params[:id])
+                                 .find_by_slug(params[:id])
   end
 
   def create
@@ -55,7 +55,7 @@ class StatusUpdatesController < ApplicationController
   private
 
   def set_status_update
-    @status_update = StatusUpdate.find(params[:id])
+    @status_update = StatusUpdate.find_by_slug(params[:id])
   end
 
   def status_update_params

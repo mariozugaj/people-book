@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: :check_email
 
   def show
-    @user ||= User.includes(:profile).find(params[:id])
+    @user ||= User.includes(:profile).find_by_slug(params[:id])
     @new_status_update = StatusUpdate.new
     @feed = StatusUpdate.includes({ author: :profile }, :likers)
                         .where(author: @user)

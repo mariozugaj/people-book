@@ -25,8 +25,11 @@ class Message < ApplicationRecord
 
   # After commits
   after_create_commit do
-    ConversationBroadcastJob.perform_later(id)
+    ConversationBroadcastJob.perform_later(slug)
   end
+
+  # Slug
+  include Slug
 
   def receiver
     conversation.other_user(user)

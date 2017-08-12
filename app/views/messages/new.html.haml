@@ -11,7 +11,7 @@
       = form_with model: @message,
         class: 'ui form',
         local: true do |form|
-        = hidden_field_tag 'receiver_id', @receiver.id
+        = hidden_field_tag 'receiver_id', @receiver.slug
         = form.text_area :body, rows: 2, class: 'field', autofocus: true
         = form.submit 'Send', class: 'ui blue button'
         = link_to 'https://www.webpagefx.com/tools/emoji-cheat-sheet/',

@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
   before_action :set_friendship, only: %i[update destroy]
 
   def index
-    @user = User.find(params[:user_id])
+    @user = User.find_by_slug(params[:user_id])
     @friends = @user.friends.includes(:profile).page(params[:page])
   end
 
@@ -51,7 +51,7 @@ class FriendshipsController < ApplicationController
   private
 
   def set_friendship
-    @friendship = Friendship.find(params[:id])
+    @friendship = Friendship.find_by_slug(params[:id])
   end
 
   def friendship_params

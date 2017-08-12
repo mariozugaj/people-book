@@ -31,6 +31,9 @@ class Image < ApplicationRecord
   # Uploader
   mount_uploader :image, PhotoAlbumImageUploader
 
+  # Slug
+  include Slug
+
   def search_info
     {
       title: description,

@@ -38,6 +38,9 @@ class StatusUpdate < ApplicationRecord
              batch_size: 200
   scope :search_import, -> { includes(:author) }
 
+  # Slug
+  include Slug
+
   def search_info
     {
       title: text.truncate(60),

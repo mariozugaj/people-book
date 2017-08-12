@@ -28,6 +28,9 @@ class Conversation < ApplicationRecord
     where('sender_id IN (:ids) AND receiver_id IN (:ids)', ids: [user1.id, user2.id])
   end
 
+  # Slug
+  include Slug
+
   def other_user(current_user)
     sender == current_user ? receiver : sender
   end

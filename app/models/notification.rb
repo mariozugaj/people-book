@@ -26,4 +26,7 @@ class Notification < ApplicationRecord
   scope :recent, -> { order(created_at: :desc).limit(10) }
   scope :unread, -> { where(read_at: nil) }
   scope :read, -> { where('read_at IS NOT NULL') }
+
+  # Slug
+  include Slug
 end

@@ -49,12 +49,12 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @user = User.find(params[:user_id])
+    @user = User.find_by_slug(params[:user_id])
     @profile = @user.profile
   end
 
   def set_image
-    @image = Image.find(params[:image_id])
+    @image = Image.find_by_slug(params[:image_id])
   end
 
   def profile_params

@@ -2,9 +2,9 @@ class ConversationBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(message_id)
-    message = Message.find(message_id)
+    message = Message.find_by_slug(message_id)
     ActionCable.server
-               .broadcast "conversations:#{message.conversation_id}:messages",
+               .broadcast "conversations:#{message.conversation.slug}:messages",
                           message: render_message(message)
   end
 

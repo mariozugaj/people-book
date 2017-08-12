@@ -70,7 +70,7 @@ class PhotoAlbumsController < ApplicationController
   end
 
   def set_photo_album
-    @photo_album = PhotoAlbum.includes(:images).find(params[:id])
+    @photo_album = PhotoAlbum.includes(:images).find_by_slug(params[:id])
   end
 
   def photo_album_params
@@ -88,6 +88,6 @@ class PhotoAlbumsController < ApplicationController
   end
 
   def set_author
-    @author = User.find(params[:user_id])
+    @author = User.find_by_slug(params[:user_id])
   end
 end

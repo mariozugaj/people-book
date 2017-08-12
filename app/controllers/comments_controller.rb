@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find_by_slug(params[:id])
     authorize @comment
     if @comment.destroy
       flash[:success] = 'Your comment was destroyed'

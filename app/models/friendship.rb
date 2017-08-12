@@ -22,6 +22,9 @@ class Friendship < ApplicationRecord
                           message: 'he already yours is'
   validate :self_friend
 
+  # Slug
+  include Slug
+
   private
 
   def self_friend

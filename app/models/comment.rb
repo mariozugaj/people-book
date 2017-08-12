@@ -34,6 +34,9 @@ class Comment < ApplicationRecord
   searchkick text_middle: %i[text]
   scope :search_import, -> { includes(:commentable, author: :profile) }
 
+  # Slug
+  include Slug
+
   def search_info
     {
       title: text.truncate(60),
