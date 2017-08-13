@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  after_action :send_notification, only: :create
   include FindPolymorphic
 
   def index
@@ -13,14 +14,6 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     authorize @comment
     if @comment.save
-      # Send notifications
-      recipients = (@commentable.commenters + [@commentable.author]).uniq - [current_user]
-      recipients.each do |user|
-        Notification.create(recipient: user,
-                            actor: current_user,
-                            action: 'posted',
-                            notifiable: @comment)
-      end
       flash[:success] = 'Comment successfuly posted'
       respond_to do |format|
         format.html { redirect_to request.referrer || root_path }
@@ -54,8 +47,19 @@ class CommentsController < ApplicationController
   end
 
   private
-  def comment_params
-    params.require(:comment).permit(:text, :commentable_type, :commentable_id,
-                                    :author_id)
-  end
+
+    def comment_params
+      params.require(:comment).permit(:text, :commentable_type, :commentable_id,
+                                      :author_id)
+    end
+
+    def send_notification
+      recipients = (@commentable.commenters + [@commentable.author] + @commentable.likers).uniq - [current_user]
+      recipients.each do |user|
+        Notification.create(recipient: user,
+                            actor: current_user,
+                            action: 'posted',
+                            notifiable: @comment)
+      end
+    end
 end

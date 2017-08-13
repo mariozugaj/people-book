@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  after_action :send_notification, only: :create
   include FindPolymorphic
 
   def index
@@ -10,14 +11,6 @@ class LikesController < ApplicationController
     @likeable = find_polymorphic(params)
     @like = @likeable.likes.build(like_params)
     @like.save
-
-    # Send notifications
-    recipient = @likeable.author unless @likeable.author == current_user
-    Notification.create(recipient: recipient,
-                        actor: current_user,
-                        action: 'liked',
-                        notifiable: @likeable)
-
     flash[:success] = 'You liked it!'
     respond_to do |format|
       format.html { redirect_to request.referrer || root_path }
@@ -39,5 +32,13 @@ class LikesController < ApplicationController
 
   def like_params
     params.permit(:likeable_type, :likeable_id, :user_id)
+  end
+
+  def send_notification
+  recipient = @likeable.author unless @likeable.author == current_user
+  Notification.create(recipient: recipient,
+                      actor: current_user,
+                      action: 'liked',
+                      notifiable: @likeable)
   end
 end

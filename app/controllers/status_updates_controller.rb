@@ -1,5 +1,6 @@
 class StatusUpdatesController < ApplicationController
   before_action :set_status_update, only: %i[edit update destroy]
+  after_action :send_notification, only: :create
 
   def show
     @status_update = StatusUpdate.includes(author: :profile)
@@ -10,16 +11,6 @@ class StatusUpdatesController < ApplicationController
     @status_update = StatusUpdate.new(status_update_params)
     authorize @status_update
     if @status_update.save
-
-      # Send notifications
-      recipients = @status_update.author.friends
-      recipients.each do |user|
-        Notification.create(recipient: user,
-                            actor: current_user,
-                            action: 'posted',
-                            notifiable: @status_update)
-      end
-
       flash[:success] = 'You\'ve posted an update.'
     else
       flash[:alert] = 'We were unable to save your post.'
@@ -49,7 +40,7 @@ class StatusUpdatesController < ApplicationController
     else
       flash[:alert] = 'There was a problem destroying your status update. Plese try again.'
     end
-    redirect_back(fallback_location: current_user)
+    redirect_to current_user
   end
 
   private
@@ -60,5 +51,14 @@ class StatusUpdatesController < ApplicationController
 
   def status_update_params
     params.require(:status_update).permit(:author_id, :text, :image, :remote_image_url)
+  end
+
+  def send_notification
+    @status_update.author.friends.each do |friend|
+      Notification.create(recipient: friend,
+                          actor: current_user,
+                          action: 'posted',
+                          notifiable: @status_update)
+    end
   end
 end

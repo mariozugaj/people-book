@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[set_avatar set_cover edit update]
   before_action :set_image, only: %i[set_avatar set_cover]
+  after_action :send_notification, only: :update
 
   def edit
     authorize @profile
@@ -10,16 +11,6 @@ class ProfilesController < ApplicationController
   def update
     authorize @profile
     if @profile.update(profile_params)
-
-      # Send notifications
-      recipients = @profile.user.friends
-      recipients.each do |user|
-        Notification.create(recipient: user,
-                            actor: current_user,
-                            action: 'updated',
-                            notifiable: @profile)
-      end
-
       flash[:success] = 'You\'ve successfuly updated your profile'
       redirect_to current_user
     else
@@ -61,5 +52,15 @@ class ProfilesController < ApplicationController
     params.require(:profile).permit(:user_id, :birthday, :education, :hometown,
                                     :profession, :company, :relationship_status,
                                     :about, :phone_number, :avatar, :cover_photo)
+  end
+
+  def send_notification
+    recipients = @profile.user.friends
+    recipients.each do |user|
+      Notification.create(recipient: user,
+                          actor: current_user,
+                          action: 'updated',
+                          notifiable: @profile)
+    end
   end
 end

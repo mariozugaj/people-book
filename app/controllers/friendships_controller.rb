@@ -1,5 +1,7 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: %i[update destroy]
+  after_action :send_notification, only: :update
+  after_action :delete_other_request, only: :update
 
   def index
     @user = User.find_by_slug(params[:user_id])
@@ -19,14 +21,6 @@ class FriendshipsController < ApplicationController
 
   def update
     if @friendship.update(accepted: true)
-
-      # Send notifications
-      recipient = @friendship.user
-      Notification.create(recipient: recipient,
-                          actor: current_user,
-                          action: 'accepted',
-                          notifiable: @friendship)
-
       flash[:success] = "You and #{@friendship.user.name} are now friends"
     else
       flash[:alert] = "We couldn\'t accept friend request from #{@friendship.user.name}"
@@ -56,5 +50,18 @@ class FriendshipsController < ApplicationController
 
   def friendship_params
     params.require(:friendship).permit(:user_id, :friend_id)
+  end
+
+  def send_notification
+    Notification.create(recipient: @friendship.user,
+                        actor: current_user,
+                        action: 'accepted',
+                        notifiable: @friendship)
+  end
+
+  def delete_other_request
+    if request = @friendship.user.received_friend_requests.where(user: @friendship.friend).first
+      request.destroy
+    end
   end
 end
