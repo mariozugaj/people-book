@@ -41,7 +41,7 @@
           ago
 
       .content
-        = form_with model: @image, class: 'ui form' do |form|
+        = form_with model: @image, class: 'ui form', local: true do |form|
 
           .field
             = form.text_area :description,
