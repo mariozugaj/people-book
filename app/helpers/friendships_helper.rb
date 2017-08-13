@@ -1,9 +1,9 @@
 module FriendshipsHelper
   def render_friendship(user)
-    if current_user.sent_friend_requests.where(friend_id: user.id, accepted: false).exists?
-      render 'friendships/request_sent', user: user
-    elsif current_user.friend_with? user
+    if current_user.friend_with? user
       render 'friendships/unfriend', user: user
+    elsif current_user.sent_friend_requests.where(friend_id: user.id, accepted: false).exists?
+      render 'friendships/request_sent', user: user
     else
       render 'friendships/add_friend', user: user
     end
