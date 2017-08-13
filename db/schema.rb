@@ -43,8 +43,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id"], name: "index_friendships_on_user_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
   end
 
   create_table "images", force: :cascade do |t|
@@ -86,13 +85,13 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.bigint "actor_id"
     t.string "notifiable_type"
     t.bigint "notifiable_id"
-    t.integer "read_at"
+    t.boolean "read", default: false
     t.string "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
-    t.index ["read_at"], name: "index_notifications_on_read_at"
+    t.index ["read"], name: "index_notifications_on_read"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 

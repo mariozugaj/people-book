@@ -9,9 +9,12 @@ class UpdateIndexes < ActiveRecord::Migration[5.1]
     add_index :likes, [:likeable_type, :likeable_id, :user_id], name: :by_likeable_and_user
 
     remove_index :notifications, [:notifiable_type, :notifiable_id]
-    add_index :notifications, :read_at
 
     remove_index :photo_albums, :author_id
     add_index :photo_albums, [:author_id, :name]
+
+    remove_index :friendships, :user_id
+    remove_index :friendships, :friend_id
+    add_index :friendships, [:user_id, :friend_id], unique: true
   end
 end
