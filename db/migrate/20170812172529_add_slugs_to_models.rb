@@ -1,5 +1,6 @@
 class AddSlugsToModels < ActiveRecord::Migration[5.1]
   def change
+    add_column :users, :slug, :string, unique: true
     add_column :status_updates, :slug, :string, unique: true
     add_column :photo_albums, :slug, :string, unique: true
     add_column :images, :slug, :string, unique: true

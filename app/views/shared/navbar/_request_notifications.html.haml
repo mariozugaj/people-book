@@ -20,12 +20,12 @@
             %span.request.buttons
               // Approve button
               = link_to 'Approve',
-                user_friendship_path(request.user.id, request.id),
+                user_friendship_path(request.user, request),
                 method: 'patch',
                 class: 'ui mini positive request button'
               // Decline button
               = link_to 'Decline',
-                user_friendship_path(request.user.id, request.id),
+                user_friendship_path(request.user, request),
                 method: 'delete',
                 class: 'ui mini negative request button'
     - else
