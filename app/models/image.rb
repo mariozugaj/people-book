@@ -10,6 +10,7 @@
 #  photo_album_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  slug           :string
 #
 
 class Image < ApplicationRecord

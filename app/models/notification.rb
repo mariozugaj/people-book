@@ -7,10 +7,11 @@
 #  actor_id        :integer
 #  notifiable_type :string
 #  notifiable_id   :integer
-#  read_at         :integer
+#  read            :boolean          default(FALSE)
 #  action          :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  slug            :string
 #
 
 class Notification < ApplicationRecord
