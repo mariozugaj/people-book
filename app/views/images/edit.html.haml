@@ -6,7 +6,7 @@
   .ui.eleven.wide.column
     .ui.segment
 
-      .ui.centered.rounded.image
+      .ui.fluid.centered.rounded.image
         // Set as avatar and cover photo links
         = link_to 'Set as avatar', user_set_avatar_path(@author, image_id: @image),
           method: :post,
