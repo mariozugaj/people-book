@@ -8,5 +8,5 @@ test:
 
 production:
   adapter: redis
-  url: ENV['REDISTOGO_URL']
+  url: <%= ENV["REDISTOGO_URL"] %>
   channel_prefix: people_book_production
