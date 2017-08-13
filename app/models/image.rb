@@ -20,6 +20,7 @@ class Image < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :likers, through: :likes, source: :user
   has_one :author, through: :photo_album
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   # Delegations
   delegate :name, to: :author, prefix: true
