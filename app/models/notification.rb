@@ -23,9 +23,10 @@ class Notification < ApplicationRecord
   validates_presence_of :recipient, :actor, :notifiable
 
   # Scopes
-  scope :recent, -> { order(created_at: :desc).limit(10) }
-  scope :unread, -> { where(read_at: nil) }
-  scope :read, -> { where('read_at IS NOT NULL') }
+  scope :ordered, -> { order(created_at: :desc) }
+  scope :recent, -> { ordered.limit(10) }
+  scope :unread, -> { where(read: false) }
+  scope :read, -> { where(read: true) }
 
   # Slug
   include Slug

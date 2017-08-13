@@ -8,8 +8,9 @@
         .date
           = time_ago_in_words notification.created_at
           ago
-        - if !notification.read_at && notification.recipient == current_user
+        - if !notification.read? && notification.recipient == current_user
           %span.ui.red.empty.circular.label
       .text
         = notification.action
         %b= message
+

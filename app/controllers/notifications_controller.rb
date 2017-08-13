@@ -10,8 +10,10 @@ class NotificationsController < ApplicationController
         @count = Notification.where(recipient: current_user).size
       end
       format.html do
-        @all_notifications = Notification.where(recipient: current_user)
-                                         .order(created_at: :desc)
+        @all_notifications = Notification.includes(:notifiable,
+                                                   actor: :profile)
+                                         .where(recipient: current_user)
+                                         .ordered
                                          .page(params[:page])
       end
     end
@@ -19,7 +21,7 @@ class NotificationsController < ApplicationController
 
   def mark_as_read
     @notifications = Notification.where(recipient: current_user).unread
-    @notifications.update_all(read_at: Time.zone.now)
+    @notifications.update_all(read: true)
     render json: { success: true }
   end
 
