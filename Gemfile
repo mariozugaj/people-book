@@ -7,7 +7,6 @@ end
 
 ruby '2.4.0'
 
-gem 'active_record_query_trace', '~> 1.5', '>= 1.5.4'
 gem 'annotate', '~> 2.7', '>= 2.7.2'
 gem 'autoprefixer-rails', '~> 7.1', '>= 7.1.2.4'
 gem 'aws-sdk', '~> 2.10', '>= 2.10.21'
@@ -46,6 +45,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'wikipedia-client', '~> 1.7'
 
 group :development, :test do
+  gem 'active_record_query_trace', '~> 1.5', '>= 1.5.4'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
