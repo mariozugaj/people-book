@@ -31,7 +31,6 @@ gem 'pg', '~> 0.18'
 gem 'pry', '~> 0.10.4'
 gem 'pry-byebug', '~> 3.4', '>= 3.4.2'
 gem 'pry-rails', '~> 0.3.6'
-gem 'puma', '~> 3.7'
 gem 'pundit', '~> 1.1'
 gem 'rack-mini-profiler', '~> 0.10.5'
 gem 'rails', '~> 5.1.1'
@@ -63,4 +62,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+end
+
+group :production do
+  gem 'puma', '~> 3.7'
 end
