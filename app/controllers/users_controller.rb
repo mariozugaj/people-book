@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @new_status_update = StatusUpdate.new
     @feed = StatusUpdate.includes({ author: :profile }, :likers)
                         .where(author: @user)
+                        .ordered
                         .page(params[:page])
   end
 

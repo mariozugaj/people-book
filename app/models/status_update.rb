@@ -36,7 +36,10 @@ class StatusUpdate < ApplicationRecord
   # Search
   searchkick text_middle: %i[text],
              batch_size: 200
+
+  # Scopes
   scope :search_import, -> { includes(:author) }
+  scope :ordered, -> { order(created_at: :desc) }
 
   # Slug
   include Slug

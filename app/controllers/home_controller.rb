@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     @feed =
       StatusUpdate.includes([{ author: :profile }, :likers])
                   .where(author_id: current_user.friends_ids)
-                  .order(created_at: :desc)
+                  .ordered
                   .page(params[:page])
                   .per(6)
     @activity =
