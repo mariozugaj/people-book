@@ -78,4 +78,3 @@ bower.json
 # End of https://www.gitignore.io/api/macos,rails
 # Ignore application configuration
 /config/application.yml
-/public/images/emoji
