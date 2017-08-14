@@ -5,6 +5,7 @@
     %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport' }
     %title= yield(:title).presence || 'PeopleBook'
     = render 'layouts/rails_default'
+    %link{ href: 'favicon.png', rel: 'shortcut icon', type: 'image/png' }
 
   %body{ class: class_string('background', [:grey] => current_user, [:blue] => !current_user ) }
 
