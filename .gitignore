@@ -75,6 +75,9 @@ bower.json
 # Ignore Byebug command history file.
 .byebug_history
 
-# End of https://www.gitignore.io/api/macos,rails
 # Ignore application configuration
 /config/application.yml
+
+### Redis ###
+# Ignore redis binary dump (dump.rdb) files
+*.rdb
