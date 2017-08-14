@@ -29,6 +29,8 @@ class Conversation < ApplicationRecord
     where('sender_id IN (:ids) AND receiver_id IN (:ids)', ids: [user1.id, user2.id])
   end
 
+  scope :ordered, -> { order(created_at: :desc) }
+
   # Slug
   include Slug
 

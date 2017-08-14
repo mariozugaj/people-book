@@ -37,6 +37,6 @@ class ConversationsController < ApplicationController
                        .includes({ sender: :profile },
                                  { receiver: :profile },
                                  :messages)
-                       .order(updated_at: :desc)
+                       .ordered
     end
 end
