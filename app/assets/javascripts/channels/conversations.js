@@ -15,6 +15,9 @@ App.conversations = App.cable.subscriptions.create('ConversationsChannel', {
   received: function (data) {
     var $messages = $('.messages');
     this.collection().append(data.message);
+    if ($('.conversations').length > 0) {
+      $.getScript('/conversations');
+    }
     return $messages.scrollTop($messages[0].scrollHeight);
   },
 

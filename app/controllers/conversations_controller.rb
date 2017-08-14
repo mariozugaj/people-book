@@ -5,6 +5,10 @@ class ConversationsController < ApplicationController
 
   def index
     @quote = JSON.parse(File.read(Rails.root.join('public/quotes.json'))).sample
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
