@@ -1,11 +1,13 @@
+- friend = @conversation.other_user(current_user)
 .row
   = render 'conversations/menu'
 
   .eleven.wide.column
     .ui.center.aligned.top.attached.segment
-      = link_to @conversation.other_user(current_user).name,
-        user_path(@conversation.other_user(current_user)),
+      = link_to friend.name,
+        user_path(friend),
         class: 'ui header'
+      = online_status(friend)
     .ui.attached.segment.messages
       .ui.large.comments{ 'data-channel': 'messages', 'data-conversation-id': @conversation.slug }
         = render @conversation.messages

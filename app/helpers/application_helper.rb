@@ -25,4 +25,10 @@ module ApplicationHelper
     when 'alert' then 'ui warning message'
     end
   end
+
+  def online_status(user)
+    content_tag :span, nil,
+                class: class_string("ui empty circular label user-#{user.id}",
+                                    'green' => user.online?)
+  end
 end

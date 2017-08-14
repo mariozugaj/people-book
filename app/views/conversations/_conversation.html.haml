@@ -6,6 +6,7 @@
     = image_tag friend.avatar.url :mini
   .content
     %span.header= friend.name
+    = online_status(friend)
     .description
       = emojify conversation.messages.last.body.truncate(25)
     .extra

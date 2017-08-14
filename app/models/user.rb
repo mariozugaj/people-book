@@ -66,6 +66,10 @@ class User < ApplicationRecord
   # Slug
   include Slug
 
+  def online?
+    !Redis.new.get("user_#{id}_online").nil?
+  end
+
   def friendships
     Friendship.where('accepted = ?', true)
               .where('user_id = ? OR friend_id = ?', id, id)
