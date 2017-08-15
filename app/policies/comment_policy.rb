@@ -21,7 +21,7 @@ class CommentPolicy
   private
 
   def friend?
-    user.friend_with? comment.commentable.author
+    user.friends_with? comment.commentable.author
   end
 
   def commentable_owner?

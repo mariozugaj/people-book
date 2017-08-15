@@ -2,30 +2,30 @@
 
   // Notifications bell icon and label
   %div{ class: class_string('right pointing ui label',
-    'red' => @friend_requests.exists?) }= @friend_requests.size
+    'red' => @requested_friends.exists?) }= @requested_friends.size
   %i.users.icon
 
   // Notifications dropdown
   .menu
-    - if @friend_requests.any?
-      - @friend_requests.each do |request|
+    - if @requested_friends.any?
+      - @requested_friends.each do |requested_friend|
         .item
           .request.content
             .description
               .ui.avatar.image
-                = image_tag request.user.profile.avatar.url :thumb
+                = image_tag requested_friend.avatar.url :thumb
               %span.ui.small.header
-                = link_to request.user.name, user_path(request.user)
+                = link_to requested_friend.name, user_path(requested_friend)
               %span.text requested to be your friend
             %span.request.buttons
               // Approve button
               = link_to 'Approve',
-                user_friendship_path(request.user, request),
+                user_friendship_path(current_user, find_friendship(requested_friend)),
                 method: 'patch',
                 class: 'ui mini positive request button'
               // Decline button
               = link_to 'Decline',
-                user_friendship_path(request.user, request),
+                user_friendship_path(current_user, find_friendship(requested_friend)),
                 method: 'delete',
                 class: 'ui mini negative request button'
     - else

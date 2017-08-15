@@ -33,6 +33,6 @@ class ImagePolicy
   end
 
   def friend?
-    user.friend_with? image.author
+    user.friends_with? image.author
   end
 end

@@ -30,18 +30,6 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy, inverse_of: :user
   has_many :photo_albums, foreign_key: 'author_id', dependent: :destroy
   has_many :status_updates, foreign_key: 'author_id', dependent: :destroy
-  has_many :received_friend_requests,
-           -> { where friendships: { accepted: false } },
-           class_name: 'Friendship',
-           foreign_key: 'friend_id',
-           dependent: :destroy
-  has_many :sent_friend_requests,
-           -> { where friendships: { accepted: false } },
-           class_name: 'Friendship',
-           foreign_key: 'user_id',
-           dependent: :destroy
-  has_many :friendships
-  has_many :friends, through: :friendships
   has_many :likes, dependent: :destroy
   has_many :comments, foreign_key: 'author_id', dependent: :destroy
   has_many :images, through: :photo_albums
@@ -50,7 +38,8 @@ class User < ApplicationRecord
            class_name: 'Notification',
            foreign_key: :actor_id,
            dependent: :destroy
-  has_many :conversations, ->(user) { Conversation.with_user(user) }
+  has_many :conversations, ->(user) { Conversation.with_user(user) },
+           dependent: :destroy
   has_many :messages
 
   # Validations
@@ -65,26 +54,10 @@ class User < ApplicationRecord
 
   # Slug
   include Slug
+  include Friendable
 
   def online?
     !Redis.new.get("user_#{id}_online").nil?
-  end
-
-  def friendships
-    Friendship.where('accepted = ?', true)
-              .where('user_id = ? OR friend_id = ?', id, id)
-  end
-
-  def friends_ids
-    friendships.map { |f| f.user_id == id ? f.friend_id : f.user_id }
-  end
-
-  def friends
-    User.where('id in (?)', friends_ids)
-  end
-
-  def friend_with?(user)
-    friends_ids.include? user.id
   end
 
   def search_info

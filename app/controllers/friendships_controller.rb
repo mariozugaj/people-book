@@ -1,7 +1,7 @@
 class FriendshipsController < ApplicationController
+  before_action :set_friend, only: :create
   before_action :set_friendship, only: %i[update destroy]
   after_action :send_notification, only: :update
-  after_action :delete_other_request, only: :update
 
   def index
     @user = User.find_by_slug(params[:user_id])
@@ -9,33 +9,26 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    @friendship = current_user.sent_friend_requests.build(friendship_params)
-    @friend = @friendship.friend
-    if @friendship.save
-      flash[:success] = "You sent a friend request to #{@friend.name}"
+    if current_user.friend_request(@friend)
+      flash[:success] = "Friend request to #{@friend.name} sent!"
     else
-      flash[:alert] = "We couldn\'t send friend request to #{@friend.name}"
+      flash[:alert] = "We couldn't send friend request to #{@friend.name}!"
     end
     redirect_to request.referrer || @friend
   end
 
   def update
-    if @friendship.update(accepted: true)
-      flash[:success] = "You and #{@friendship.user.name} are now friends"
+    if current_user.accept_request(@friendship.friend)
+      flash[:success] = "You and #{@friendship.friend.name} are now friends"
     else
-      flash[:alert] = "We couldn\'t accept friend request from #{@friendship.user.name}"
+      flash[:alert] = "We couldn\'t accept friend request from #{@friendship.friend.name}"
     end
     redirect_to request.referrer || root_path
   end
 
   def destroy
-    @friend = if @friendship.friend == current_user
-                @friendship.user
-              else
-                @friendship.friend
-              end
-    if @friendship.destroy
-      flash[:success] = "You are no longer friends with #{@friend.name}" if @friendship.accepted
+    if current_user.remove_friend(@friendship.friend)
+      flash[:success] = 'Removed!'
     else
       flash[:alert] = "We couldn\'t remove #{@friend.name} as your friend"
     end
@@ -44,24 +37,22 @@ class FriendshipsController < ApplicationController
 
   private
 
-  def set_friendship
-    @friendship = Friendship.find_by_slug(params[:id])
+  def friendship_params
+    params.permit(:friend_id, :id).to_h
   end
 
-  def friendship_params
-    params.require(:friendship).permit(:user_id, :friend_id)
+  def set_friend
+    @friend = User.find_by_slug(friendship_params[:friend_id])
+  end
+
+  def set_friendship
+    @friendship = Friendship.find_by_slug(friendship_params[:id])
   end
 
   def send_notification
-    Notification.create(recipient: @friendship.user,
+    Notification.create(recipient: @friendship.friend,
                         actor: current_user,
                         action: 'accepted',
                         notifiable: @friendship)
-  end
-
-  def delete_other_request
-    if request = @friendship.user.received_friend_requests.where(user: @friendship.friend).first
-      request.destroy
-    end
   end
 end

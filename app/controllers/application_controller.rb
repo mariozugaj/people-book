@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
                 if: :user_signed_in?
 
   def set_requests
-    @friend_requests = current_user.received_friend_requests
-                                   .includes(user: :profile)
+    @requested_friends = current_user.requested_friends.includes(:profile)
   end
 
   private

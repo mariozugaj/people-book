@@ -33,6 +33,6 @@ class StatusUpdatePolicy
   end
 
   def friend?
-    user.friend_with? status_update.author
+    user.friends_with? status_update.author
   end
 end
