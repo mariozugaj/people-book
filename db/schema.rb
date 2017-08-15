@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["commentable_type", "commentable_id", "author_id"], name: "by_commentable_and_author"
+    t.index ["slug"], name: "index_comments_on_slug"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -34,15 +35,18 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["sender_id", "receiver_id"], name: "index_conversations_on_sender_id_and_receiver_id", unique: true
+    t.index ["slug"], name: "index_conversations_on_slug"
   end
 
   create_table "friendships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "friend_id", null: false
-    t.boolean "accepted", default: false
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.index ["slug"], name: "index_friendships_on_slug"
+    t.index ["status"], name: "index_friendships_on_status"
     t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
   end
 
@@ -56,6 +60,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["photo_album_id"], name: "index_images_on_photo_album_id"
+    t.index ["slug"], name: "index_images_on_slug"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -66,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["likeable_type", "likeable_id", "user_id"], name: "by_likeable_and_user"
+    t.index ["slug"], name: "index_likes_on_slug"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -77,6 +83,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["slug"], name: "index_messages_on_slug"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -93,6 +100,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["read"], name: "index_notifications_on_read"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
+    t.index ["slug"], name: "index_notifications_on_slug"
   end
 
   create_table "photo_albums", force: :cascade do |t|
@@ -103,6 +111,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["author_id", "name"], name: "index_photo_albums_on_author_id_and_name"
+    t.index ["slug"], name: "index_photo_albums_on_slug"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -120,6 +129,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.index ["slug"], name: "index_profiles_on_slug"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -133,6 +143,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.index ["author_id"], name: "index_status_updates_on_author_id"
+    t.index ["slug"], name: "index_status_updates_on_slug"
   end
 
   create_table "users", force: :cascade do |t|
@@ -155,6 +166,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug"
   end
 
   add_foreign_key "messages", "conversations"

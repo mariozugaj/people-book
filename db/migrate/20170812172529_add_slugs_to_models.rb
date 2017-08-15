@@ -11,5 +11,16 @@ class AddSlugsToModels < ActiveRecord::Migration[5.1]
     add_column :notifications, :slug, :string, unique: true
     add_column :profiles, :slug, :string, unique: true
     add_column :messages, :slug, :string, unique: true
+    add_index :users, :slug
+    add_index :status_updates, :slug
+    add_index :photo_albums, :slug
+    add_index :images, :slug
+    add_index :conversations, :slug
+    add_index :likes, :slug
+    add_index :comments, :slug
+    add_index :friendships, :slug
+    add_index :notifications, :slug
+    add_index :profiles, :slug
+    add_index :messages, :slug
   end
 end
