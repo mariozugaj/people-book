@@ -45,10 +45,7 @@ group :development, :test do
   gem 'active_record_query_trace', '~> 1.5', '>= 1.5.4'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
-  gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
-  gem 'factory_girl_rails', '~> 4.8'
   gem 'letter_opener', '~> 1.4', '>= 1.4.1'
-  gem 'rspec-rails', '~> 3.6'
   gem 'rubycritic', '~> 3.2', '>= 3.2.3', require: false
   gem 'selenium-webdriver', '~> 3.4', '>= 3.4.4'
 end
