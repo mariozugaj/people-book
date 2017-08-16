@@ -61,14 +61,6 @@ App.FormValidations = (function () {
               type: 'minLength[6]',
               prompt: 'Please enter a 6 characters minimum password',
             }]
-          },
-          checkbox: {
-          identifier  : 'checkbox',
-          rules: [
-            {
-              type   : 'checked',
-              prompt : 'You have to agree to Terms and Conditions'
-            }]
           }
         }
       });
