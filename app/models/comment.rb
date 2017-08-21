@@ -32,7 +32,7 @@ class Comment < ApplicationRecord
   delegate :name, to: :author, prefix: true
 
   # Search
-  searchkick text_middle: %i[text]
+  searchkick text_middle: %i[text], callbacks: :async
   scope :search_import, -> { includes(:commentable, author: :profile) }
 
   # Slug

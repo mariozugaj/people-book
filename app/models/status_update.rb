@@ -36,7 +36,8 @@ class StatusUpdate < ApplicationRecord
 
   # Search
   searchkick text_middle: %i[text],
-             batch_size: 200
+             batch_size: 200,
+             callbacks: :async
 
   # Scopes
   scope :search_import, -> { includes(:author) }

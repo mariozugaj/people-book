@@ -27,7 +27,7 @@ class Image < ApplicationRecord
   delegate :name, to: :author, prefix: true
 
   # Search
-  searchkick text_middle: %i[description]
+  searchkick text_middle: %i[description], callbacks: :async
   scope :search_import, -> { includes(author: :profile) }
 
   # Uploader

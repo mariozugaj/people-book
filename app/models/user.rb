@@ -49,7 +49,7 @@ class User < ApplicationRecord
   delegate :avatar, to: :profile
 
   # Search
-  searchkick text_middle: [:name]
+  searchkick text_middle: [:name], callbacks: :async
   scope :search_import, -> { includes(:profile) }
 
   # Slug
