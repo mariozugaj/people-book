@@ -15,16 +15,9 @@ class CommentsController < ApplicationController
     authorize @comment
     if @comment.save
       flash[:success] = 'Comment successfuly posted'
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_path }
-        format.js
-      end
     else
       flash[:alert] = 'There was a problem posting your comment. Try again?'
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_path }
-        format.js { render partial: 'shared/flash_js' }
-      end
+      render partial: 'shared/flash_js'
     end
   end
 
@@ -33,16 +26,9 @@ class CommentsController < ApplicationController
     authorize @comment
     if @comment.destroy
       flash[:success] = 'Your comment was destroyed'
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_path }
-        format.js
-      end
     else
       flash[:alert] = 'There was a problem destroying your comment. Try again?'
-      respond_to do |format|
-        format.html { redirect_to request.referrer || root_path }
-        format.js { render partial: 'shared/flash_js' }
-      end
+      render partial: 'shared/flash_js'
     end
   end
 
@@ -54,7 +40,10 @@ class CommentsController < ApplicationController
     end
 
     def send_notification
-      recipients = (@commentable.commenters + [@commentable.author] + @commentable.likers).uniq - [current_user]
+      recipients = (@commentable.commenters +
+                    [@commentable.author] +
+                    @commentable.likers).uniq -
+                    [current_user]
       recipients.each do |user|
         Notification.create(recipient: user,
                             actor: current_user,
