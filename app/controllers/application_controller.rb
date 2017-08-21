@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     @requested_friends = current_user.requested_friends.includes(:profile)
   end
 
+  def after_sign_in_path_for(resource)
+    home_path
+  end
+
   private
 
   def user_not_authorized
