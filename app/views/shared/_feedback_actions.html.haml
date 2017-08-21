@@ -1,11 +1,11 @@
 - comments_path = send("#{feedbackable.class.to_s.underscore.downcase}_comments_path", feedbackable)
 - likes_path = send("#{feedbackable.class.to_s.underscore.downcase}_likes_path", feedbackable)
-- feedback = policy(feedbackable).feedback?
+- can_feedback = policy(feedbackable).feedback?
 .content.statistics
   // Like action and statistics
   %span
 
-    - if feedback
+    - if can_feedback
       = render_likes feedbackable
 
     %span{ 'data-link': likes_path,
@@ -16,15 +16,15 @@
   // Comment action and statistics
   %span.whitespace--left
 
-    - if feedback
+    - if can_feedback
       %a{ 'data-tooltip': 'Comment', 'data-inverted': '' }
         %i.comment.icon{ 'data-behavior': 'comment-link' }
 
   %a.comments_count{ 'data-behavior': 'show-comments',
-    'data-link': comments_path }
+    'data-link': comments_path, 'data-tooltip': 'See comments', 'data-inverted': '' }
     = pluralize feedbackable.comments_count, 'comment'
 
-- if feedback
+- if can_feedback
   // Comment form
   .content.comment__form{ 'data-behavior': 'comment-form' }
     = form_with model: [feedbackable, Comment.new],
