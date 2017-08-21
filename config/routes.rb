@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   # Root
   authenticated :user do
-    root to: 'home#index', as: :authenticated_root
+    root to: redirect('home'), as: :root_home
+    get :home, to: 'home#index', as: :home
   end
-  root to: 'welcome#index'
+  root to: 'welcome#index', as: :welcome
 
   # Devise routes
   devise_for :users,
