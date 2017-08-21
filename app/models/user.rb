@@ -28,10 +28,10 @@ class User < ApplicationRecord
 
   # Associations
   has_one :profile, dependent: :destroy, inverse_of: :user
-  has_many :photo_albums, foreign_key: 'author_id', dependent: :destroy
   has_many :status_updates, foreign_key: 'author_id', dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, foreign_key: 'author_id', dependent: :destroy
+  has_many :photo_albums, foreign_key: 'author_id', dependent: :destroy
   has_many :images, through: :photo_albums
   has_many :notifications, foreign_key: :recipient_id
   has_many :sent_notifications,
@@ -52,9 +52,9 @@ class User < ApplicationRecord
   searchkick text_middle: [:name], callbacks: :async
   scope :search_import, -> { includes(:profile) }
 
-  # Slug
   include Slug
   include Friendable
+  include Authentication
 
   def online?
     !Redis.new.get("user_#{id}_online").nil?
@@ -73,27 +73,5 @@ class User < ApplicationRecord
     conversations
       .select { |c| c.messages.not_sent_by(self).unread.exists? }
       .count
-  end
-
-  def self.from_omniauth(auth)
-    where(email: auth.info.email).first_or_create do |user|
-      break unless auth.info.email
-      user.email = auth.info.email
-      user.password = Devise.friendly_token(40)
-      user.name = auth.info.name
-      Profile.create! user: user,
-                      remote_avatar_url: auth.info.image
-      avatars = PhotoAlbum.create(author: user, name: 'Avatars')
-      avatars.images.create(remote_image_url: auth.info.image)
-      PhotoAlbum.create(author: user, name: 'Cover photos')
-    end
-  end
-
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
-        user.email = data['email'] if user.email.blank?
-      end
-    end
   end
 end

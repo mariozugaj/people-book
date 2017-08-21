@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  user_id    :integer          not null
 #  friend_id  :integer          not null
-#  accepted   :boolean          default(FALSE)
+#  status     :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  slug       :string
@@ -32,28 +32,30 @@ class Friendship < ApplicationRecord
   # Slug
   include Slug
 
-  def self.relation_attributes(one, other, status: nil)
-    attr = {
-      user_id: one.id,
-      friend_id: other.id
-    }
+  private
 
-    attr[:status] = status if status
+    def self.relation_attributes(one, other, status: nil)
+      attr = {
+        user_id: one.id,
+        friend_id: other.id
+      }
 
-    attr
-  end
+      attr[:status] = status if status
 
-  def self.create_relation(one, other, options)
-    relation = new relation_attributes(one, other)
-    relation.attributes = options
-    relation.save
-  end
+      attr
+    end
 
-  def self.find_relation(user, friend, status: nil)
-    where relation_attributes(user, friend, status: status)
-  end
+    def self.create_relation(one, other, options)
+      relation = new relation_attributes(one, other)
+      relation.attributes = options
+      relation.save
+    end
 
-  def self.exist?(user, friend)
-    find_relation(user, friend).any? && find_relation(friend, user).any?
-  end
+    def self.find_relation(user, friend, status: nil)
+      where relation_attributes(user, friend, status: status)
+    end
+
+    def self.exist?(user, friend)
+      find_relation(user, friend).any? && find_relation(friend, user).any?
+    end
 end
