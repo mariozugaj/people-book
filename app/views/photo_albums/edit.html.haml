@@ -35,7 +35,7 @@
       .ui.small.images
         - @photo_album.images.each do |image|
           .ui.image
-            = link_to 'x', image_path(image.id, photo_album_id: image.photo_album.id),
+            = link_to 'x', image_path(image, photo_album_id: image.photo_album),
               method: :delete,
               class: 'ui red floating circular label',
               data: { confirm: 'Are you sure you want to destroy it?'}
