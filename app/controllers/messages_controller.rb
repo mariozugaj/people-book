@@ -13,7 +13,6 @@ class MessagesController < ApplicationController
     @message = current_user.messages.build(message_params)
     @message.conversation_id = @conversation.id
     @message.save!
-    @conversation.touch
     respond_to do |format|
       format.html { redirect_to @conversation }
       format.js
@@ -29,7 +28,7 @@ class MessagesController < ApplicationController
     def find_conversation
       @receiver = User.find_by_slug(params[:receiver_id]) if params[:receiver_id]
       @conversation = if @receiver
-                        Conversation.between(current_user, @receiver).first
+                        current_user.conversations.with_user(@receiver).first
                       else
                         Conversation.find_by_slug(params[:conversation_id])
                       end

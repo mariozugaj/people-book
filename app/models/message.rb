@@ -14,7 +14,7 @@
 
 class Message < ApplicationRecord
   # Associations
-  belongs_to :conversation
+  belongs_to :conversation, touch: true
   belongs_to :user
 
   # Validations
@@ -25,7 +25,7 @@ class Message < ApplicationRecord
   scope :not_sent_by, ->(user) { where.not(user: user) }
 
   # After commits
-  after_create_commit do
+  after_commit do
     ConversationBroadcastJob.perform_later(slug)
   end
 

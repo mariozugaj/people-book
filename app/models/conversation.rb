@@ -25,17 +25,12 @@ class Conversation < ApplicationRecord
     unscope(:where).where('? IN (sender_id, receiver_id)', user.id)
   end
 
-  scope :between, ->(user1, user2) do
-    where('sender_id IN (:ids) AND receiver_id IN (:ids)', ids: [user1.id, user2.id])
-  end
-
   scope :ordered, -> { order(created_at: :desc) }
 
-  # Slug
   include Slug
 
-  def other_user(current_user)
-    sender == current_user ? receiver : sender
+  def other_user(user)
+    sender == user ? receiver : sender
   end
 
   def participates?(user)
