@@ -14,17 +14,3 @@
           .ui.large.feed
             = render @feed
       = paginate @feed
-
-  /* Activity
-  .six.wide.column
-    %h3.ui.top.attached.header Activity
-    - if @activity.any?
-      .ui.attached.segment.activity.feed
-        .ui.segments
-          - @activity.each do |notification|
-            .ui.segment
-              = render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}",
-                                locals: { notification: notification }
-    - else
-      %h5.ui.attached.header
-        No activity yet
