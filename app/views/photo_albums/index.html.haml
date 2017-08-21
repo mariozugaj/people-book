@@ -1,13 +1,13 @@
-= provide :title, "#{@author.name} | Photo Albums"
+= provide :title, "#{@user.name} | Photo Albums"
 
 // User aside info
 .four.wide.column
-  = render 'users/aside', user: @author
+  = render 'users/aside', user: @user
 
 .twelve.wide.column
   .ui.centered.grid
 
-    = render 'users/cover_menu', user: @author
+    = render 'users/cover_menu', user: @user
 
     // Photo albums
     .row
@@ -19,8 +19,8 @@
               Photo Albums
 
           // New photo album button
-          - if policy(@author.photo_albums.build).create?
-            = link_to new_user_photo_album_path(@author),
+          - if policy(@user.photo_albums.build).create?
+            = link_to new_user_photo_album_path(@user),
               class: 'ui right floated blue button' do
               %i.add.square.icon
               New Photo Album
@@ -31,7 +31,7 @@
         .column
           .ui.three.stackable.cards
             - @photo_albums.each do |photo_album|
-              = link_to user_photo_album_path(@author, photo_album), class: 'ui card' do
+              = link_to user_photo_album_path(@user, photo_album), class: 'ui card' do
                 = image_tag photo_album.first_image
                 .content
                   .header= photo_album.name

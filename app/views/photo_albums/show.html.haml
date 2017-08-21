@@ -1,13 +1,13 @@
-= provide :title, "#{@author.name} | #{@photo_album.name}"
+= provide :title, "#{@photo_album.author.name} | #{@photo_album.name}"
 
 // author aside info
 .four.wide.column
-  = render 'users/aside', user: @author
+  = render 'users/aside', user: @photo_album.author
 
 .twelve.wide.column
   .ui.centered.grid
 
-    = render 'users/cover_menu', user: @author
+    = render 'users/cover_menu', user: @photo_album.author
 
     .row
       .column
@@ -24,8 +24,8 @@
             %i.arrow.circle.outline.left.icon
             Back to photo albums
 
-          - if policy(@author.photo_albums.build).create?
-            = link_to edit_user_photo_album_path(@author, @photo_album),
+          - if policy(@photo_album.author.photo_albums.build).create?
+            = link_to edit_user_photo_album_path(current_user, @photo_album),
               class: 'ui right floated blue button' do
               %i.add.square.icon
               EDIT or ADD new images
