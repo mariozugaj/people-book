@@ -29,7 +29,7 @@ class Profile < ApplicationRecord
   belongs_to :user, inverse_of: :profile
 
   # Validations
-  validates_presence_of :user
+  validates :user, presence: true, uniqueness: true
 
   # Slug
   include Slug
@@ -46,8 +46,7 @@ class Profile < ApplicationRecord
                           'Divorced',
                           'Widowed'].freeze
 
-  # Calculate user's age
   def age
-    ((Time.zone.now - birthday) / (365.2422 * 60 * 60 * 24)).to_i
+    ((Time.current - birthday) / (365.2422 * 24 * 60 * 60)).to_i
   end
 end
