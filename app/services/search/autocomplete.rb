@@ -21,12 +21,15 @@ module Search
     def results
       [].tap do |category_result|
         search_results = search
-        grouped_results = search_results.group_by { |r| r.class.name }
-        grouped_results.each_pair do |category, results|
-          grouped_results[category] = results.first(2).map(&:search_info)
-        end
         category_result << { count: search_results.total_count }
-        category_result << grouped_results
+        category_result << grouped_results(search_results)
+      end
+    end
+
+    def grouped_results(search_results)
+      grouped_results = search_results.group_by { |r| r.class.name }
+      grouped_results.each_pair do |category, results|
+        grouped_results[category] = results.first(2).map(&:search_info)
       end
     end
   end
