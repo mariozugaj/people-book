@@ -20,7 +20,7 @@
       .ui.three.column.grid
         .three.column.row
           .column
-            .ui.header Friends
+            = link_to 'Friends', user_friendships_path(user), class: 'ui header'
         = render partial: 'users/user_thumb',
           collection: user.friends.limit(12).includes(:profile),
           as: :user
