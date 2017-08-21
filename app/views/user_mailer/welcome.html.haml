@@ -1,17 +1,13 @@
 %p
-  Hi
-  = @user.name
-  !
-
+  Hi #{@user.name}!
+%br
 %p
   Welcome to PeopleBook! We hope you'll have a blast and meet many new friends.
   You can check your profile if you click
   = link_to 'here.', user_url(@user)
-
-
 %p
   Thanks for joining and have a great day!
-
+%br
 %p
   Yours sincerely,
 %p
