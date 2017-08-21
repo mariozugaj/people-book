@@ -22,7 +22,7 @@ class Comment < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   # Validations
-  validates_presence_of :author, :commentable_id, :commentable_type
+  validates_presence_of :author, :commentable
   validates :text, length: { maximum: 4000, minimum: 1 }
 
   # Scopes

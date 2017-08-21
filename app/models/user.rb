@@ -43,7 +43,7 @@ class User < ApplicationRecord
   has_many :messages
 
   # Validations
-  validates_presence_of :name, :email, :password
+  validates_presence_of :name
 
   # Delegations
   delegate :avatar, to: :profile

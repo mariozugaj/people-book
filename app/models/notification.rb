@@ -29,6 +29,5 @@ class Notification < ApplicationRecord
   scope :unread, -> { where(read: false) }
   scope :read, -> { where(read: true) }
 
-  # Slug
   include Slug
 end
