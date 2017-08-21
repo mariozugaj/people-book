@@ -1,0 +1,35 @@
+first:
+  user: maymie
+  birthday: 1989-03-18
+  education: Master of Criminology
+  hometown: Sethborough
+  profession: Software writter
+  company: Yada dada llc.
+  relationship_status: Single
+  about: One must spend an entire lifetime in learning how to live, and, which may surprise you more, an entire lifetime in learning how to die.
+  phone_number: 00385989563441
+  slug: 7321058
+
+second:
+  user: ronny
+  birthday: 1985-07-29
+  education: Bachelor of Biological Science
+  hometown: Maeganberg
+  profession: Consulting Director
+  company: Bartoletti Inc
+  relationship_status: Married
+  about: Don't cry because it's over, smile because it happened.
+  phone_number: 001611-608-4178
+  slug: 8476105
+
+third:
+  user: casimir
+  slug: 7574849
+
+fourth:
+  user: antonina
+  slug: 8840294
+
+fifth:
+  user: cole
+  slug: 9320385

@@ -1,0 +1,39 @@
+maymie:
+  name: Maymie Blick
+  email: maymie@blick.com
+  encrypted_password: '<%= encrypted_password %>'
+  slug: 8473853
+  provider: facebook
+  uid: 1323222024398387
+
+ronny:
+  name: Ronny Miller
+  email: ronny@miller.com
+  encrypted_password: '<%= encrypted_password %>'
+  slug: 3847362
+  provider: facebook
+  uid: 7523922024898381
+
+casimir:
+  name: Mr. Casimir Fahey
+  email: mr.casimir@fahey.com
+  encrypted_password: '<%= encrypted_password %>'
+  slug: 8471027
+
+antonina:
+  name: Antonina Zulauf
+  email: antonina@zulauf.com
+  encrypted_password: '<%= encrypted_password %>'
+  slug: 86458689
+
+cole:
+  name: Cole Spencer
+  email: cole@spencer.com
+  encrypted_password: '<%= encrypted_password %>'
+  slug: 1083958
+
+lydia:
+  name: Lydia Renner
+  email: lydia@renner.com
+  encrypted_password: '<%= encrypted_password %>'
+  slug: 7723193
