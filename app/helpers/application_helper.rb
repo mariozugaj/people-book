@@ -19,10 +19,10 @@ module ApplicationHelper
   # Semantic UI flash
   def flash_class(level)
     case level
-    when 'success' then 'ui green message'
-    when 'error' then 'ui red message'
-    when 'notice' then 'ui info message'
-    when 'alert' then 'ui warning message'
+    when 'success' then 'green'
+    when 'error' then 'red'
+    when 'notice' then 'info'
+    when 'alert' then 'warning'
     end
   end
 
