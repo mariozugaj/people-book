@@ -1,4 +1,4 @@
-.ui.fluid.card.commentable.lazy_image{ 'data-id': status_update.id, 'data-type': status_update.class }
+.ui.fluid.card.commentable.lazy_image{ 'data-id': status_update.slug, 'data-type': status_update.class }
 
   // Status update's author's avatar, full name and date
   .content
@@ -25,9 +25,7 @@
       = link_to status_update.author.name, user_path(status_update.author)
 
     // Time at status_update creation
-    .meta
-      = time_ago_in_words(status_update.created_at)
-      ago
+    .meta.time #{time_ago_in_words(status_update.created_at)} ago
 
   - unless status_update.text.empty?
 

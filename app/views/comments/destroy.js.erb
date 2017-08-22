@@ -1,7 +1,7 @@
 <%= render partial: "shared/flash_js" %>
 
 var comments_count = "<%= pluralize @comment.commentable.reload.comments_count, 'comment' %>"
-App.Comments.removeComment('<%= @comment.id %>',
-                                        comments_count,
-                                        '<%= @comment.commentable_id %>',
-                                        '<%= @comment.commentable_type %>');
+App.Comments.removeComment('<%= @comment.slug %>',
+                            comments_count,
+                            '<%= @comment.commentable.slug %>',
+                            '<%= @comment.commentable_type %>');

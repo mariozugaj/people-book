@@ -2,7 +2,7 @@
 
 var comment = '<%= j render @comment %>';
 var comments_count = "<%= pluralize @commentable.reload.comments_count, 'comment' %>"
-App.Comments.addComment('<%= @comment.commentable_id %>',
-                                     '<%= @comment.commentable_type %>',
-                                     comment,
-                                     comments_count);
+App.Comments.addComment('<%= @comment.commentable.slug %>',
+                        '<%= @comment.commentable_type %>',
+                        comment,
+                        comments_count);
