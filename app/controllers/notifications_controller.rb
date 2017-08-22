@@ -29,6 +29,6 @@ class NotificationsController < ApplicationController
     notifications = Notification.where(recipient: current_user).read
     notifications.destroy_all
     flash[:success] = 'Notifications cleared'
-    redirect_to request.referrer || notifications_path
+    redirect_to notifications_path
   end
 end

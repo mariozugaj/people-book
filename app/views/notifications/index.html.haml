@@ -24,8 +24,8 @@
           .eight.wide.column
             .ui.segment
               = render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}",
-                                            locals: { notification: notification },
-                                            formats: [:html]
+                locals: { notification: notification },
+                formats: [:html]
 - else
   .ui.blue.message
     .content
