@@ -23,36 +23,37 @@ class FriendshipsController < ApplicationController
     else
       flash[:alert] = "We couldn\'t accept friend request from #{@friendship.friend.name}"
     end
-    redirect_to request.referrer || root_path
+    redirect_to request.referrer || home_path
   end
 
   def destroy
-    if current_user.remove_friend(@friendship.friend)
+    friend = @friendship.friend
+    if current_user.remove_friend(friend)
       flash[:success] = 'Removed!'
     else
       flash[:alert] = "We couldn\'t remove #{@friend.name} as your friend"
     end
-    redirect_to request.referrer || @friend
+    redirect_to request.referrer || friend
   end
 
   private
 
-  def friendship_params
-    params.permit(:friend_id, :id).to_h
-  end
+    def friendship_params
+      params.permit(:friend_id, :id).to_h
+    end
 
-  def set_friend
-    @friend = User.find_by_slug(friendship_params[:friend_id])
-  end
+    def set_friend
+      @friend = User.find_by_slug(friendship_params[:friend_id])
+    end
 
-  def set_friendship
-    @friendship = Friendship.find_by_slug(friendship_params[:id])
-  end
+    def set_friendship
+      @friendship = Friendship.find_by_slug(friendship_params[:id])
+    end
 
-  def send_notification
-    Notification.create(recipient: @friendship.friend,
-                        actor: current_user,
-                        action: 'accepted',
-                        notifiable: @friendship)
-  end
+    def send_notification
+      Notification.create(recipient: @friendship.friend,
+                          actor: current_user,
+                          action: 'accepted',
+                          notifiable: @friendship)
+    end
 end
