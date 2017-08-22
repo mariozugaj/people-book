@@ -1,5 +1,11 @@
 first:
   photo_album: first
-  description: Lights in the sky
+  description: Blue water
   image: haha.jpg
   slug: 6732107
+
+second:
+  photo_album: second
+  description: Blue sky
+  image: haha.jpg
+  slug: 9481105

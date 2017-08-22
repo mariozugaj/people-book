@@ -1,6 +1,7 @@
 first:
   author: maymie
   text: You only live once, but if you do it right, once is enough.
+  image: haha.jpg
   slug: 9472748
 
 second:
@@ -42,3 +43,19 @@ ninth:
   author: cole
   text: A reader lives a thousand lives before he dies, said Jojen. The man who never reads lives only one.
   slug: 4029503
+
+<% 4.times do |n| %>
+m_status_update_<%= n + 2 %>:
+  text: <%= Faker::Lorem.sentences(5) %>
+  created_at: <%= 15.days.ago %>
+  author: maymie
+  slug: 585944<%= n %>
+<% end %>
+
+<% 12.times do |n| %>
+r_status_update_<%= n + 2 %>:
+  text: <%= Faker::Lorem.sentences(5) %>
+  created_at: <%= 3.days.ago %>
+  author: ronny
+  slug: 840938<%= n %>
+<% end %>

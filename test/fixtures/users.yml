@@ -13,6 +13,8 @@ ronny:
   slug: 3847362
   provider: facebook
   uid: 7523922024898381
+  created_at: '<%= 5.days.ago %>'
+  updated_at: '<%= 5.days.ago %>'
 
 casimir:
   name: Mr. Casimir Fahey
@@ -37,3 +39,9 @@ lydia:
   email: lydia@renner.com
   encrypted_password: '<%= encrypted_password %>'
   slug: 7723193
+
+kassandra:
+  name: Kassandra Vandervort
+  email: kassandra@vandervort.com
+  encrypted_password: '<%= encrypted_password %>'
+  slug: 7584048

@@ -3,3 +3,13 @@ first:
   name: Lights in the sky
   description: Lights in the sky
   slug: 7620855
+
+second:
+  author: maymie
+  name: Avatars
+  slug: 3984455
+
+third:
+  author: maymie
+  name: Cover photos
+  slug: 3948578

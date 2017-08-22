@@ -20,6 +20,7 @@ second:
   relationship_status: Married
   about: Don't cry because it's over, smile because it happened.
   phone_number: 001611-608-4178
+  avatar: haha.jpg
   slug: 8476105
 
 third:
@@ -33,3 +34,7 @@ fourth:
 fifth:
   user: cole
   slug: 9320385
+
+sixth:
+  user: kassandra
+  slug: 8403958

@@ -4,20 +4,44 @@ first:
   status: 2
   slug: 3394818
 
+first_a:
+  user: ronny
+  friend: maymie
+  status: 2
+  slug: 3398418
+
 second:
   user: maymie
-  friend: casimir
-  status: 2
-  slug: 8472847
-
-third:
-  user: maymie
   friend: cole
-  status: 1
+  status: 0
   slug: 2295820
 
+second_a:
+  user: cole
+  friend: maymie
+  status: 1
+  slug: 2295280
+
 third:
-  user: maymie
-  friend: antonina
+  user: cole
+  friend: casimir
   status: 2
-  slug: 6930495
+  slug: 7594039
+
+third_a:
+  user: casimir
+  friend: cole
+  status: 2
+  slug: 7594093
+
+fourth:
+  user: maymie
+  friend: kassandra
+  status: 2
+  slug: 8330597
+
+fourth_a:
+  user: kassandra
+  friend: maymie
+  status: 2
+  slug: 3950684

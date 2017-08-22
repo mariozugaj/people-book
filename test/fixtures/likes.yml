@@ -1,0 +1,19 @@
+first:
+  likeable: second (StatusUpdate)
+  user: maymie
+  slug: 9920584
+
+second:
+  likeable: third (Comment)
+  user: maymie
+  slug: 5503938
+
+third:
+  likeable: second (Image)
+  user: maymie
+  slug: 7209482
+
+fourth:
+  likeable: first (StatusUpdate)
+  user: ronny
+  slug: 8594340

@@ -1,5 +1,17 @@
-status_update_first:
+first:
   commentable: first (StatusUpdate)
-  author: maymie
+  author: ronny
   text: To live is the rarest thing in the world. Most people exist, that is all.
   slug: 7309918
+
+second:
+  commentable: second (StatusUpdate)
+  author: maymie
+  text: ... a mind needs books as a sword needs a whetstone, if it is to keep its edge.
+  slug: 4858457
+
+third:
+  commentable: third (StatusUpdate)
+  author: maymie
+  text: An eye for an eye will only make the whole world blind.
+  slug: 3924898
