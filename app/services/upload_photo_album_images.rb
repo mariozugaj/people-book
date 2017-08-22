@@ -26,13 +26,10 @@ class UploadPhotoAlbumImages
   end
 
   def send_notification
-    recipients = photo_album.author.friends
-    recipients.each do |user|
-      Notification.create!(recipient: user,
-                           actor: photo_album.author,
-                           action: 'shared',
-                           notifiable: photo_album)
-    end
+    NotificationRelayJob.perform_later(photo_album.author.friends,
+                                       photo_album.author,
+                                       'shared',
+                                       photo_album)
   end
 
   private

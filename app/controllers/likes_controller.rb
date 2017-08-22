@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-  after_action :send_notification, only: :create
   include FindPolymorphic
 
   def index
@@ -9,36 +8,30 @@ class LikesController < ApplicationController
 
   def create
     @likeable = find_polymorphic(params)
-    @like = @likeable.likes.build(like_params)
+    @like = Like.new(likeable: @likeable, user: current_user)
     @like.save
+    send_notification(@likeable)
     flash[:success] = 'You liked it!'
-    respond_to do |format|
-      format.html { redirect_to request.referrer || root_path }
-      format.js
-    end
   end
 
   def destroy
     @like = Like.find_by_slug(params[:id])
+    authorize @like
     @like.destroy
     flash[:success] = 'You dont\' like it anymore'
-    respond_to do |format|
-      format.html { redirect_to request.referrer || root_path }
-      format.js
-    end
   end
 
   private
 
-  def like_params
-    params.permit(:likeable_type, :likeable_id, :user_id)
-  end
+    def like_params
+      params.permit(:likeable_type, :likeable_id)
+    end
 
-  def send_notification
-  recipient = @likeable.author unless @likeable.author == current_user
-  Notification.create(recipient: recipient,
-                      actor: current_user,
-                      action: 'liked',
-                      notifiable: @likeable)
-  end
+    def send_notification(likeable)
+      recipient = [likeable.author] unless likeable.author == current_user
+      NotificationRelayJob.perform_later(recipient,
+                                         current_user,
+                                         'liked',
+                                         likeable)
+    end
 end

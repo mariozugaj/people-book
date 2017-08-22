@@ -1,6 +1,5 @@
 class StatusUpdatesController < ApplicationController
   before_action :set_status_update, only: %i[edit update destroy]
-  after_action :send_notification, only: :create
 
   def show
     @status_update = StatusUpdate.includes(author: :profile)
@@ -8,12 +7,13 @@ class StatusUpdatesController < ApplicationController
   end
 
   def create
-    @status_update = StatusUpdate.new(status_update_params)
+    @status_update = current_user.status_updates.build(status_update_params)
     authorize @status_update
     if @status_update.save
       flash[:success] = 'You\'ve posted an update.'
+      send_notification(@status_update)
     else
-      flash[:alert] = 'We were unable to save your post.'
+      flash[:alert] = 'We were unable to save your status update.'
     end
     redirect_to request.referrer || current_user
   end
@@ -26,7 +26,7 @@ class StatusUpdatesController < ApplicationController
     authorize @status_update
     if @status_update.update(status_update_params)
       flash[:success] = 'Status successfuly updated'
-      redirect_back(fallback_location: current_user)
+      redirect_to current_user
     else
       flash[:alert] = 'There was a problem updating your status. Try again?'
       render :edit
@@ -45,20 +45,18 @@ class StatusUpdatesController < ApplicationController
 
   private
 
-  def set_status_update
-    @status_update = StatusUpdate.find_by_slug(params[:id])
-  end
-
-  def status_update_params
-    params.require(:status_update).permit(:author_id, :text, :image, :remote_image_url)
-  end
-
-  def send_notification
-    @status_update.author.friends.each do |friend|
-      Notification.create(recipient: friend,
-                          actor: current_user,
-                          action: 'posted',
-                          notifiable: @status_update)
+    def set_status_update
+      @status_update = StatusUpdate.find_by_slug(params[:id])
     end
-  end
+
+    def status_update_params
+      params.require(:status_update).permit(:text, :image, :remote_image_url)
+    end
+
+    def send_notification(status_update)
+      NotificationRelayJob.perform_later(status_update.author.friends.to_a,
+                                         current_user,
+                                         'posted',
+                                         status_update)
+    end
 end

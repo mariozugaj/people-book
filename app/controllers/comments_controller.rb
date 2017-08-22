@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  after_action :send_notification, only: :create
   include FindPolymorphic
 
   def index
@@ -14,6 +13,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     authorize @comment
     if @comment.save
+      send_notification(@comment, @commentable)
       flash[:success] = 'Comment successfuly posted'
     else
       flash[:alert] = 'There was a problem posting your comment. Try again?'
@@ -39,16 +39,14 @@ class CommentsController < ApplicationController
                                       :author_id)
     end
 
-    def send_notification
-      recipients = (@commentable.commenters +
-                    [@commentable.author] +
-                    @commentable.likers).uniq -
+    def send_notification(comment, commentable)
+      recipients = (commentable.commenters +
+                    [commentable.author] +
+                    commentable.likers).uniq -
                     [current_user]
-      recipients.each do |user|
-        Notification.create(recipient: user,
-                            actor: current_user,
-                            action: 'posted',
-                            notifiable: @comment)
-      end
+      NotificationRelayJob.perform_later(recipients,
+                                         current_user,
+                                         'posted',
+                                         comment)
     end
 end
