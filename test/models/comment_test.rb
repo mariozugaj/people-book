@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CommentTest < ActiveSupport::TestCase
   def setup
-    @comment = comments(:status_update_first)
+    @comment = comments(:first)
   end
 
   test 'should be valid' do
