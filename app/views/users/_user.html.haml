@@ -1,7 +1,7 @@
 .ui.raised.card
   // User's image
   = link_to user_path(user), class: 'image' do
-    = image_tag user.profile.avatar.url :normal
+    = image_tag user.avatar.url :normal
 
   .content
     // Link to user's name
@@ -10,9 +10,7 @@
     // When did the user join PeopleBook?
     .meta
       %span.date
-        Joined
-        = time_ago_in_words user.created_at
-        ago
+        Joined #{time_ago_in_words user.created_at} ago
 
   // Link to and count of user's friends
   .extra.content

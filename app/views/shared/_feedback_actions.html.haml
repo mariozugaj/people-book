@@ -8,10 +8,10 @@
     - if can_feedback
       = render_likes feedbackable
 
-    %span{ 'data-link': likes_path,
+    %span.likes_count{ 'data-link': likes_path,
       'data-behavior': 'like-count-container',
       'data-inverted': '' }
-      = pluralize feedbackable.likes_count, 'like'
+      = pluralize feedbackable.likes.count, 'like'
 
   // Comment action and statistics
   %span.whitespace--left
@@ -22,7 +22,7 @@
 
   %a.comments_count{ 'data-behavior': 'show-comments',
     'data-link': comments_path, 'data-tooltip': 'See comments', 'data-inverted': '' }
-    = pluralize feedbackable.comments_count, 'comment'
+    = pluralize feedbackable.comments.count, 'comment'
 
 - if can_feedback
   // Comment form
