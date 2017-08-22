@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = "Akward! Seems like you wanted to go somewhere you are not allowed to."
-    redirect_to(request.referrer || root_path)
+    flash[:alert] = "Akward! Seems like you wanted to do something you are not allowed to."
+    redirect_to(request.referrer || home_path)
   end
 
   protected
