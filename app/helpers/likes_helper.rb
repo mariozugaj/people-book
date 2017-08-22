@@ -1,6 +1,6 @@
 module LikesHelper
   def render_likes(likeable)
-    if likeable.likers.pluck(:id).include? current_user.id
+    if likeable.likers.include? current_user
       render 'likes/unlike', likeable: likeable
     else
       render 'likes/like', likeable: likeable
