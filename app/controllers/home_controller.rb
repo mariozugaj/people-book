@@ -3,9 +3,11 @@ class HomeController < ApplicationController
     @new_status_update ||= StatusUpdate.new
     @feed =
       StatusUpdate.includes([{ author: :profile }, :likers])
-                  .where(author: [current_user] << current_user.friends)
+                  .where("author_id IN (:ids) OR author_id = :id",
+                         ids: current_user.friends.pluck(:id),
+                         id: current_user.id)
                   .ordered
                   .page(params[:page])
-                  .per(6)
+                  .per(10)
   end
 end
