@@ -62,5 +62,5 @@ Rails.application.routes.draw do
   resources :conversations, except: %i[edit create update] do
     get :unread_count, on: :collection
   end
-  resources :messages, only: %i[new create]
+  resources :messages, only: %i[create]
 end

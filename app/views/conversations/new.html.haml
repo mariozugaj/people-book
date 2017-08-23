@@ -5,15 +5,21 @@
     .ui.center.aligned.top.attached.segment
       = link_to @receiver.name ,
         user_path(@receiver),
-        class: 'ui header'
+        class: 'ui blue button'
+      = online_status @receiver
+
     .ui.attached.segment.messages
+
     .ui.bottom.attached.segment
+
       = form_with model: @message,
         class: 'ui form',
         local: true do |form|
+
         = hidden_field_tag 'receiver_id', @receiver.slug
         = form.text_area :body, rows: 2, class: 'field', autofocus: true
         = form.submit 'Send', class: 'ui blue button'
+
         = link_to 'https://www.webpagefx.com/tools/emoji-cheat-sheet/',
           class: 'ui label', target: :_blank do
           = emojify ':smile: Emoji cheat sheet'

@@ -1,7 +1,6 @@
 class ConversationsController < ApplicationController
-  before_action :set_conversation, only: :show
-  before_action :set_conversations, only: %i[index show]
-  before_action :check_participating!, only: :show
+  before_action :set_conversation, only: %i[new show destroy]
+  before_action :set_conversations, only: %i[index new show]
 
   def index
     @quote = JSON.parse(File.read(Rails.root.join('public/quotes.json'))).sample
@@ -11,9 +10,19 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def new
+    redirect_to @conversation and return if @conversation
+    conversation = Conversation.new(sender: current_user, receiver: @receiver)
+    authorize conversation
+    @message = current_user.messages.build
+  end
+
   def show
+    authorize @conversation
+    Message.update_unread(current_user, @conversation)
     @message = Message.new
-    @conversation.messages.not_sent_by(current_user).unread.update_all(read: true)
+  end
+
   def destroy
     authorize @conversation
     @conversation.destroy
@@ -27,21 +36,22 @@ class ConversationsController < ApplicationController
 
   private
 
-    def check_participating!
-      redirect_to root_path unless @conversation && @conversation.participates?(current_user)
-    end
-
     def set_conversation
-      @conversation = Conversation.includes(messages: [user: :profile])
-                                  .find_by_slug(params[:id])
+      @receiver = User.find_by_slug(params[:receiver_id]) if params[:receiver_id]
+      @conversation = if @receiver
+                        current_user.conversations.with_user(@receiver).first
+                      else
+                        Conversation.find_by_slug(params[:id])
+                      end
     end
 
     def set_conversations
-      @conversations = current_user
-                       .conversations
-                       .includes({ sender: :profile },
-                                 { receiver: :profile },
-                                 :messages)
-                       .ordered
+      @conversations =
+        current_user
+        .conversations
+        .includes({ sender: :profile },
+                  { receiver: :profile },
+                  :messages)
+        .ordered
     end
 end

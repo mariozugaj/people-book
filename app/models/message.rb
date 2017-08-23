@@ -13,6 +13,8 @@
 #
 
 class Message < ApplicationRecord
+  include Slug
+
   # Associations
   belongs_to :conversation, touch: true
   belongs_to :user
@@ -29,10 +31,17 @@ class Message < ApplicationRecord
     ConversationBroadcastJob.perform_later(slug)
   end
 
-  # Slug
-  include Slug
+  # Delegations
+  delegate :name, to: :user, prefix: true
 
   def receiver
     conversation.other_user(user)
+  end
+
+  def self.update_unread(user, conversation)
+    where(conversation: conversation)
+      .not_sent_by(user)
+      .unread
+      .update_all(read: true)
   end
 end
