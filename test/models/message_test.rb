@@ -18,6 +18,12 @@ class MessageTest < ActiveSupport::TestCase
     assert_equal messages(:second), other_messsage
   end
 
+  test 'update unread messages' do
+    unread_messsage = messages :second
+    Message.update_unread(@user, @conversation)
+    assert unread_messsage.reload.read?
+  end
+
   test 'messages broadcast job gets enqueued' do
     assert_enqueued_with(job: ConversationBroadcastJob,
                          args: [@message.slug],

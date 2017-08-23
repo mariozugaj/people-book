@@ -2,10 +2,12 @@ first:
   conversation: first
   user: maymie
   body: Insanity is doing the same thing, over and over again, but expecting different results.
+  read: true
   slug: 8593449
 
 second:
   conversation: first
   user: ronny
   body: It does not do to dwell on dreams and forget to live.
+  read: false
   slug: 2363544
