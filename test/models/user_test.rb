@@ -129,4 +129,9 @@ class UserTest < ActiveSupport::TestCase
     refute @user1.friends_with?(@user2)
     refute @user2.friends_with?(@user1)
   end
+
+  test 'unread conversations count' do
+    assert_equal 1, users(:maymie).unread_conversations_count
+    assert_equal 0, users(:ronny).unread_conversations_count
+  end
 end
