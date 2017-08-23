@@ -9,3 +9,7 @@ App.whoIsOnline = App.cable.subscriptions.create({
     user.toggleClass('green', data['online']);
   }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  return App.whoIsOnline;
+});
