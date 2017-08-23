@@ -14,15 +14,18 @@ class ActiveSupport::TestCase
   fixtures :all
 
   OmniAuth.config.test_mode = true
+  Searchkick.disable_callbacks
+  Capybara.default_max_wait_time = 10
 end
 
 class ActionDispatch::IntegrationTest
   include IntegrationTestHelpers
+  Searchkick.disable_callbacks
+  Capybara.default_max_wait_time = 10
 end
 
 class ActionDispatch::SystemTestCase
   include SystemTestHelpers
+  Searchkick.disable_callbacks
+  Capybara.default_max_wait_time = 10
 end
-
-Searchkick.disable_callbacks
-Capybara.default_max_wait_time = 10
