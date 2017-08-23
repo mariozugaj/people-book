@@ -7,7 +7,7 @@ class NotificationsTest < ApplicationSystemTestCase
     @user = users :maymie
     @friend = users :ronny
     ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
-  end
+    end
 
   test 'notifications ajax pulled on page load' do
     log_in_as @user
@@ -58,8 +58,9 @@ class NotificationsTest < ApplicationSystemTestCase
       end
     end
     assert_current_path notifications_path
-    click_link 'Clear all notifications'
-    page.driver.browser.switch_to.alert.accept
+    accept_alert do
+      click_link 'Clear all notifications'
+    end
     assert_text 'No new notifications'
     assert_text 'Notifications cleared'
   end
