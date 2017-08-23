@@ -14,6 +14,11 @@ class ConversationsController < ApplicationController
   def show
     @message = Message.new
     @conversation.messages.not_sent_by(current_user).unread.update_all(read: true)
+  def destroy
+    authorize @conversation
+    @conversation.destroy
+    flash[:success] = 'Conversation destroyed'
+    redirect_to conversations_path
   end
 
   def unread_count

@@ -6,10 +6,17 @@
     .ui.center.aligned.top.attached.segment
       = link_to friend.name,
         user_path(friend),
-        class: 'ui header'
+        class: 'ui blue button'
       = online_status(friend)
+
+      .ui.icon.top.right.pointing.right.floated.dropdown.button
+        %i.wrench.icon
+        .menu
+          = link_to 'Delete conversation', conversation_path(@conversation), class: 'item', method: :delete, data: { confirm: 'Are you sure you want to delete the conversation?' }
+
     .ui.attached.segment.messages
       .ui.large.comments{ 'data-channel': 'messages', 'data-conversation-id': @conversation.slug }
         = render @conversation.messages
+
     .ui.bottom.attached.segment
       = render 'messages/form'

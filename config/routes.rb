@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   get :check_email, to: 'users#check_email'
 
   # Conversations and messages
-  resources :conversations, only: %i[index show] do
+  resources :conversations, except: %i[edit create update] do
     get :unread_count, on: :collection
   end
   resources :messages, only: %i[new create]
