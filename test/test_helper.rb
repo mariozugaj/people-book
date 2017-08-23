@@ -7,10 +7,10 @@ require 'support/system_test_helpers'
 require 'support/carrierwave_config'
 require 'minitest/autorun'
 
-include CarrierwaveConfig
 
 class ActiveSupport::TestCase
   include OmniauthHelper
+  include CarrierwaveConfig
   fixtures :all
 
   OmniAuth.config.test_mode = true
@@ -20,12 +20,14 @@ end
 
 class ActionDispatch::IntegrationTest
   include IntegrationTestHelpers
+  include CarrierwaveConfig
   Searchkick.disable_callbacks
   Capybara.default_max_wait_time = 10
 end
 
 class ActionDispatch::SystemTestCase
   include SystemTestHelpers
+  include CarrierwaveConfig
   Searchkick.disable_callbacks
   Capybara.default_max_wait_time = 10
 end
