@@ -23,6 +23,7 @@ class Message < ApplicationRecord
   validates_presence_of :body, :user, :conversation
 
   # Scopes
+  default_scope { order(created_at: :asc) }
   scope :unread, -> { where(read: false) }
   scope :not_sent_by, ->(user) { where.not(user: user) }
 
