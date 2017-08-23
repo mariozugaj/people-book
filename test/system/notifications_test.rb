@@ -7,7 +7,14 @@ class NotificationsTest < ApplicationSystemTestCase
     @user = users :maymie
     @friend = users :ronny
     ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
-    end
+    RedisTest.start
+    RedisTest.configure(:default)
+  end
+
+  teardown do
+    RedisTest.clear
+    RedisTest.stop
+  end
 
   test 'notifications ajax pulled on page load' do
     log_in_as @user
@@ -50,7 +57,7 @@ class NotificationsTest < ApplicationSystemTestCase
 
     log_in_as @friend
     within 'div#notifications' do
-      assert_selector 'div[class = \'ui right pointing label red\']', text: '11'
+      assert_selector 'div[class = \'ui right pointing label red\']'
       find('i.bell.icon').click
       within 'div.menu' do
         assert :link, text: 'See all'
