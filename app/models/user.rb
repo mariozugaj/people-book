@@ -57,7 +57,7 @@ class User < ApplicationRecord
   include Authentication
 
   def online?
-    !Redis.new.get("user_#{id}_online").nil?
+    !Redis.new.get("user_#{slug}_online").nil?
   end
 
   def search_info
