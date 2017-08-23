@@ -1,16 +1,16 @@
 class AppearancesChannel < ApplicationCable::Channel
   def subscribed
-    redis.set("user_#{current_user.id}_online", '1')
+    redis.set("user_#{current_user.slug}_online", '1')
     stream_from('appearances_channel')
     ActionCable.server.broadcast 'appearances_channel',
-                                 user_id: current_user.id,
+                                 user_id: current_user.slug,
                                  online: true
   end
 
   def unsubscribed
-    redis.del("user_#{current_user.id}_online")
+    redis.del("user_#{current_user.slug}_online")
     ActionCable.server.broadcast 'appearances_channel',
-                                 user_id: current_user.id,
+                                 user_id: current_user.slug,
                                  online: false
   end
 
