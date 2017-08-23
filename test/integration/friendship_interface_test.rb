@@ -138,8 +138,8 @@ class FriendshipInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as @user
     get user_friendships_path(@user)
 
-    assert_select 'div#friend_count', text: '1', count: 1
-    assert_select 'div[class = \'ui raised card\']', count: 1 do
+    assert_select 'div#friend_count', text: '2', count: 1
+    assert_select 'div[class = \'ui raised card\']', count: 2 do
       assert_select 'a.image[href=?]', user_path(@friend), count: 1
       assert_select 'img[src=?]', @friend.profile.avatar.url(:normal), count: 1
       assert_select 'a.header[href=?]', user_path(@friend), text: 'Ronny Miller', count: 1
