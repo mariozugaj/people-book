@@ -10,12 +10,12 @@ module Search
     end
 
     def search
+      # TODO: add includes_per model after pull request #967
       Searchkick.search search_term,
                         index_name: categories,
                         fields: fields,
                         indices_boost: { User => 2, StatusUpdate => 1 },
-                        match: :text_middle,
-                        includes: categories.zip(includes).to_h
+                        match: :text_middle
     end
 
     def results
