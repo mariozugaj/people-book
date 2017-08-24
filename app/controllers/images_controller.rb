@@ -8,6 +8,7 @@ class ImagesController < ApplicationController
   end
 
   def edit
+    authorize @image
     @photo_album = @image.photo_album
     @author = @photo_album.author
   end
@@ -20,17 +21,25 @@ class ImagesController < ApplicationController
 
   def update
     @image = Image.find_by_slug(params[:id])
+    authorize @image
     if @image.update(images_params)
       flash[:success] = 'Image was successfuly updated'
       redirect_to @image
+    else
+      flash[:success] = 'There was a problem updating your image'
+      render :edit
     end
   end
 
   def destroy
     @image = Image.find_by_slug(params[:id])
-    @image.destroy
-    flash[:success] = 'Image was successfuly destroyed'
-    redirect_to user_photo_album_path(current_user, @photo_album)
+    authorize @image
+    if @image.destroy
+      flash[:success] = 'Image was successfuly destroyed'
+    else
+      flash[:success] = 'There was a problem destroying your image.'
+    end
+    redirect_to edit_user_photo_album_path(current_user, @photo_album)
   end
 
   private
