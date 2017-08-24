@@ -15,6 +15,7 @@ class Friendship < ApplicationRecord
   # Associations
   belongs_to :user
   belongs_to :friend, class_name: 'User', foreign_key: :friend_id
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   # Validations
   validates_presence_of :user_id, :friend_id
