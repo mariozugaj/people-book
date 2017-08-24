@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20170812172529) do
 
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.datetime "birthday"
+    t.date "birthday"
     t.string "education"
     t.string "hometown"
     t.string "profession"

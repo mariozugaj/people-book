@@ -4,7 +4,7 @@
 #
 #  id                  :integer          not null, primary key
 #  user_id             :integer          not null
-#  birthday            :datetime
+#  birthday            :date
 #  education           :string
 #  hometown            :string
 #  profession          :string
@@ -45,6 +45,6 @@ class Profile < ApplicationRecord
                           'Widowed'].freeze
 
   def age
-    ((Time.current - birthday) / (365.2422 * 24 * 60 * 60)).to_i
+    ((Date.today - birthday) / 365.2422).to_i
   end
 end
