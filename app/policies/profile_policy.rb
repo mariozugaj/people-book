@@ -14,6 +14,14 @@ class ProfilePolicy
     owner?
   end
 
+  def set_avatar?
+    owner?
+  end
+
+  def set_cover?
+    owner?
+  end
+
   private
 
   def owner?
