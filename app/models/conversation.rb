@@ -7,10 +7,12 @@
 #  receiver_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  slug        :string
+#  slug        :string           not null
 #
 
 class Conversation < ApplicationRecord
+  include Slug
+
   # Associations
   belongs_to :sender, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
@@ -26,8 +28,6 @@ class Conversation < ApplicationRecord
   end
 
   scope :ordered, -> { order(created_at: :desc) }
-
-  include Slug
 
   def other_user(user)
     sender == user ? receiver : sender

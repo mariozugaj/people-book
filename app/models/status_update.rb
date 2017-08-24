@@ -10,10 +10,11 @@
 #  image          :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  slug           :string
+#  slug           :string           not null
 #
 
 class StatusUpdate < ApplicationRecord
+  include Slug
 
   # Mount image uploader
   mount_uploader :image, StatusImageUploader
@@ -42,9 +43,6 @@ class StatusUpdate < ApplicationRecord
   # Scopes
   scope :search_import, -> { includes(:author) }
   scope :ordered, -> { order(created_at: :desc) }
-
-  # Slug
-  include Slug
 
   def search_info
     {

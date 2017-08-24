@@ -8,10 +8,12 @@
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  slug        :string
+#  slug        :string           not null
 #
 
 class PhotoAlbum < ApplicationRecord
+  include Slug
+
   # Associations
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
   has_many :images, dependent: :destroy
@@ -25,8 +27,6 @@ class PhotoAlbum < ApplicationRecord
 
   # Default photo album image
   DEFAULT_IMAGE = 'https://s3.eu-central-1.amazonaws.com/chanjman-peoplebook/missing/photo_album/missing.jpg'
-
-  include Slug
 
   def first_image
     return images.first.image.url(:mini) if images.exists?

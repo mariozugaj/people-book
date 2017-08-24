@@ -18,10 +18,14 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  slug                   :string
+#  slug                   :string           not null
 #
 
 class User < ApplicationRecord
+  include Slug
+  include Friendable
+  include Authentication
+
   # Devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
@@ -51,10 +55,6 @@ class User < ApplicationRecord
   # Search
   searchkick text_middle: [:name], callbacks: :async
   scope :search_import, -> { includes(:profile) }
-
-  include Slug
-  include Friendable
-  include Authentication
 
   def online?
     !Redis.new.get("user_#{slug}_online").nil?

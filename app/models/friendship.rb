@@ -5,13 +5,15 @@
 #  id         :integer          not null, primary key
 #  user_id    :integer          not null
 #  friend_id  :integer          not null
-#  status     :integer
+#  status     :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  slug       :string
+#  slug       :string           not null
 #
 
 class Friendship < ApplicationRecord
+  include Slug
+
   # Associations
   belongs_to :user
   belongs_to :friend, class_name: 'User', foreign_key: :friend_id
@@ -29,9 +31,6 @@ class Friendship < ApplicationRecord
       transition %i[pending requested] => :accepted
     end
   end
-
-  # Slug
-  include Slug
 
   private
 

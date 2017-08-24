@@ -16,10 +16,11 @@
 #  cover_photo         :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  slug                :string
+#  slug                :string           not null
 #
 
 class Profile < ApplicationRecord
+  include Slug
 
   # Mount avatar and cover photo uploader
   mount_uploader :avatar, AvatarUploader
@@ -30,9 +31,6 @@ class Profile < ApplicationRecord
 
   # Validations
   validates :user, presence: true, uniqueness: true
-
-  # Slug
-  include Slug
 
   RELATIONSHIP_OPTIONS = ['Single',
                           'In a relationship',

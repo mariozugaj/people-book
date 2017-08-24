@@ -8,10 +8,12 @@
 #  user_id       :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  slug          :string
+#  slug          :string           not null
 #
 
 class Like < ApplicationRecord
+  include Slug
+
   # Associations
   belongs_to :likeable, polymorphic: true, counter_cache: true
   belongs_to :user
@@ -21,6 +23,4 @@ class Like < ApplicationRecord
   validates_uniqueness_of :user_id,
                           scope: %i[likeable_id likeable_type],
                           message: 'can\'t like more than once'
-
-  include Slug
 end

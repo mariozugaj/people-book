@@ -10,10 +10,12 @@
 #  photo_album_id :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  slug           :string
+#  slug           :string           not null
 #
 
 class Image < ApplicationRecord
+  include Slug
+
   # Associations
   belongs_to :photo_album
   has_many :comments, as: :commentable, dependent: :destroy
@@ -33,12 +35,9 @@ class Image < ApplicationRecord
   # Uploader
   mount_uploader :image, PhotoAlbumImageUploader
 
-  # Slug
-  include Slug
-
   def search_info
     {
-      title: description,
+      title: description.truncate(60),
       image: image.url(:thumb) || '',
       url: Rails.application.routes.url_helpers.image_path(self),
       description: author_name
