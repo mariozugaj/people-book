@@ -12,4 +12,5 @@
     .row
       .column
         // Profile edit form
-        = render partial: 'form', locals: { user: current_user, relationship_options: @relationship_options }
+        = render partial: 'form',
+          locals: { user: current_user, relationship_options: @relationship_options, profile: @profile }

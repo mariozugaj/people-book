@@ -31,6 +31,10 @@ class Profile < ApplicationRecord
 
   # Validations
   validates :user, presence: true, uniqueness: true
+  validates :about, length: { maximum: 150 }
+  validates :education, :hometown, :phone_number, length: { maximum: 75 }
+  validates :profession, :company, length: { maximum: 35 }
+  validate :minimum_age
 
   RELATIONSHIP_OPTIONS = ['Single',
                           'In a relationship',
@@ -47,4 +51,12 @@ class Profile < ApplicationRecord
   def age
     ((Date.today - birthday) / 365.2422).to_i
   end
+
+  private
+
+    def minimum_age
+      if birthday.present? && birthday > 13.years.ago
+        errors.add(:birthday, "can't be less than 13 years")
+      end
+    end
 end

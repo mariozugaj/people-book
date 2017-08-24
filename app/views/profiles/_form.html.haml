@@ -6,15 +6,19 @@
       .sub.header Manage your profile
 
 .ui.attached.segment
-  = form_with model: [user, user.profile],
-    multipart: true,
+
+  = form_with model: [user, profile],
     class: 'ui form',
     local: true do |form|
+
+    = render 'shared/errors', object: form.object
+
+    = hidden_field_tag :profile_id, profile.slug
 
     .equal.width.fields
       .field
         = form.label :birthday
-        = form.date_field :birthday
+        = form.date_field :birthday, max: 13.years.ago
 
       .field
         = form.label :education
