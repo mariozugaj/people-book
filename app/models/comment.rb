@@ -10,10 +10,12 @@
 #  likes_count      :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  slug             :string
+#  slug             :string           not null
 #
 
 class Comment < ApplicationRecord
+  include Slug
+
   # Associations
   belongs_to :commentable, polymorphic: true, counter_cache: true
   belongs_to :author, class_name: 'User', foreign_key: 'author_id'
@@ -35,15 +37,17 @@ class Comment < ApplicationRecord
   searchkick text_middle: %i[text], callbacks: :async
   scope :search_import, -> { includes(:commentable, author: :profile) }
 
-  # Slug
-  include Slug
-
   def search_info
     {
       title: text.truncate(60),
       image: author.avatar.url(:thumb),
-      url: Rails.application.routes.url_helpers.url_for(commentable),
-      description: author.name
+      url: Rails.application.routes.url_helpers.url_for(
+        controller: commentable.model_name.route_key,
+        id: commentable.slug,
+        action: :show,
+        only_path: true
+      ),
+      description: author_name
     }
   end
 end
