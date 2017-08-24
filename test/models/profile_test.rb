@@ -19,8 +19,8 @@ class ProfileTest < ActiveSupport::TestCase
   end
 
   test 'returns age value' do
-    @profile.birthday = '1985-07-29'
-    Time.stub :current, Time.new(2017, 8, 17) do
+    @profile.birthday = Date.new(1985, 7, 29)
+    Date.stub :today, Date.new(2017, 8, 17) do
       assert_equal 32, @profile.age
     end
   end
