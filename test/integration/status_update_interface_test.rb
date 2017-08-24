@@ -67,9 +67,6 @@ class StatusUpdateInterfaceTest < ActionDispatch::IntegrationTest
     assert_performed_jobs 1 do
       write_status_update(text)
     end
-    @user.friends.each do |friend|
-      assert_equal 1, friend.notifications.count
-    end
   end
 
   test 'no edit/delete buttons if user not author' do
