@@ -29,8 +29,7 @@
       .item
         %i.suitcase.icon
         %p.middle.aligned.content
-          = profile_default(user, :profession)
-          = profile_default(user, :company, '@')
+          #{profile_default(user, :profession)} #{profile_default(user, :company, '@')}
       // Relationship status
       .item
         %i.empty.heart.icon
