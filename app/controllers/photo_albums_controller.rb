@@ -42,8 +42,13 @@ class PhotoAlbumsController < ApplicationController
 
   def destroy
     authorize @photo_album
-    @photo_album.destroy
-    redirect_to user_photo_albums_url, success: 'Photo album was successfully destroyed.'
+    if @photo_album.destroy
+      flash[:success] = 'Photo album was successfully destroyed.'
+      redirect_to user_photo_albums_path
+    else
+      flash[:notice] = 'There was a problem destroying the photo album.'
+      render :edit
+    end
   end
 
   private
