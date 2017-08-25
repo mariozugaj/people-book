@@ -1,4 +1,4 @@
-# Destroy all existing models
+# Destroy all existing data
 print 'Destroying existing models...'
 
 Rails.application.eager_load!
@@ -8,7 +8,7 @@ puts 'done!'
 
 # Multiplier constant
 
-MULTIPLIER = 10
+MULTIPLIER = 15
 
 # Users
 
@@ -39,7 +39,7 @@ end
 
 PROFILES = Array.new(MULTIPLIER) do |idx|
   {
-    birthday: Faker::Date.between(60.years.ago, 18.years.ago),
+    birthday: Faker::Date.between(60.years.ago, 13.years.ago),
     education: Faker::University.name,
     hometown: Faker::Address.city,
     profession: Faker::Job.title,
@@ -65,7 +65,7 @@ USERS.each do |user|
                       email: user[:email],
                       password: user[:password])
   new_user.build_profile(user[:profile])
-  new_user.save
+  new_user.save!
 end
 
 puts "#{User.count} created!"
@@ -85,40 +85,52 @@ FRIENDSHIPS = User.pluck(:id)
                     }
                   end
 
-FRIENDSHIPS.each { |friendship| Friendship.create(friendship) }
+FRIENDSHIPS.each do |friendship|
+  User.find(friendship[:user_id])
+      .friend_request(User.find(friendship[:friend_id]))
+end
 
 # Accept random no of friend requests
-friendship_count = Friendship.count
-Friendship.all
-          .sample(rand((friendship_count * 0.7)..friendship_count))
-          .each { |friendship| friendship.update(accepted: true) }
+friendship_count = Friendship.count / 2
 
-puts "#{Friendship.where(accepted: true).count} created!"
+FRIENDSHIPS.sample(friendship_count * 0.7)
+           .each do |friendship|
+             User.find(friendship[:friend_id])
+                 .accept_request(User.find(friendship[:user_id]))
+           end
 
+puts "#{Friendship.where(status: 2).count} created!"
 
-# Create 3..10 status updates for each user, pulled as articles from Wikipedia
+# Create 3 status updates for each user, pulled as articles from Wikipedia
 
 require 'wikipedia'
 
 print 'Creating status updates...'
 
 User.all.each do |user|
-  1.times do
-    # Get random article from Wikipedia
+  3.times do
     status_update_text = ''
-    article_image = ''
+    status_update_image = ''
 
     loop do
       article = Wikipedia.find_random
-      if !article.summary.nil? && !article.images.nil? && (article.summary.size > 1000)
-        status_update_text = "#{article.title}\n\n#{article.summary}\n\nRead more <a href='#{article.fullurl}'>here</a>"
-        article_image = article.image_urls.sample
+      if !article.summary.nil? &&
+         (!article.images.nil? && !article.image_urls.nil?) &&
+         (article.summary.length > 1000 && article.summary.length < 3000)
+
+        status_update_text = "#{article.title}\n\n#{article.summary}\n\nRead"\
+                             " more at <a href='#{article.fullurl}'>Wikipedia</a>"
+        status_update_image = article.image_urls
+                                     .grep(/\.jpg|\.png|\.jpeg|\.gif/)
+                                     .sample
       end
-      break if !article.summary.nil? && !article.images.nil? && (article.summary.size > 1000)
+      break if !article.summary.nil? &&
+               (!article.images.nil? && !article.image_urls.nil?) &&
+               (article.summary.length > 1000 && article.summary.length < 3000)
     end
 
-    user.status_updates.create(text: status_update_text,
-                               remote_image_url: article_image)
+    user.status_updates.create!(text: status_update_text,
+                                remote_image_url: status_update_image)
   end
 end
 
@@ -142,7 +154,8 @@ User.all.each do |user|
 
   5.times do
     image = Faker::LoremPixel.image('1280x720')
-    highlights.images.create(remote_image_url: image)
+    highlights.images.create(remote_image_url: image,
+                             description: Faker::Hacker.say_something_smart)
   end
 end
 
@@ -160,7 +173,7 @@ COMMENTABLES.each do |commentable|
     random_users =
       User.all
           .select { |user| commentable_object.author.friends.include? user }
-          .sample(MULTIPLIER * 0.4)
+          .sample(MULTIPLIER * 0.5)
 
     random_users.each do |user|
       commentable_object
@@ -182,7 +195,7 @@ LIKEABLES.each do |likeable|
 
   random_likeables.each do |likeable_object|
     random_users = User.all
-                       .sample(rand(1..(MULTIPLIER * 0.4)))
+                       .sample(rand(1..(MULTIPLIER * 0.5)))
                        .select { |user| likeable_object.author.friends.include? user }
 
     random_users.each do |user|
