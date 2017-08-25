@@ -9,16 +9,19 @@ class LikesController < ApplicationController
   def create
     @likeable = find_polymorphic(params)
     @like = Like.new(likeable: @likeable, user: current_user)
-    @like.save
-    send_notification(@likeable)
-    flash[:success] = 'You liked it!'
+    authorize @like
+    if @like.save
+      send_notification(@likeable)
+      flash[:success] = 'You liked it!'
+    end
   end
 
   def destroy
     @like = Like.find_by_slug(params[:id])
     authorize @like
-    @like.destroy
-    flash[:success] = 'You dont\' like it anymore'
+    if @like.destroy
+      flash[:success] = 'You dont\' like it anymore'
+    end
   end
 
   private

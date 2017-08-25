@@ -16,19 +16,18 @@ class LikeInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as @user
 
     get image_path(@image)
+    assert_select 'a.comment__like', count: 1
     assert_difference 'Like.count', 1 do
-      post image_likes_path(@image, format: :js),
-           params: { user_id: @user.id }
+      post image_likes_path(@image, format: :js)
     end
 
     get user_path(@user)
+    assert_select 'a.comment__like'
     assert_difference 'Like.count', 1 do
-      post status_update_likes_path(@status_update, format: :js),
-           params: { user_id: @user.id }
+      post status_update_likes_path(@status_update, format: :js)
     end
     assert_difference 'Like.count', 1 do
-      post comment_likes_path(@comment, format: :js),
-           params: { user_id: @user.id }
+      post comment_likes_path(@comment, format: :js)
     end
   end
 
@@ -64,13 +63,13 @@ class LikeInterfaceTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'can like if not a friend' do
+  test 'cannot like if not a friend' do
     log_in_as @not_friend
 
     get image_path(@image)
-    assert_difference 'Like.count', 1 do
-      post image_likes_path(@image, format: :js),
-           params: { user_id: @not_friend.id }
+    assert_select 'a.comment__like', count: 0
+    assert_no_difference 'Like.count' do
+      post image_likes_path(@image, format: :js)
     end
   end
 
@@ -81,8 +80,7 @@ class LikeInterfaceTest < ActionDispatch::IntegrationTest
     get image_path(@image)
 
     assert_performed_jobs 1 do
-      post image_likes_path(@image, format: :js),
-           params: { user_id: @friend.id }
+      post image_likes_path(@image, format: :js)
     end
 
     assert_equal 1, @user.notifications.count

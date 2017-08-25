@@ -6,6 +6,10 @@ class LikePolicy
     @like = like
   end
 
+  def create?
+    friend? || likeable_owner?
+  end
+
   def destroy?
     owner?
   end
@@ -14,5 +18,13 @@ class LikePolicy
 
   def owner?
     user == like.user
+  end
+
+  def likeable_owner?
+    user == like.likeable.author
+  end
+
+  def friend?
+    user.friends_with? like.likeable.author
   end
 end
