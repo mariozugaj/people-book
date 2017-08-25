@@ -1,6 +1,6 @@
 - unless likeable.likers.blank?
-  = likeable.likers.limit(5).map(&:name).join(', ')
+  = likeable.likers.limit(3).map(&:name).join(', ')
 
-  - if likeable.likers.size > 5
+  - if likeable.likers.size > 3
     +
-    = pluralize (likeable.likers.size - 5), 'other'
+    = pluralize (likeable.likers.size - 3), 'other'
