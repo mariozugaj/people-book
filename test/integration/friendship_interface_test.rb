@@ -55,7 +55,7 @@ class FriendshipInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as @user
     get user_path(@pending_friend)
     assert_select 'span[class = \'friendship_button\']',
-                  text: 'Pending friend request',
+                  text: 'Pending request',
                   count: 1
   end
 
@@ -63,12 +63,12 @@ class FriendshipInterfaceTest < ActionDispatch::IntegrationTest
     log_in_as @user
     get user_path(@pending_friend)
     assert_select 'span[class = \'friendship_button\']',
-                  text: 'Pending friend request',
+                  text: 'Pending request',
                   count: 1
     log_in_as @pending_friend
     get user_path(@user)
     assert_select 'span[class = \'friendship_button\']',
-                  text: 'Pending friend request',
+                  text: 'Pending request',
                   count: 1
   end
 
@@ -81,7 +81,7 @@ class FriendshipInterfaceTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_path(@new_friend)
     follow_redirect!
     assert_select 'span[class = \'friendship_button\']',
-                  text: 'Pending friend request',
+                  text: 'Pending request',
                   count: 1
 
     log_in_as @new_friend
