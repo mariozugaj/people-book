@@ -8,11 +8,19 @@ require 'minitest/autorun'
 
 class ActiveSupport::TestCase
   include OmniauthHelper
-  include SystemTestHelpers
   include IntegrationTestHelpers
 
   fixtures :all
 
+  OmniAuth.config.test_mode = true
+  Searchkick.disable_callbacks
+  Capybara.default_max_wait_time = 10
+end
+
+class ActionDispatch::SystemTestCase
+  include SystemTestHelpers
+
+  fixtures :all
   OmniAuth.config.test_mode = true
   Searchkick.disable_callbacks
   Capybara.default_max_wait_time = 10

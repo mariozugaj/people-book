@@ -7,13 +7,6 @@ class NotificationsTest < ApplicationSystemTestCase
     @user = users :maymie
     @friend = users :ronny
     ActiveJob::Base.queue_adapter.perform_enqueued_jobs = true
-    RedisTest.start
-    RedisTest.configure(:default)
-  end
-
-  teardown do
-    RedisTest.clear
-    RedisTest.stop
   end
 
   test 'notifications ajax pulled on page load' do

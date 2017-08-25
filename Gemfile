@@ -47,7 +47,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'letter_opener', '~> 1.4', '>= 1.4.1'
-  gem 'redis_test', '~> 0.0.10'
   gem 'rubycritic', '~> 3.2', '>= 3.2.3', require: false
   gem 'selenium-webdriver', '~> 3.4', '>= 3.4.4'
 end
