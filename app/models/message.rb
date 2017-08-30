@@ -28,7 +28,7 @@ class Message < ApplicationRecord
   scope :not_sent_by, ->(user) { where.not(user: user) }
 
   # After commits
-  after_commit do
+  after_create_commit do
     ConversationBroadcastJob.perform_later(slug)
   end
 
