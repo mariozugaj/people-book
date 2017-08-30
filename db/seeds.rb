@@ -51,11 +51,10 @@ PROFILES = Array.new(MULTIPLIER) do |idx|
 end
 
 USERS = Array.new(MULTIPLIER) do |idx|
-  name = Faker::Name.name
   {
-    name: name,
-    email: Faker::Internet.email(name),
-    password: Faker::Internet.password(30, 50),
+    name: Faker::Name.name,
+    email: "user_#{idx}@example.com",
+    password: 'password',
     profile: PROFILES[idx]
   }
 end
@@ -186,6 +185,7 @@ end
 puts "#{Comment.count} created!"
 
 # Create status update, comment and image likes
+
 print 'Creating likes...'
 
 LIKEABLES = [Image, StatusUpdate, Comment].freeze
@@ -205,5 +205,34 @@ LIKEABLES.each do |likeable|
 end
 
 puts "#{Like.count} created!"
+
+CONVERSATIONS = User.pluck(:id)
+                    .repeated_combination(2)
+                    .reject { |combination| combination[0] == combination[1] }
+                    .select { |combination| User.find(combination[0]).friends_with? User.find(combination[1]) }
+                    .sample((MULTIPLIER**2) * 0.7)
+                    .map do |combination|
+                      {
+                        sender_id: combination[0],
+                        receiver_id: combination[1]
+                      }
+                    end
+
+CONVERSATIONS.each do |conversation|
+  Conversation.create!(conversation)
+end
+
+Conversation.all.each do |conversation|
+  5.times do
+    Message.create!(user: conversation.sender,
+                    conversation: conversation,
+                    body: Faker::Hacker.say_something_smart)
+    Message.create!(user: conversation.receiver,
+                    conversation: conversation,
+                    body: Faker::Hacker.say_something_smart)
+  end
+end
+
+puts "#{Conversation.count} created!"
 
 puts 'Done with everything!'
