@@ -19,9 +19,6 @@ class Conversation < ApplicationRecord
   has_many :messages,
            dependent: :destroy
 
-  # Validations
-  validates :sender, uniqueness: { scope: :receiver }
-
   # Scopes
   scope :with_user, ->(user) do
     unscope(:where).where('? IN (sender_id, receiver_id)', user.id)
