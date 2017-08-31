@@ -24,6 +24,10 @@ class Conversation < ApplicationRecord
     unscope(:where).where('? IN (sender_id, receiver_id)', user.id)
   end
 
+  scope :with, ->(user) do
+    where('? IN (sender_id, receiver_id)', user.id)
+  end
+
   scope :ordered, -> { order(created_at: :desc) }
 
   def other_user(user)

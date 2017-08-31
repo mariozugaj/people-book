@@ -18,7 +18,7 @@ class ConversationTest < ActiveSupport::TestCase
 
   test 'finds conversation with other user' do
     @conversation.save
-    conversation = @user1.conversations.with_user(@user2).first
+    conversation = @user1.conversations.with(@user2).first
     assert_equal conversation, @conversation
   end
 

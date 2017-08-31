@@ -39,7 +39,7 @@ class ConversationsController < ApplicationController
     def set_conversation
       @receiver = User.find_by_slug(params[:receiver_id]) if params[:receiver_id]
       @conversation = if @receiver
-                        current_user.conversations.with_user(@receiver).first
+                        current_user.conversations.with(@receiver).first
                       else
                         Conversation.find_by_slug(params[:id])
                       end
