@@ -6,14 +6,13 @@ module Search
       @search_term = search_term
       @categories = SearchController::CATEGORIES.values.map { |v| v[0] }
       @fields = SearchController::CATEGORIES.values.map { |v| v[1] }
-      @includes = SearchController::CATEGORIES.values.map { |v| v[2] }
     end
 
     def search
-      # TODO: add includes_per model after pull request #967
       Searchkick.search search_term,
                         index_name: categories,
                         fields: fields,
+                        model_includes: build_includes,
                         indices_boost: { User => 2, StatusUpdate => 1 },
                         match: :text_middle
     end
@@ -31,6 +30,16 @@ module Search
       grouped_results.each_pair do |category, results|
         grouped_results[category] = results.first(2).map(&:search_info)
       end
+    end
+
+    private
+
+    def build_includes
+      includes = {}
+      SearchController::CATEGORIES.values.each do |category|
+        includes[category[0]] = category[2]
+      end
+      includes
     end
   end
 end
