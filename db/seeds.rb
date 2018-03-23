@@ -8,7 +8,7 @@ puts 'done!'
 
 # Multiplier constant
 
-MULTIPLIER = 15
+MULTIPLIER = 5
 
 # Users
 
