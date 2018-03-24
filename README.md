@@ -5,7 +5,7 @@ PeopleBook is a social network clone built with the power of Ruby on Rails. View
 You can sign in and explore using multiple **prepopulated accounts**:
 
 ```
-email: user_1@example.com (all the way through 15)
+email: user_1@example.com (all the way through 5)
 password: password
 ```
 
