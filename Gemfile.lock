@@ -100,7 +100,7 @@ GEM
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.0.5)
     concurrent-ruby (1.0.5-java)
-    crass (1.0.3)
+    crass (1.0.4)
     css-class-string (0.1.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -218,12 +218,12 @@ GEM
     netrc (0.11.0)
     nio4r (2.1.0)
     nio4r (2.1.0-java)
-    nokogiri (1.8.2)
+    nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
-    nokogiri (1.8.2-java)
-    nokogiri (1.8.2-x64-mingw32)
+    nokogiri (1.8.3-java)
+    nokogiri (1.8.3-x64-mingw32)
       mini_portile2 (~> 2.3.0)
-    nokogiri (1.8.2-x86-mingw32)
+    nokogiri (1.8.3-x86-mingw32)
       mini_portile2 (~> 2.3.0)
     oauth2 (1.4.0)
       faraday (>= 0.8, < 0.13)
@@ -265,7 +265,7 @@ GEM
     puma (3.10.0-java)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    rack (2.0.3)
+    rack (2.0.5)
     rack-mini-profiler (0.10.5)
       rack (>= 1.2.0)
     rack-test (0.7.0)
@@ -285,8 +285,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     railties (5.1.4)
       actionpack (= 5.1.4)
       activesupport (= 5.1.4)
@@ -368,7 +368,7 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sprockets (3.7.1)
+    sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.2.1)
@@ -477,7 +477,7 @@ DEPENDENCIES
   wikipedia-client (~> 1.7)
 
 RUBY VERSION
-   ruby 2.4.1p111
+   ruby 2.5.0p0
 
 BUNDLED WITH
    1.16.1
