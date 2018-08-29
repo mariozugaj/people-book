@@ -1,6 +1,6 @@
 # PeopleBook
 
-PeopleBook is a social network clone built with the power of Ruby on Rails. View the [demo](https://peoplebook.herokuapp.com/).
+PeopleBook is a social network clone built with the power of Ruby on Rails. View the [demo](https://peoplebook.mariozugaj.com/).
 
 You can sign in and explore using multiple **prepopulated accounts**:
 
