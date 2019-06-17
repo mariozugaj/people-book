@@ -35,8 +35,7 @@ require 'rest-client'
 QUOTES = Array.new(MULTIPLIER) do
   JSON.parse(RestClient.get('https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous&count=1',
                             'X-Mashape-Key' => Figaro.env.MASHAPE_KEY,
-                            'Accept' => 'application/json')
-      .body)['quote']
+                            'Accept' => 'application/json').body)[0]['quote']
 end
 
 PROFILES = Array.new(MULTIPLIER) do |idx|
@@ -147,9 +146,12 @@ User.all.each do |user|
   cover_photos = PhotoAlbum.create(author: user, name: 'Cover photos')
   highlights = PhotoAlbum.create(author: user, name: 'Highlights')
 
-  avatars.images.create(remote_image_url: Faker::LoremPixel.image('780x720', false))
-  cover_photos.images.create(remote_image_url: Faker::LoremPixel.image('1260x630', false))
-
+  avatars.images.create!(
+    remote_image_url: Faker::LoremPixel.image('780x720', false, secure: false)
+  )
+  cover_photos.images.create!(
+    remote_image_url: Faker::LoremPixel.image('1260x630', false, secure: false)
+  )
   user.profile.update avatar: avatars.reload.images.first.image,
                       cover_photo: cover_photos.reload.images.first.image
 
@@ -219,6 +221,8 @@ CONVERSATIONS = User.pluck(:id)
     receiver_id: combination[1]
   }
 end
+
+print 'Creating conversations...'
 
 CONVERSATIONS.each do |conversation|
   Conversation.create!(conversation)
