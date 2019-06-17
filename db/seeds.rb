@@ -29,13 +29,15 @@ RELATIONSHIP_OPTIONS = ['Single',
                         'Divorced',
                         'Widowed'].freeze
 
-require 'rest-client'
-
 # Get quote from Mashape and parse it
 QUOTES = Array.new(MULTIPLIER) do
-  JSON.parse(RestClient.get('https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous&count=1',
-                            'X-Mashape-Key' => Figaro.env.MASHAPE_KEY,
-                            'Accept' => 'application/json').body)[0]['quote']
+  JSON.parse(HTTParty.get(
+    'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous&count=1',
+    headers: {
+      'X-Mashape-Key' => Figaro.env.MASHAPE_KEY,
+      'Accept' => 'application/json'
+    }
+  ).body)[0]['quote']
 end
 
 PROFILES = Array.new(MULTIPLIER) do |idx|

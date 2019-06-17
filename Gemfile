@@ -19,6 +19,7 @@ gem 'faker', '~> 1.9', '>= 1.9.3'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'gemoji', '~> 3.0', '>= 3.0.1'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
+gem 'httparty', '~> 0.17.0'
 gem 'jbuilder', '~> 2.9', '>= 2.9.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
@@ -30,10 +31,10 @@ gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'pry', '~> 0.12.2'
 gem 'pry-byebug', '~> 3.7'
 gem 'pry-rails', '~> 0.3.9'
+gem 'puma', '~> 3.12', '>= 3.12.1'
 gem 'pundit', '~> 2.0', '>= 2.0.1'
 gem 'rails', '~> 5.2', '>= 5.2.3'
 gem 'redis', '~> 4.1', '>= 4.1.2'
-gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'sass-rails', '~> 5.0', '>= 5.0.7'
 gem 'searchkick', '~> 4.0', '>= 4.0.2'
 gem 'semantic-ui-sass', '~> 2.4', '>= 2.4.2.0'
@@ -55,13 +56,8 @@ end
 group :development do
   gem 'bullet', '~> 6.0'
   gem 'listen', '~> 3.1', '>= 3.1.5'
-  gem 'puma', '~> 3.12', '>= 3.12.1'
   gem 'rack-mini-profiler', '~> 1.0', '>= 1.0.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
   gem 'web-console', '>= 3.3.0'
-end
-
-group :production do
-  gem 'puma', '~> 3.12', '>= 3.12.1'
 end
