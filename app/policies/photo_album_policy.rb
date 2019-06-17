@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhotoAlbumPolicy
   attr_reader :user, :photo_album
 

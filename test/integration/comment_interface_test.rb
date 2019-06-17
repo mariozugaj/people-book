@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class CommentInterfaceTest < ActionDispatch::IntegrationTest
@@ -17,8 +19,8 @@ class CommentInterfaceTest < ActionDispatch::IntegrationTest
     get image_path(@image)
     assert_difference 'Comment.count', 1 do
       post image_comments_path(@image, format: :js),
-        params: { comment: { author_id: @user.id,
-                             text: "It’s no use going back to yesterday, because I was a different person then." } }
+           params: { comment: { author_id: @user.id,
+                                text: 'It’s no use going back to yesterday, because I was a different person then.' } }
     end
   end
 
@@ -27,8 +29,8 @@ class CommentInterfaceTest < ActionDispatch::IntegrationTest
     get user_path(@user)
     assert_difference 'Comment.count', 1 do
       post status_update_comments_path(@status_update, format: :js),
-        params: { comment: { author_id: @user.id,
-                             text: "It’s no use going back to yesterday, because I was a different person then." } }
+           params: { comment: { author_id: @user.id,
+                                text: 'It’s no use going back to yesterday, because I was a different person then.' } }
     end
   end
 
@@ -37,8 +39,8 @@ class CommentInterfaceTest < ActionDispatch::IntegrationTest
     get image_path(@image)
     assert_difference 'Comment.count', 1 do
       post image_comments_path(@image, format: :js),
-        params: { comment: { author_id: @friend.id,
-                             text: "It’s no use going back to yesterday, because I was a different person then." } }
+           params: { comment: { author_id: @friend.id,
+                                text: 'It’s no use going back to yesterday, because I was a different person then.' } }
     end
   end
 
@@ -47,8 +49,8 @@ class CommentInterfaceTest < ActionDispatch::IntegrationTest
     get user_path(@user)
     assert_difference 'Comment.count', 1 do
       post status_update_comments_path(@status_update, format: :js),
-        params: { comment: { author_id: @friend.id,
-                             text: "It’s no use going back to yesterday, because I was a different person then." } }
+           params: { comment: { author_id: @friend.id,
+                                text: 'It’s no use going back to yesterday, because I was a different person then.' } }
     end
   end
 
@@ -57,9 +59,9 @@ class CommentInterfaceTest < ActionDispatch::IntegrationTest
     get image_path(@image)
     assert_no_difference 'Comment.count' do
       post image_comments_path(@image, format: :js),
-        params: { comment: { author_id: @not_friend.id,
-                             text: "It’s no use going back to yesterday, because I was a different person then." } },
-        headers: { 'HTTP_REFERER' => image_path(@image) }
+           params: { comment: { author_id: @not_friend.id,
+                                text: 'It’s no use going back to yesterday, because I was a different person then.' } },
+           headers: { 'HTTP_REFERER' => image_path(@image) }
     end
     assert_equal 'Akward! Seems like you wanted to do something you are not allowed to.', flash[:alert]
     assert_redirected_to image_path(@image)
@@ -70,8 +72,8 @@ class CommentInterfaceTest < ActionDispatch::IntegrationTest
     get user_path(@user)
     assert_no_difference 'Comment.count' do
       post status_update_comments_path(@status_update, format: :js),
-        params: { comment: { author_id: @not_friend.id,
-                             text: "It’s no use going back to yesterday, because I was a different person then." } }
+           params: { comment: { author_id: @not_friend.id,
+                                text: 'It’s no use going back to yesterday, because I was a different person then.' } }
     end
     assert_equal 'Akward! Seems like you wanted to do something you are not allowed to.', flash[:alert]
     assert_redirected_to home_path
@@ -103,14 +105,14 @@ class CommentInterfaceTest < ActionDispatch::IntegrationTest
 
     assert_performed_jobs 1 do
       post image_comments_path(@image, format: :js),
-        params: { comment: { author_id: @friend.id,
-                             text: "It’s no use going back to yesterday, because I was a different person then." } }
+           params: { comment: { author_id: @friend.id,
+                                text: 'It’s no use going back to yesterday, because I was a different person then.' } }
     end
 
     recipients = (@image.commenters +
                   [@image.author] +
                   @image.likers).uniq -
-                  [@friend]
+                 [@friend]
 
     assert_equal 1, recipients.size
     recipients.each do |recipient|

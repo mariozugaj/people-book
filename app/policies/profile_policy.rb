@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilePolicy
   attr_reader :user, :profile
 

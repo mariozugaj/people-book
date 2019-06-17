@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhotoAlbumsController < ApplicationController
   before_action :set_photo_album, only: %i[show edit update destroy]
 
@@ -53,16 +55,16 @@ class PhotoAlbumsController < ApplicationController
 
   private
 
-    def set_photo_album
-      @photo_album = PhotoAlbum.includes(:images).find_by_slug(params[:id])
-    end
+  def set_photo_album
+    @photo_album = PhotoAlbum.includes(:images).find_by_slug(params[:id])
+  end
 
-    def photo_album_params
-      params.require(:photo_album)
-            .permit(:author_id,
-                    :name,
-                    :description,
-                    images_attributes: %i[id image],
-                    cloud_image_attributes: %i[id remote_image_url])
-    end
+  def photo_album_params
+    params.require(:photo_album)
+      .permit(:author_id,
+              :name,
+              :description,
+              images_attributes: %i[id image],
+              cloud_image_attributes: %i[id remote_image_url])
+  end
 end

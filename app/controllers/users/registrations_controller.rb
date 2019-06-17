@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |resource|
-      if resource.persisted?
-        CompleteRegistration.execute(resource)
-      end
+      CompleteRegistration.execute(resource) if resource.persisted?
     end
   end
 end

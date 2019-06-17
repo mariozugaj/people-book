@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Friendable
   extend ActiveSupport::Concern
 
@@ -52,9 +54,11 @@ module Friendable
   end
 
   private
-    def can_accept_request?(friendship)
-      return if friendship.pending? && self == friendship.user
-      return if friendship.requested? && self == friendship.friend
-      true
-    end
+
+  def can_accept_request?(friendship)
+    return if friendship.pending? && self == friendship.user
+    return if friendship.requested? && self == friendship.friend
+
+    true
+  end
 end

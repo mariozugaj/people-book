@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationsController < ApplicationController
   def index
     respond_to do |format|
@@ -5,16 +7,16 @@ class NotificationsController < ApplicationController
         @notifications ||= Notification.includes(:recipient,
                                                  :notifiable,
                                                  actor: :profile)
-                                       .where(recipient: current_user)
-                                       .recent
+          .where(recipient: current_user)
+          .recent
         @count = Notification.where(recipient: current_user).size
       end
       format.html do
         @all_notifications = Notification.includes(:notifiable,
                                                    actor: :profile)
-                                         .where(recipient: current_user)
-                                         .ordered
-                                         .page(params[:page])
+          .where(recipient: current_user)
+          .ordered
+          .page(params[:page])
       end
     end
   end

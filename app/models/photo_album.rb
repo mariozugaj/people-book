@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: photo_albums
@@ -30,6 +32,7 @@ class PhotoAlbum < ApplicationRecord
 
   def first_image
     return images.first.image.url(:mini) if images.exists?
+
     PhotoAlbum::DEFAULT_IMAGE
   end
 end

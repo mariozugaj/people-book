@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriendshipsController < ApplicationController
   before_action :set_friend, only: :create
   before_action :set_friendship, only: %i[update destroy]
@@ -38,22 +40,22 @@ class FriendshipsController < ApplicationController
 
   private
 
-    def friendship_params
-      params.permit(:friend_id, :id).to_h
-    end
+  def friendship_params
+    params.permit(:friend_id, :id).to_h
+  end
 
-    def set_friend
-      @friend = User.find_by_slug(friendship_params[:friend_id])
-    end
+  def set_friend
+    @friend = User.find_by_slug(friendship_params[:friend_id])
+  end
 
-    def set_friendship
-      @friendship = Friendship.find_by_slug(friendship_params[:id])
-    end
+  def set_friendship
+    @friendship = Friendship.find_by_slug(friendship_params[:id])
+  end
 
-    def send_notification
-      Notification.create(recipient: @friendship.friend,
-                          actor: current_user,
-                          action: 'accepted',
-                          notifiable: @friendship)
-    end
+  def send_notification
+    Notification.create(recipient: @friendship.friend,
+                        actor: current_user,
+                        action: 'accepted',
+                        notifiable: @friendship)
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemTestHelpers
   def log_in_as(user)
     visit welcome_url

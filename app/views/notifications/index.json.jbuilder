@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.results do
   json.total @count
   json.notifications do

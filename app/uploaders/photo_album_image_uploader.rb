@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhotoAlbumImageUploader < CarrierWave::Uploader::Base
   include UploaderHelper
 

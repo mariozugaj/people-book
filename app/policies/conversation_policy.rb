@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConversationPolicy
   attr_reader :user, :conversation
 

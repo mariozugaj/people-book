@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompleteRegistration
   def initialize(user, avatar = nil)
     @user = user
@@ -29,5 +31,5 @@ class CompleteRegistration
 
   private
 
-    attr_reader :user, :avatar
+  attr_reader :user, :avatar
 end

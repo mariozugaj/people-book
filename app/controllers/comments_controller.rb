@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   include FindPolymorphic
 
   def index
     @commentable = find_polymorphic(params)
     @comments = @commentable.comments
-                            .includes([:commentable, :likers, author: :profile])
-                            .page(params[:page])
+      .includes([:commentable, :likers, author: :profile])
+      .page(params[:page])
   end
 
   def create
@@ -34,19 +36,19 @@ class CommentsController < ApplicationController
 
   private
 
-    def comment_params
-      params.require(:comment).permit(:text, :commentable_type, :commentable_id,
-                                      :author_id)
-    end
+  def comment_params
+    params.require(:comment).permit(:text, :commentable_type, :commentable_id,
+                                    :author_id)
+  end
 
-    def send_notification(comment, commentable)
-      recipients = (commentable.commenters +
-                    [commentable.author] +
-                    commentable.likers).uniq -
-                    [current_user]
-      NotificationRelayJob.perform_later(recipients,
-                                         current_user,
-                                         'posted',
-                                         comment)
-    end
+  def send_notification(comment, commentable)
+    recipients = (commentable.commenters +
+                  [commentable.author] +
+                  commentable.likers).uniq -
+                 [current_user]
+    NotificationRelayJob.perform_later(recipients,
+                                       current_user,
+                                       'posted',
+                                       comment)
+  end
 end

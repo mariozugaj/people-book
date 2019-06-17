@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StatusUpdatePolicy
   attr_reader :user, :status_update
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   include FindPolymorphic
 
@@ -19,22 +21,20 @@ class LikesController < ApplicationController
   def destroy
     @like = Like.find_by_slug(params[:id])
     authorize @like
-    if @like.destroy
-      flash[:success] = 'You dont\' like it anymore'
-    end
+    flash[:success] = 'You dont\' like it anymore' if @like.destroy
   end
 
   private
 
-    def like_params
-      params.permit(:likeable_type, :likeable_id)
-    end
+  def like_params
+    params.permit(:likeable_type, :likeable_id)
+  end
 
-    def send_notification(likeable)
-      recipient = [likeable.author] unless likeable.author == current_user
-      NotificationRelayJob.perform_later(recipient,
-                                         current_user,
-                                         'liked',
-                                         likeable)
-    end
+  def send_notification(likeable)
+    recipient = [likeable.author] unless likeable.author == current_user
+    NotificationRelayJob.perform_later(recipient,
+                                       current_user,
+                                       'liked',
+                                       likeable)
+  end
 end

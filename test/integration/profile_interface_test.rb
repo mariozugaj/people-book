@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ProfileInterfaceTest < ActionDispatch::IntegrationTest
@@ -54,7 +56,8 @@ class ProfileInterfaceTest < ActionDispatch::IntegrationTest
               about: Faker::Lorem.sentence(40),
               phone_number: Faker::Lorem.sentence(20)
             }, profile_id: @user.profile.slug }
-    assert_equal 'There was a problem updating your profile. Try again?', flash[:alert]
+    assert_equal 'There was a problem updating your profile. Try again?',
+                 flash[:alert]
     assert_select 'div#error_explanation ul' do |elements|
       elements.each do |element|
         assert_select element, 'li', 7

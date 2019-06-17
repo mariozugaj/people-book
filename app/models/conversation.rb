@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: conversations
@@ -20,13 +22,13 @@ class Conversation < ApplicationRecord
            dependent: :destroy
 
   # Scopes
-  scope :with_user, ->(user) do
+  scope :with_user, lambda { |user|
     unscope(:where).where('? IN (sender_id, receiver_id)', user.id)
-  end
+  }
 
-  scope :with, ->(user) do
+  scope :with, lambda { |user|
     where('? IN (sender_id, receiver_id)', user.id)
-  end
+  }
 
   scope :ordered, -> { order(created_at: :desc) }
 

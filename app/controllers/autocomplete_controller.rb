@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AutocompleteController < ApplicationController
   before_action :set_search_term
 

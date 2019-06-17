@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'application_system_test_case'
 
 class NotificationsTest < ApplicationSystemTestCase
@@ -43,9 +45,7 @@ class NotificationsTest < ApplicationSystemTestCase
     log_in_as @user
 
     visit user_path(@friend)
-    all(:css, 'i.like.icon').each do |icon|
-      icon.click
-    end
+    all(:css, 'i.like.icon').each(&:click)
     log_out
 
     log_in_as @friend

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StatusImageUploader < CarrierWave::Uploader::Base
   include UploaderHelper
 

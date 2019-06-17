@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class SearchController < ApplicationController
   before_action :set_search_term
 
   CATEGORIES = {
     'Users' => [User, :name, [:profile]],
     'Status updates' => [StatusUpdate, :text, [:author]],
-    'Comments' => [Comment, :text, [:commentable, :author]],
+    'Comments' => [Comment, :text, %i[commentable author]],
     'Images' => [Image, :description, [:author]]
   }.freeze
 

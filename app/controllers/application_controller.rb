@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include Pundit
@@ -13,14 +15,14 @@ class ApplicationController < ActionController::Base
     @requested_friends = current_user.requested_friends.includes(:profile)
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     home_path
   end
 
   private
 
   def user_not_authorized
-    flash[:alert] = "Akward! Seems like you wanted to do something you are not allowed to."
+    flash[:alert] = 'Akward! Seems like you wanted to do something you are not allowed to.'
     redirect_to(request.referrer || home_path)
   end
 

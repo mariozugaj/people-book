@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LikesHelper
   def render_likes(likeable)
     if likeable.likers.include? current_user

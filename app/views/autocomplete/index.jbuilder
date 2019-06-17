@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.results do
   idx = 1
   @search_results[1].each_pair do |category, results|

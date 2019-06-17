@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImagesController < ApplicationController
   before_action :set_photo_album, only: %i[create destroy]
   before_action :set_image, only: %i[show edit]
@@ -34,11 +36,11 @@ class ImagesController < ApplicationController
   def destroy
     @image = Image.find_by_slug(params[:id])
     authorize @image
-    if @image.destroy
-      flash[:success] = 'Image was successfuly destroyed'
-    else
-      flash[:success] = 'There was a problem destroying your image.'
-    end
+    flash[:success] = if @image.destroy
+                        'Image was successfuly destroyed'
+                      else
+                        'There was a problem destroying your image.'
+                      end
     redirect_to edit_user_photo_album_path(current_user, @photo_album)
   end
 

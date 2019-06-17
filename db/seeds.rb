@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Destroy all existing data
 print 'Destroying existing models...'
 
@@ -74,29 +76,29 @@ puts "#{User.count} created!"
 print 'Creating friendships...'
 
 FRIENDSHIPS = User.pluck(:id)
-                  .repeated_combination(2)
-                  .reject { |combination| combination[0] == combination[1] }
-                  .sample((MULTIPLIER**2) * 0.7)
-                  .map do |combination|
-                    {
-                      user_id: combination[0],
-                      friend_id: combination[1]
-                    }
-                  end
+  .repeated_combination(2)
+  .reject { |combination| combination[0] == combination[1] }
+  .sample((MULTIPLIER**2) * 0.7)
+  .map do |combination|
+  {
+    user_id: combination[0],
+    friend_id: combination[1]
+  }
+end
 
 FRIENDSHIPS.each do |friendship|
   User.find(friendship[:user_id])
-      .friend_request(User.find(friendship[:friend_id]))
+    .friend_request(User.find(friendship[:friend_id]))
 end
 
 # Accept random no of friend requests
 friendship_count = Friendship.count / 2
 
 FRIENDSHIPS.sample(friendship_count * 0.7)
-           .each do |friendship|
-             User.find(friendship[:friend_id])
-                 .accept_request(User.find(friendship[:user_id]))
-           end
+  .each do |friendship|
+  User.find(friendship[:friend_id])
+    .accept_request(User.find(friendship[:user_id]))
+end
 
 puts "#{Friendship.where(status: 2).count} created!"
 
@@ -120,8 +122,8 @@ User.all.each do |user|
         status_update_text = "#{article.title}\n\n#{article.summary}\n\nRead"\
                              " more at <a href='#{article.fullurl}'>Wikipedia</a>"
         status_update_image = article.image_urls
-                                     .grep(/\.jpg|\.png|\.jpeg|\.gif/)
-                                     .sample
+          .grep(/\.jpg|\.png|\.jpeg|\.gif/)
+          .sample
       end
       break if !article.summary.nil? &&
                (!article.images.nil? && !article.image_urls.nil?) &&
@@ -171,8 +173,8 @@ COMMENTABLES.each do |commentable|
   random_commentables.each do |commentable_object|
     random_users =
       User.all
-          .select { |user| commentable_object.author.friends.include? user }
-          .sample(MULTIPLIER * 0.5)
+        .select { |user| commentable_object.author.friends.include? user }
+        .sample(MULTIPLIER * 0.5)
 
     random_users.each do |user|
       commentable_object
@@ -195,8 +197,8 @@ LIKEABLES.each do |likeable|
 
   random_likeables.each do |likeable_object|
     random_users = User.all
-                       .sample(rand(1..(MULTIPLIER * 0.5)))
-                       .select { |user| likeable_object.author.friends.include? user }
+      .sample(rand(1..(MULTIPLIER * 0.5)))
+      .select { |user| likeable_object.author.friends.include? user }
 
     random_users.each do |user|
       likeable_object.likes.create(user: user)
@@ -207,16 +209,16 @@ end
 puts "#{Like.count} created!"
 
 CONVERSATIONS = User.pluck(:id)
-                    .repeated_combination(2)
-                    .reject { |combination| combination[0] == combination[1] }
-                    .select { |combination| User.find(combination[0]).friends_with? User.find(combination[1]) }
-                    .sample((MULTIPLIER**2) * 0.7)
-                    .map do |combination|
-                      {
-                        sender_id: combination[0],
-                        receiver_id: combination[1]
-                      }
-                    end
+  .repeated_combination(2)
+  .reject { |combination| combination[0] == combination[1] }
+  .select { |combination| User.find(combination[0]).friends_with? User.find(combination[1]) }
+  .sample((MULTIPLIER**2) * 0.7)
+  .map do |combination|
+  {
+    sender_id: combination[0],
+    receiver_id: combination[1]
+  }
+end
 
 CONVERSATIONS.each do |conversation|
   Conversation.create!(conversation)

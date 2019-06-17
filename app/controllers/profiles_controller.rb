@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[set_avatar set_cover edit]
   before_action :set_image, only: %i[set_avatar set_cover]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class StatusUpdateInterfaceTest < ActionDispatch::IntegrationTest
@@ -88,7 +90,7 @@ class StatusUpdateInterfaceTest < ActionDispatch::IntegrationTest
   test 'status update layout' do
     log_in_as @user
 
-    get status_update_path(status_updates :first)
+    get status_update_path(status_updates(:first))
     assert_select 'div[class = \'ui fluid card commentable lazy_image\']', count: 1 do
       assert_select 'img[src=?]', @user.avatar.url(:thumb), count: 1
       assert_select 'a[href=?]', user_path(@user), count: 2
@@ -102,11 +104,11 @@ class StatusUpdateInterfaceTest < ActionDispatch::IntegrationTest
 
   private
 
-    def write_status_update(text)
-      log_in_as @user
-      get user_path(@user)
-      image = fixture_file_upload('test/fixtures/files/haha.jpg', 'image/jpg')
-      post user_status_updates_path(@user), params: { status_update: { text: text,
-                                                                       image: image } }
-    end
+  def write_status_update(text)
+    log_in_as @user
+    get user_path(@user)
+    image = fixture_file_upload('test/fixtures/files/haha.jpg', 'image/jpg')
+    post user_status_updates_path(@user), params: { status_update: { text: text,
+                                                                     image: image } }
+  end
 end

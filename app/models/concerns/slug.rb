@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Slug
   extend ActiveSupport::Concern
 
@@ -6,7 +8,7 @@ module Slug
   end
 
   def to_param
-    self.slug
+    slug
   end
 
   private

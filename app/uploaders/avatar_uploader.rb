@@ -1,5 +1,6 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+# frozen_string_literal: true
 
+class AvatarUploader < CarrierWave::Uploader::Base
   include UploaderHelper
 
   Rails.env.production? ? (storage :aws) : (storage :file)
@@ -16,7 +17,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     process resize_to_fill: [54, 50]
   end
 
-  def default_url(*args)
+  def default_url(*_args)
     'https://s3.eu-central-1.amazonaws.com/chanjman-peoplebook/missing/avatar/missing.png'
   end
 end

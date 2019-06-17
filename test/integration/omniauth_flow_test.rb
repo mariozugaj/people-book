@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class OmniauthFlowTest < ActionDispatch::IntegrationTest
@@ -70,17 +72,17 @@ class OmniauthFlowTest < ActionDispatch::IntegrationTest
 
   private
 
-    def signup_through_facebook
-      get welcome_url
-      mock_auth_hash_new
-      post user_facebook_omniauth_authorize_path
-      follow_redirect!
-    end
+  def signup_through_facebook
+    get welcome_url
+    mock_auth_hash_new
+    post user_facebook_omniauth_authorize_path
+    follow_redirect!
+  end
 
-    def login_through_facebook
-      get welcome_url
-      mock_auth_hash_existing
-      post user_facebook_omniauth_authorize_path
-      follow_redirect!
-    end
+  def login_through_facebook
+    get welcome_url
+    mock_auth_hash_existing
+    post user_facebook_omniauth_authorize_path
+    follow_redirect!
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: friendships
@@ -34,28 +36,28 @@ class Friendship < ApplicationRecord
 
   private
 
-    def self.relation_attributes(one, other, status: nil)
-      attr = {
-        user_id: one.id,
-        friend_id: other.id
-      }
+  def self.relation_attributes(one, other, status: nil)
+    attr = {
+      user_id: one.id,
+      friend_id: other.id
+    }
 
-      attr[:status] = status if status
+    attr[:status] = status if status
 
-      attr
-    end
+    attr
+  end
 
-    def self.create_relation(one, other, options)
-      relation = new relation_attributes(one, other)
-      relation.attributes = options
-      relation.save
-    end
+  def self.create_relation(one, other, options)
+    relation = new relation_attributes(one, other)
+    relation.attributes = options
+    relation.save
+  end
 
-    def self.find_relation(user, friend, status: nil)
-      where relation_attributes(user, friend, status: status)
-    end
+  def self.find_relation(user, friend, status: nil)
+    where relation_attributes(user, friend, status: status)
+  end
 
-    def self.exist?(user, friend)
-      find_relation(user, friend).any? && find_relation(friend, user).any?
-    end
+  def self.exist?(user, friend)
+    find_relation(user, friend).any? && find_relation(friend, user).any?
+  end
 end

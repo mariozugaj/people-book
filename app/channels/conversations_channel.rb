@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConversationsChannel < ApplicationCable::Channel
   def follow(data)
     stop_all_streams

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OmniauthHelper
   def mock_auth_hash_new
     OmniAuth.config.mock_auth[:default] = OmniAuth::AuthHash.new(
@@ -5,7 +7,7 @@ module OmniauthHelper
       uid: '123545',
       info: {
         name: 'Destin Botsford',
-        email: 'destin@botsford.com',
+        email: 'destin@botsford.com'
       },
       credentials: {
         token: 'mock_token',

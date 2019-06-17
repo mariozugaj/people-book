@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UploadPhotoAlbumImages
   def initialize(photo_album, params)
     @photo_album = photo_album
@@ -10,7 +12,7 @@ class UploadPhotoAlbumImages
 
   def execute
     upload_images unless params[:images].blank?
-    upload_cloud_image unless (params[:cloud_image].blank? || params[:cloud_image][:remote_image_url].blank?)
+    upload_cloud_image unless params[:cloud_image].blank? || params[:cloud_image][:remote_image_url].blank?
     send_notification
   end
 
@@ -22,7 +24,7 @@ class UploadPhotoAlbumImages
 
   def upload_cloud_image
     Image.create!(remote_image_url: params[:cloud_image][:remote_image_url],
-                 photo_album: photo_album)
+                  photo_album: photo_album)
   end
 
   def send_notification
@@ -34,5 +36,5 @@ class UploadPhotoAlbumImages
 
   private
 
-    attr_reader :photo_album, :params
+  attr_reader :photo_album, :params
 end

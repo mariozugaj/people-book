@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -65,7 +67,7 @@ Rails.application.configure do
     Bullet.add_footer = true
   end
 
-  OmniAuth.config.on_failure = Proc.new { |env|
+  OmniAuth.config.on_failure = proc { |env|
     OmniAuth::FailureEndpoint.new(env).redirect_to_failure
   }
 end

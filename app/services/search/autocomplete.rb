@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   class Autocomplete
     attr_accessor :search_term, :categories, :fields, :includes

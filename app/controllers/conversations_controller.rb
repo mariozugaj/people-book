@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: %i[new show destroy]
   before_action :set_conversations, only: %i[index new show]
@@ -11,7 +13,7 @@ class ConversationsController < ApplicationController
   end
 
   def new
-    redirect_to @conversation and return if @conversation
+    redirect_to(@conversation) && return if @conversation
     conversation = Conversation.new(sender: current_user, receiver: @receiver)
     authorize conversation
     @message = current_user.messages.build
@@ -36,22 +38,22 @@ class ConversationsController < ApplicationController
 
   private
 
-    def set_conversation
-      @receiver = User.find_by_slug(params[:receiver_id]) if params[:receiver_id]
-      @conversation = if @receiver
-                        current_user.conversations.with(@receiver).first
-                      else
-                        Conversation.find_by_slug(params[:id])
-                      end
-    end
+  def set_conversation
+    @receiver = User.find_by_slug(params[:receiver_id]) if params[:receiver_id]
+    @conversation = if @receiver
+                      current_user.conversations.with(@receiver).first
+                    else
+                      Conversation.find_by_slug(params[:id])
+                    end
+  end
 
-    def set_conversations
-      @conversations =
-        current_user
+  def set_conversations
+    @conversations =
+      current_user
         .conversations
         .includes({ sender: :profile },
                   { receiver: :profile },
                   :messages)
         .ordered
-    end
+  end
 end

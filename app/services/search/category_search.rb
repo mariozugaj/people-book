@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Search
   class CategorySearch
     def self.search(category_options = [], params)

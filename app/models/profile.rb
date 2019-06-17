@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: profiles
@@ -54,9 +56,9 @@ class Profile < ApplicationRecord
 
   private
 
-    def minimum_age
-      if birthday.present? && birthday > 13.years.ago
-        errors.add(:birthday, "can't be less than 13 years")
-      end
+  def minimum_age
+    if birthday.present? && birthday > 13.years.ago
+      errors.add(:birthday, "can't be less than 13 years")
     end
+  end
 end
