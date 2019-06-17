@@ -27,10 +27,13 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   test 'messages broadcast job gets enqueued' do
-    assert_enqueued_with(job: ConversationBroadcastJob,
-                         args: [@message.slug],
-                         queue: 'default') do
-      @message.save
+    assert_enqueued_jobs 1 do
+      Message.create!(
+        user: users(:maymie),
+        body: 'Insanity is doing the same thing, over and over'\
+              'again, but expecting different results.',
+        conversation: conversations(:first)
+      )
     end
   end
 end

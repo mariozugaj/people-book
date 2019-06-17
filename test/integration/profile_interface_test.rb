@@ -73,7 +73,7 @@ class ProfileInterfaceTest < ActionDispatch::IntegrationTest
           params: { profile:
             {
               birthday: 18.years.ago,
-              education: Faker::Educator.course,
+              education: Faker::Educator.course_name,
               hometown: Faker::Address.city,
               profession: Faker::Job.title,
               company: Faker::Company.name,
