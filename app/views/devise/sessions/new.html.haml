@@ -7,7 +7,7 @@
       = form_for(resource, as: resource_name, url: session_path(resource_name),
                  html: { class: 'ui form'},
                  local: true) do |f|
-        = devise_error_messages!
+        = render 'shared/errors', resource: resource
 
         .required.field
           = f.label :email

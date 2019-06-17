@@ -11,7 +11,7 @@
     class: 'ui form',
     local: true do |form|
 
-    = render 'shared/errors', object: form.object
+    = render 'shared/errors', resource: form.object
 
     = hidden_field_tag :profile_id, profile.slug
 
