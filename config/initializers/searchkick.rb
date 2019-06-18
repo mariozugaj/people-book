@@ -2,6 +2,7 @@
 
 Searchkick.client =
   Elasticsearch::Client.new(
+    adapter: :net_http_persistent,
     host: ENV['ELASTICSEARCH_URL'],
     retry_on_failure: true,
     transport_options: {
