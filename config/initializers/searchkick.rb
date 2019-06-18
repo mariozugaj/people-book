@@ -7,7 +7,8 @@ Searchkick.client =
     transport_options: {
       request: { timeout: 250 },
       ssl: {
-        min_version: :TLSv1_2,
+        min_version: OpenSSL::SSL::TLS1_1_VERSION,
+        max_version: OpenSSL::SSL::TLS1_2_VERSION,
         ca_path: '/usr/lib/ssl'
       }
     }
