@@ -6,6 +6,9 @@ Searchkick.client =
     retry_on_failure: true,
     transport_options: { 
       request: { timeout: 250 },
-      ssl: { ca_file: '/usr/lib/ssl/certs/ca-certificates.crt' } 
+      ssl: {
+        ca_path: '/usr/lib/ssl',
+        version: :TLSv1_2
+      }
     }
   )
