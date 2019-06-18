@@ -8,7 +8,8 @@ Searchkick.client =
       request: { timeout: 250 },
       ssl: {
         ca_path: '/usr/lib/ssl',
-        version: :TLSv1_2
+        version: :TLSv1_2,
+        verify: false
       }
     }
   )
