@@ -2,6 +2,6 @@
 
 Searchkick.client =
   Elasticsearch::Client.new(
-    host: ENV['SEARCHBOX_SSL_URL'],
+    hosts: ['localhost:9200', ENV['ELASTICSEARCH_URL']],
     retry_on_failure: true
   )
