@@ -11,7 +11,7 @@ password: password
 
 ### Technical notes
 
-* Backend built using **Ruby on Rails 5.1**
+* Backend built using **Ruby on Rails 5.2**
 * Frontend interactions built using **Javascript** (mostly ES6)
 * Database (Postgres) seeded using **Faker gem, wikipedia and mashape APIs**
 * Real time conversations and appearance status pushed to clients using **ActionCable** and **Redis**
