@@ -3,8 +3,5 @@
 Searchkick.client =
   Elasticsearch::Client.new(
     host: ENV['SEARCHBOX_SSL_URL'],
-    retry_on_failure: true,
-    transport_options: {
-      request: { timeout: 250 }
-    }
+    retry_on_failure: true
   )
