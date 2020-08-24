@@ -10,7 +10,7 @@ end
 ruby '2.6.3'
 
 gem 'annotate', '~> 2.7', '>= 2.7.5'
-gem 'autoprefixer-rails', '~> 9.6'
+gem 'autoprefixer-rails', '~> 9.8'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 gem 'carrierwave-aws', '~> 1.3'
 gem 'css-class-string', '~> 0.1.1'
