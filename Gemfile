@@ -54,7 +54,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'bullet', '~> 6.0'
+  gem 'bullet', '~> 6.1'
   gem 'listen', '~> 3.1', '>= 3.1.5'
   gem 'rack-mini-profiler', '~> 1.0', '>= 1.0.2'
   gem 'spring'
