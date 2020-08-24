@@ -49,8 +49,9 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     arel (9.0.0)
-    autoprefixer-rails (9.8.6.2)
     ast (2.4.1)
+      execjs
+    autoprefixer-rails (9.8.6.2)
       execjs
     aws-eventstream (1.1.0)
     aws-partitions (1.358.0)
@@ -245,9 +246,9 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     psych (3.1.0)
+    public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
-    public_suffix (4.0.5)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     rack (2.2.3)
@@ -381,8 +382,8 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_query_trace (~> 1.6, >= 1.6.2)
-  autoprefixer-rails (~> 9.8)
   annotate (~> 3.1)
+  autoprefixer-rails (~> 9.8)
   bullet (~> 6.1)
   byebug
   capybara (~> 3.33)
@@ -428,7 +429,7 @@ DEPENDENCIES
   wikipedia-client (~> 1.10)
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.6.5p114
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
