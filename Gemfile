@@ -9,7 +9,7 @@ end
 
 ruby '2.6.3'
 
-gem 'annotate', '~> 2.7', '>= 2.7.5'
+gem 'annotate', '~> 3.1'
 gem 'autoprefixer-rails', '~> 9.6'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 gem 'carrierwave-aws', '~> 1.3'
@@ -32,7 +32,7 @@ gem 'pry', '~> 0.13.1'
 gem 'pry-byebug', '~> 3.7'
 gem 'pry-rails', '~> 0.3.9'
 gem 'puma', '~> 4.3'
-gem 'pundit', '~> 2.0', '>= 2.0.1'
+gem 'pundit', '~> 2.1'
 gem 'rails', '~> 5.2', '>= 5.2.3'
 gem 'redis', '~> 4.2'
 gem 'sass-rails', '~> 5.0', '>= 5.0.7'
@@ -47,14 +47,14 @@ gem 'wikipedia-client', '~> 1.10'
 group :development, :test do
   gem 'active_record_query_trace', '~> 1.6', '>= 1.6.2'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capybara', '~> 3.24'
+  gem 'capybara', '~> 3.33'
   gem 'letter_opener', '~> 1.7'
   gem 'rubycritic', '~> 4.1', require: false
   gem 'selenium-webdriver', '~> 3.142', '>= 3.142.3'
 end
 
 group :development do
-  gem 'bullet', '~> 6.0'
+  gem 'bullet', '~> 6.1'
   gem 'listen', '~> 3.1', '>= 3.1.5'
   gem 'rack-mini-profiler', '~> 1.0', '>= 1.0.2'
   gem 'spring'
