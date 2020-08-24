@@ -45,9 +45,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    annotate (2.7.5)
+    annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
-      rake (>= 10.4, < 13.0)
+      rake (>= 10.4, < 14.0)
     arel (9.0.0)
     ast (2.4.1)
     autoprefixer-rails (9.6.0)
@@ -380,7 +380,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_query_trace (~> 1.6, >= 1.6.2)
-  annotate (~> 2.7, >= 2.7.5)
+  annotate (~> 3.1)
   autoprefixer-rails (~> 9.6)
   bullet (~> 6.1)
   byebug
