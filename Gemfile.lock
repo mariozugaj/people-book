@@ -49,8 +49,8 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     arel (9.0.0)
+    autoprefixer-rails (9.8.6.2)
     ast (2.4.1)
-    autoprefixer-rails (9.6.0)
       execjs
     aws-eventstream (1.1.0)
     aws-partitions (1.358.0)
@@ -381,8 +381,8 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_query_trace (~> 1.6, >= 1.6.2)
+  autoprefixer-rails (~> 9.8)
   annotate (~> 3.1)
-  autoprefixer-rails (~> 9.6)
   bullet (~> 6.1)
   byebug
   capybara (~> 3.33)
