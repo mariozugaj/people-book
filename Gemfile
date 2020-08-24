@@ -47,7 +47,7 @@ gem 'wikipedia-client', '~> 1.10'
 group :development, :test do
   gem 'active_record_query_trace', '~> 1.6', '>= 1.6.2'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capybara', '~> 3.24'
+  gem 'capybara', '~> 3.33'
   gem 'letter_opener', '~> 1.7'
   gem 'rubycritic', '~> 4.1', require: false
   gem 'selenium-webdriver', '~> 3.142', '>= 3.142.3'
