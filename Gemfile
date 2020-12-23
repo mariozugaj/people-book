@@ -56,7 +56,7 @@ end
 group :development do
   gem 'bullet', '~> 6.1'
   gem 'listen', '~> 3.1', '>= 3.1.5'
-  gem 'rack-mini-profiler', '~> 1.0', '>= 1.0.2'
+  gem 'rack-mini-profiler', '~> 2.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
   gem 'web-console', '>= 3.3.0'
