@@ -36,7 +36,8 @@
         OR
       %p.center-text
         %i.facebook.square.icon
-        = link_to "Log in with Facebook", user_facebook_omniauth_authorize_path
+        = link_to "Log in with Facebook", user_facebook_omniauth_authorize_path,
+          method: :post
 
     .ui.blue.secondary.raised.segment
       %p.center-text Don't have an account? #{link_to 'Sign up', new_user_registration_path}
