@@ -81,3 +81,6 @@ bower.json
 ### Redis ###
 # Ignore redis binary dump (dump.rdb) files
 *.rdb
+
+### MISC
+.idea
