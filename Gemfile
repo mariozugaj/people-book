@@ -11,7 +11,7 @@ ruby '2.6.5'
 
 gem 'autoprefixer-rails', '~> 9.8'
 gem 'annotate', '~> 3.1'
-gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'carrierwave', '~> 2.0'
 gem 'carrierwave-aws', '~> 1.3'
 gem 'css-class-string', '~> 0.1.1'
 gem 'devise', '~> 4.7'
