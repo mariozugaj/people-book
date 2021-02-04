@@ -20,6 +20,7 @@ password: password
 * Frontend form validation and autocomplete built using SemanticUI API
 * Search is powered by **ElasticSearch and Searchick gem**
 * Log in / sign up through Facebook using **Omniauth**
+* Tests written using **Minitest**
 * Hosted on **Heroku**
 
 ### Features
